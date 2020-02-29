@@ -1,0 +1,147 @@
+﻿@model IEnumerable<ASM_UI.Models.tr_depreciation>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.asset_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.depreciation_type_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.asset_original_value)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.asset_original_currency_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Currency_kurs)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.asset_book_value)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fis_asset_residu_value)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fis_asset_usefull_life)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fis_ddb_precentage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mkt_asset_residu_value)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mkt_asset_usefull_life)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mkt_ddb_percentage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fl_active)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.created_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.created_by)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.updated_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.updated_by)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.deleted_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.deleted_by)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.org_id)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.asset_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.depreciation_type_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.asset_original_value)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.asset_original_currency_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Currency_kurs)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.asset_book_value)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fis_asset_residu_value)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fis_asset_usefull_life)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fis_ddb_precentage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.mkt_asset_residu_value)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.mkt_asset_usefull_life)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.mkt_ddb_percentage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fl_active)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.created_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.created_by)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.updated_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.updated_by)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.deleted_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.deleted_by)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.org_id)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.depreciation_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.depreciation_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.depreciation_id })
+        </td>
+    </tr>
+}
+
+</table>

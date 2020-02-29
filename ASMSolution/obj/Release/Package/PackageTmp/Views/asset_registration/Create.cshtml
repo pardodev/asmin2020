@@ -1,0 +1,477 @@
+﻿@model ASM_UI.Models.asset_registrationViewModel
+
+@{
+    ViewBag.Title = "New Asset Registration";
+}
+<div id="content">
+    <div class="row">
+        <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+            <h1 class="page-title txt-color-blueDark">
+
+                <!-- PAGE HEADER -->
+                <i class="fa-fw fa fa-pencil-square-o"></i>
+                Registration
+                <span>
+                    >
+                    Asset Registration Form
+                </span>
+            </h1>
+        </div>
+    </div>
+
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false" data-widget-togglebutton="false" data-widget-collapsed="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                        <h2>Registration Asset </h2>
+
+                    </header>
+                    <!-- widget div-->
+                    <div>
+
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+
+                            @using (Html.BeginForm("Create", "asset_registration", FormMethod.Post, htmlAttributes: new { @class = "smart-form", enctype = "multipart/form-data" }))
+                            {
+                                <header>
+                                    Registration Asset Form
+                                </header>
+
+                                <fieldset>
+
+                                    <fieldset>
+                                        @Html.AntiForgeryToken()
+                                        <br />
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        @Html.HiddenFor(model => model.asset_type_id)
+                                        @*<section>
+                                                <div class="row">
+                                                    <div class="col-md-1">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        @Html.LabelFor(model => model.asset_type_id, htmlAttributes: new { @class = "control-label" })
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <label class="input">
+                                                            @Html.EditorFor(model => model.asset_type_id, new { htmlAttributes = new { @class = "form-control" } })
+                                                            @Html.ValidationMessageFor(model => model.asset_type_id, "", new { @class = "text-danger" })
+                                                        </label>
+                                                    </div>
+                                                    </div>
+                                            </section>*@
+
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.asset_number, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="input">
+                                                        @Html.EditorFor(model => model.asset_number, new { htmlAttributes = new { @class = "form-control", @readonly = "true", placeholder = "Auto" } })
+                                                        @Html.ValidationMessageFor(model => model.asset_number, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.company_id, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="input">
+                                                        @Html.DropDownListFor(model => model.company_id, new SelectList(Model.company_list, "company_id", "company_name"), "- Select Company -", htmlAttributes: new { @class = "form-control select2" })
+                                                        @Html.ValidationMessageFor(model => model.company_id, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.asset_reg_location_id, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="input">
+                                                        @Html.DropDownListFor(model => model.asset_reg_location_id, new SelectList(Model.asset_reg_location_list, "asset_reg_location_id", "asset_reg_location_name"), "-Select Asset Reg Location-", htmlAttributes: new { @class = "form-control select2" })
+                                                        @Html.ValidationMessageFor(model => model.asset_reg_location_id, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.asset_reg_pic_id, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="input">
+                                                        @Html.DropDownListFor(model => model.asset_reg_pic_id, new SelectList(Model.asset_reg_pic_list, "asset_reg_pic_id", "asset_reg_pic_name"), "-Select Asset Reg PIC-", htmlAttributes: new { @class = "form-control select2" })
+                                                        @Html.ValidationMessageFor(model => model.asset_reg_pic_id, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.category_id, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="input">
+                                                        @Html.DropDownListFor(model => model.category_id, new SelectList(Model.asset_category_list, "category_id", "category_name"), "- Select Category -", htmlAttributes: new { @class = "form-control select2" })
+                                                        @Html.ValidationMessageFor(model => model.category_id, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.asset_receipt_date, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="input">
+                                                        @{var asset_receipt_date = string.Format("{0:dd-MM-yyyy}", Model.asset_receipt_date); }
+                                                        @Html.EditorFor(model => asset_receipt_date, new { htmlAttributes = new { @class = "form-control", id = "asset_receipt_date" } })
+                                                        @Html.ValidationMessageFor(model => model.asset_receipt_date, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                    </fieldset>
+
+                                    <fieldset title="Asset Detail Information">
+
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.asset_po_number, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="input">
+                                                        @Html.EditorFor(model => model.asset_po_number, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.asset_po_number, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.asset_do_number, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="input">
+                                                        @Html.EditorFor(model => model.asset_do_number, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.asset_do_number, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.asset_name, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="input">
+                                                        @Html.EditorFor(model => model.asset_name, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.asset_name, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.asset_merk, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="input">
+                                                        @Html.EditorFor(model => model.asset_merk, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.asset_merk, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.asset_serial_number, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label class="input">
+                                                        @Html.EditorFor(model => model.asset_serial_number, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.asset_serial_number, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </div>
+
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-1">@Html.LabelFor(model => model.asset_quantity, htmlAttributes: new { @class = "control-label" })</div>
+                                                <div class="col-md-3">
+                                                    <label class="input">
+                                                        @Html.EditorFor(model => model.asset_quantity, "1", new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.asset_quantity, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </div>
+
+                                            </div>
+                                        </section>
+
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.asset_description, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-8">
+                                                    @Html.TextAreaFor(model => model.asset_description, 5, 104, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @*<textarea name="asset_description" rows="5" class="form-control" placeholder="Description or specification"></textarea>*@
+                                                    @Html.ValidationMessageFor(model => model.asset_description, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                            </div>
+                                        </section>
+
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.vendor_id, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="input">
+                                                        @Html.DropDownListFor(model => model.vendor_id, new SelectList(Model.vendor_list, "vendor_id", "vendor_name"), "- Select Vendor -", htmlAttributes: new { @class = "form-control select2" })
+                                                        @Html.ValidationMessageFor(model => model.vendor_id, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+
+
+                                    </fieldset>
+
+                                    <fieldset title="Location">
+
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.location_id, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="input">
+                                                        @Html.DropDownListFor(model => model.location_id, new SelectList(Model.asset_location_list, "location_id", "location_name"), "- Select Location -", htmlAttributes: new { @class = "form-control select2" })
+                                                        @Html.ValidationMessageFor(model => model.location_id, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.department_id, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="input">
+                                                        @Html.DropDownListFor(model => model.department_id, new SelectList(Model.department_list, "department_id", "department_name"), "- Select Department -", htmlAttributes: new { @class = "form-control select2" })
+                                                        @Html.ValidationMessageFor(model => model.department_id, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.employee_id, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="input">
+                                                        @Html.DropDownListFor(model => model.employee_id, new SelectList(Model.employee_list, "employee_id", "employee_name"), "- Select Employee -", htmlAttributes: new { @class = "form-control select2" })
+                                                        @*@Html.DropDownListFor(model=>model.employee_id, Model.employee_list, "Select Employee", new { data_url = Url.Action("GetEmployeeByDepartment") })*@
+                                                        @Html.ValidationMessageFor(model => model.employee_id, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                    </fieldset>
+
+                                    <fieldset title="Image">
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.asset_img_file, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="input">
+                                                        <span class="input-group-btn">
+                                                            <span class="btn btn-default btn-file">
+                                                                Browse asset image ( *.jpg | *.gif | *.png )
+                                                                @Html.TextBoxFor(model => model.asset_img_file, new { type = "file", @class = "form-control" })
+                                                            </span>
+                                                        </span>
+
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </fieldset>
+
+                                </fieldset>
+
+                                <footer>
+                                    <div class="form-group">
+                                        <div class="col-md-7">
+                                            @Html.ActionLink("Cancel", "Index", "asset_registration", htmlAttributes: new { @class = "btn btn-default" })
+                                            <input type="submit" value="Save" class="btn btn-primary" />
+                                        </div>
+                                    </div>
+                                </footer>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </section>
+</div>
+
+@section pagespecific {
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#asset_receipt_date').datepicker({
+                dateFormat: 'dd-mm-yy',
+                prevText: '<i class="fa fa-chevron-left"></i>',
+                nextText: '<i class="fa fa-chevron-right"></i>',
+            });
+
+
+            //$("#department_id").change(function () {
+            //    var compid = $("#company_id").val();
+            //    var depid = $(this).val();
+
+            //    var url = $("#department_id").data("url") + '?compid=' + compid + '&depid=' + depid;
+            //    var $ddl_emp = $("#employee_id");
+
+            //    $.getJSON(url, function (data) {
+            //        $ddl_emp.empty();
+            //        $.each(data, function (i, item) {
+            //            $ddl_emp.append($("<option>").text(item.Text).val(item.Value));
+            //        });
+            //    });
+            //});
+
+            //Dropdownlist Selectedchange event
+            $("#department_id").change(function () {
+                $("#employee_id").empty();
+                $("#employee_id").append('<option value="">- Select Employee -</option>');
+                //alert($("#location_id").val());
+                $.ajax({
+                    type: 'POST',
+
+                    url: '/asset_registration/GetEmployeeByDepartment', // we are calling json method
+
+                    dataType: 'json',
+
+                    data: { deptid: $("#department_id").val(), locid: $("#location_id").val() },
+
+                    success: function (employee_list) {
+
+                        $.each(employee_list, function (i, employee) {
+                            $("#employee_id").append('<option value="' + employee.Value + '">' + employee.Text + '</option>');
+
+                        });
+                    },
+                    error: function (ex) {
+                        var deptid = $("#department_id").val();
+                        if (!deptid)
+                            alert('Please select Department');
+                        else
+                            alert('Failed to retrieve employee.' + ex);
+                    }
+                });
+                return false;
+            })
+
+
+            $("asset_quantity").change(function () {
+                var qty = $(this).val();
+                var dept_ctl = $("#department_id");
+                var emp_ctl = $("#employee_id");
+
+                if (eval(qty) <= 1 || !qty) {
+                    dept_ctl.enable = true;
+                    emp_ctl.enable = true;
+                    if (!dept_ctl.val) { alert('Please select Department'); return false; }
+                    if (!emp_ctl.val) { alert('Please select Employee'); return false; }
+                }
+                else {
+                    dept_ctl.enable = false;
+                    emp_ctl.enable = false;
+                    dept_ctl.val = "";
+                    emp_ctl.val = "";
+                }
+
+            });
+
+        });
+    </script>
+}

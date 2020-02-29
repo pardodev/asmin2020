@@ -1,0 +1,1345 @@
+﻿<!-- MAIN CONTENT -->
+<div id="content">
+
+    <!-- row -->
+    <div class="row">
+        <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+            <h1 class="page-title txt-color-blueDark">
+
+                <!-- PAGE HEADER -->
+                <i class="fa-fw fa fa-pencil-square-o"></i>
+                Depreciation
+                <span>
+                    >
+                    Set Data
+                </span>
+            </h1>
+        </div>
+    </div>
+    <div class="body-content">
+        <section id="widget-grid" class="">
+            <div class="row">
+                <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                    <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false" data-widget-togglebutton="false" data-widget-collapsed="false">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                            <h2>Depreciation Asset</h2>
+
+                        </header>
+                        <div>
+                            <!-- widget edit box -->
+                            <div class="jarviswidget-editbox">
+                                <!-- This area used as dropdown edit box -->
+
+                            </div>
+                            <div class="widget-body no-padding">
+                                <form id="depre-form" class="smart-form">
+                                    <header>
+                                        Depreciation Asset Form
+                                        <label class="input">
+                                            <input type="hidden" name="asset_id" id="assetID" placeholder="Asset ID">
+                                        </label>
+                                        <label class="input">
+                                            <input type="hidden" name="mode" id="modeID" placeholder="Must not be viewed">
+                                        </label>
+                                    </header>
+                                    <fieldset>
+                                        <section>
+                                            <div class="row">
+                                                <label class="label col col-3">Asset Number</label>
+                                                <div class="col col-6">
+                                                    <label class="input">
+                                                        <input type="text" name="asset_code" id="assetCodeID" placeholder="Asset Number" readonly>
+                                                    </label>
+                                                </div>
+                                                <div class="col col-3">
+                                                    <a data-toggle="modal" href="#Asset" class="btn btn-success btn-sm" onclick="OpenModalAssetList();"><i class="fa fa-search fa-lg"></i></a>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section>
+                                            <div class="row">
+                                                <label class="label col col-3">Asset Name</label>
+                                                <div class="col col-6">
+                                                    <label class="input">
+                                                        <input type="text" name="asset_name" id="assetNameID" placeholder="Asset Name" readonly>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section>
+                                            <div class="row">
+                                                <label class="label col col-3">Asset Receipt Date</label>
+                                                <div class="col col-6">
+                                                    <label class="input">
+                                                        <input type="text" name="asset_receipt_date" id="receiptDateID" placeholder="Asset Receipt Date" readonly>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section>
+                                            <div class="row">
+                                                <hr class="Bold" />
+                                            </div>
+                                        </section>
+                                        <section>
+                                            <div class="row">
+                                                <label class="label col col-3">Original Currency</label>
+                                                <div class="col col-2">
+                                                    <select id="currencyID" name="currency" placeholder="Select Currency" style="width:100%" class="form-control select2"></select>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section>
+                                            <div class="row">
+                                                <label class="label col col-3">Original Price</label>
+                                                <div class="col col-2">
+                                                    <label class="input">
+                                                        <input onkeyup="" class="numeric" type="text" name="price" id="priceID" placeholder="Price" style="text-align:right;">
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section>
+                                            <div class="row">
+                                                <label class="label col col-3"></label>
+                                                <div class="col col-2">
+                                                    <label class="input">
+                                                        <input id="elips_date" name="elips_date" type="hidden" value="1970-01-01" />
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section>
+                                            <div class="row">
+                                                <label class="label col col-3">USD Kurs</label>
+                                                <div class="col col-2">
+                                                    <label class="input">
+                                                        <input onkeyup="CalculateByKurs(this.value);" type="text" class="numeric" name="usd_kurs" id="kursID" placeholder="USD Kurs" style="text-align:right;">
+                                                    </label>
+                                                </div>
+                                                <label class="label col col-2">IDR Kurs</label>
+                                                <div class="col col-2">
+                                                    <label class="input">
+                                                        <input type="text" class="numeric" name="idr_kurs" id="IDRkursID" placeholder="IDR Kurs" style="text-align:right;">
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section>
+                                            <div class="row">
+                                                <label class="label col col-3">Asset Value (in USD)</label>
+                                                <div class="col col-2">
+                                                    <label class="input">
+                                                        <input onkeyup="CalculateByBookValue(this.value)" type="text" name="asset_value_usd" id="assetvalueUSDID" placeholder="Asset Value (in USD)" style="text-align:right;">
+                                                    </label>
+                                                </div>
+                                                <label class="label col col-2">Asset Value (in IDR)</label>
+                                                <div class="col col-2">
+                                                    <label class="input">
+                                                        <input onkeyup="CalculateByBookValue(this.value)" type="text" name="asset_value_idr" id="assetvalueIDRID" placeholder="Asset Value (in IDR)" style="text-align:right;">
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section>
+                                            <div class="row">
+                                                <hr class="Bold" />
+                                            </div>
+                                        </section>
+                                        <section>
+                                            <div class="row">
+                                                <label class="label col col-3">Depreciation Method</label>
+                                                <div class="col col-5">
+                                                    <select id="depreMethodID" name="depre_method" placeholder="Select Method" style="width:100%" class="form-control select2" readonly="true"></select>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section>
+                                            <div class="row">
+                                                <label class="label col col-3"></label>
+                                                <div class="col col-3">
+                                                    <h3>
+                                                        <label class="input">
+                                                            <label class="label col col-3">Commercial</label>
+                                                        </label>
+                                                    </h3>
+                                                </div>
+                                                <div class="col col-3">
+                                                    <h3>
+                                                        <label class="input">
+                                                            <label class="label col col-3">Fiscal</label>
+                                                        </label>
+                                                    </h3>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section>
+                                            <div class="row">
+                                                <label class="label col col-3">Asset Residu Value</label>
+                                                <div class="col col-3">
+                                                    <label class="input">
+                                                        <input type="text" name="komersil_residu_value" id="komersilResiduValueID" onkeyup="validateKomersil(this.value)" placeholder="Commercial Residue Value" class="numeric" style="text-align:right;">
+                                                    </label>
+                                                </div>
+                                                <div class="col col-3">
+                                                    <label class="input">
+                                                        <input type="text" name="fiskal_residu_value" id="fiskalResiduValueID" onkeyup="validateKomersil(this.value)" placeholder="Fiscal Residue Value" class="numeric" style="text-align:right;">
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section>
+                                            <div class="row">
+                                                <label class="label col col-3">Useful Life (in Month)</label>
+                                                <div class="col col-3">
+                                                    <label class="input">
+                                                        <input type="text" name="komersil_life_value" id="komersilUsefulLifeValueID"  placeholder="Commercial Useful Life" class="numeric" style="text-align:right;">
+                                                    </label>
+                                                </div>
+                                                <div class="col col-3">
+                                                    <label class="input">
+                                                        <input type="text" name="fiskal_life_value" id="fiskalUsefulLifeValueID" placeholder="Fiscal Useful Life" class="numeric" style="text-align:right;">
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </fieldset>
+                                    <footer>
+                                        <div class="form-group">
+                                            <div class="col-md-7">
+                                                <button type="button" class="btn btn-default" id="CancelBtn" onclick="CancelButton()">Clear</button>
+                                                <!--<button type="button" class="btn btn-primary" id="NewBtn" onclick="New()">Clear</button>
+                <button type="button" class="btn btn-primary" id="DeleteBtn" onclick="Delete()">Delete</button>
+                <button type="button" class="btn btn-primary" id="EditBtn" onclick="Edit()">Edit</button> -->
+                                                <button type="button" class="btn btn-primary" id="SaveBtn" onclick="Save()">Save</button>
+                                                </div>
+                                            </div>
+                                    </footer>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="Asset" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+
+    </div>
+
+    <div class="modal fade" id="DepreciationModalID" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+
+    </div>
+
+    <div class="modal fade" id="ModalApprovalID" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+
+    </div>
+    <!-- /.modal -->
+    <!-- end widget grid -->
+
+</div>
+<!-- END MAIN CONTENT -->
+
+
+@section pagespecific {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#elips_date').datepicker({
+                dateFormat: 'dd-mm-yy',
+                prevText: '<i class="fa fa-chevron-left"></i>',
+                nextText: '<i class="fa fa-chevron-right"></i>',
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+
+        $("#currencyID").change(function () {
+            //alert(this.value);
+            //var x = Calc_GetKurs();
+            var currencyID = this.value;
+            var priceID = parseFloat($('#priceID').val().replace(/,/g, ''));
+            var bookValue = parseFloat($('#assetvalueUSDID').val().replace(/,/g, ''));
+            //var elips_date = parseInt($('#elips_date').val().replace(/,/g, ''));
+            var KursID = parseFloat($('#kursID').val().replace(/,/g, ''));
+            var IDRKursID = parseFloat($('#IDRkursID').val().replace(/,/g, ''));
+            if (!isNaN(priceID) && !isNaN(bookValue) && !isNaN(KursID))
+            {
+                var CurrencyType = $('#currencyID').select2('data');
+                if (CurrencyType[0].text != "Select Currency") {
+                    if (CurrencyType[0].text == "Indonesia Rupiah") {
+                        if (!isNaN(KursID)) {
+                            bookValue = priceID / KursID;
+                            if (!isNaN(bookValue)) {
+                                //$("#assetvalueUSDID").val(bookValue);
+                                $("#assetvalueUSDID").autoNumeric("init", {
+                                    aSep: ',',
+                                    aDec: '.',
+                                    aPad: false,
+                                    mDec: '2',
+                                    vMin: 0,
+                                });
+                                $("#assetvalueIDRID").autoNumeric("init", {
+                                    aSep: ',',
+                                    aDec: '.',
+                                    aPad: false,
+                                    mDec: '2',
+                                    vMin: 0,
+                                });
+                                /*$("#kursID").autoNumeric("init", {
+                                    aSep: ',',
+                                    aDec: '.',
+                                    aPad: false,
+                                    mDec: '2',
+                                    vMin: 0,
+                                });*/
+                                $("#IDRkursID").autoNumeric("init", {
+                                    aSep: ',',
+                                    aDec: '.',
+                                    aPad: false,
+                                    mDec: '2',
+                                    vMin: 0,
+                                });
+                                //$("#kursID").autoNumeric("set", 0);
+                                $("#IDRkursID").autoNumeric("set", 1);
+                                $("#assetvalueUSDID").autoNumeric("set", 0);
+                                $("#assetvalueIDRID").autoNumeric("set", priceID);
+                            }
+                        }
+                    }
+                    else if (CurrencyType[0].text == "US Dollar") {
+                        if (!isNaN(KursID)) {
+                            bookValueIDR = priceID/IDRkursID;
+                            //$("#assetvalueUSDID").val(bookValue);
+                            $("#assetvalueUSDID").autoNumeric("init", {
+                                aSep: ',',
+                                aDec: '.',
+                                aPad: false,
+                                mDec: '2',
+                                vMin: 0,
+                            });
+                            $("#assetvalueIDRID").autoNumeric("init", {
+                                aSep: ',',
+                                aDec: '.',
+                                aPad: false,
+                                mDec: '2',
+                                vMin: 0,
+                            });
+                            /*$("#kursID").autoNumeric("init", {
+                                aSep: ',',
+                                aDec: '.',
+                                aPad: false,
+                                mDec: '2',
+                                vMin: 0,
+                            });*/
+                            $("#IDRkursID").autoNumeric("init", {
+                                aSep: ',',
+                                aDec: '.',
+                                aPad: false,
+                                mDec: '2',
+                                vMin: 0,
+                            });
+                            //$("#kursID").autoNumeric("set", 1);
+                            $("#IDRkursID").autoNumeric("set", 0);
+                            $("#assetvalueUSDID").autoNumeric("set", priceID);
+                            $("#assetvalueIDRID").autoNumeric("set", 0);
+                        }
+                    }
+                    else if (CurrencyType[0].text != "Indonesia Rupiah" && CurrencyType[0].text != "US Dollar") {
+                        if (!isNaN(KursID)) {
+                            bookValue = priceID * KursID;
+                            if (!isNaN(bookValue)) {
+                                $(".numeric").autoNumeric("init", {
+                                    aSep: ',',
+                                    aDec: '.',
+                                    aPad: false,
+                                    mDec: '2',
+                                    vMin: 0,
+                                });
+                                $("#assetvalueIDRID").autoNumeric("init", {
+                                    aSep: ',',
+                                    aDec: '.',
+                                    aPad: false,
+                                    mDec: '2',
+                                    vMin: 0,
+                                });
+                                /*$("#kursID").autoNumeric("init", {
+                                    aSep: ',',
+                                    aDec: '.',
+                                    aPad: false,
+                                    mDec: '2',
+                                    vMin: 0,
+                                });*/
+                                $("#IDRkursID").autoNumeric("init", {
+                                    aSep: ',',
+                                    aDec: '.',
+                                    aPad: false,
+                                    mDec: '2',
+                                    vMin: 0,
+                                });
+                                //$("#kursID").autoNumeric("set", 0);
+                                $("#IDRkursID").autoNumeric("set", 0);
+                                $("#assetvalueUSDID").autoNumeric("set", 0);
+                                $("#assetvalueIDRID").autoNumeric("set", 0);
+                            }
+                        }
+                    }
+                }
+            }
+
+        });
+
+        function getKurs(kurs_date, curr_id, kurs_mode) {
+            var _result = 0;
+            $.ajax({
+                dataType: "json",
+                url: '/depreciation/GetKurs',
+                async: false,  //tunggu hasil keluar :)
+                data: {
+                    date: kurs_date,
+                    currency_id: curr_id,
+                    mode: kurs_mode
+                },
+                success: function (result) {
+                    _result = result.data;
+                }
+            });
+            return _result;
+        }
+
+        function Calc_GetKurs() {
+            var aDate = $("#elips_date").val();
+            var aCurr = $("#currencyID").val();
+            var aPrice = parseFloat($('#priceID').val().replace(/,/g, ''));
+
+            if ((aDate) && (aCurr > 0)) {
+
+                var rest_0 = getKurs(aDate, $("#currencyID").val(), 0);
+                //alert('rest-0 : ' + rest_0);
+                if (rest_0 > 0)
+                    $("#kursID").val(rest_0);
+                else
+                    alert('Kurs [' + $('#currencyID').select2('data')[0].text + '] Not Found.\n\n.');
+
+                var rest_1 = getKurs(aDate, $("#currencyID").val(), 1);
+                //alert('rest-1 : ' + rest_1);
+                if (rest_1)
+                    $("#IDRkursID").val(rest_1);
+                else
+                    alert('Kurs [' + $('#currencyID').select2('data')[0].text + '] Not Found.\n\n.');
+
+                var _value = 0;
+                if (parseFloat(rest_0) <= 0) { _value = 0; }
+                else if (rest_0 >= 1) {
+                    _value = parseFloat(aPrice) / parseFloat(rest_0);
+                }
+                else {
+                    _value = parseFloat(aPrice) * parseFloat(rest_0);
+                }
+                $("#assetvalueUSDID").val(_value.toFixed(2));
+            }
+            return true;
+        }
+
+        $("#elips_date").change(function () {
+            //var x = Calc_GetKurs();
+        });
+
+        $("#priceID").blur(function () {
+            //var x = Calc_GetKurs();
+        });
+        function validateKomersil(value)
+        {
+            var priceID = parseFloat($('#priceID').val().replace(/,/g, ''));
+            var komresVal = parseFloat($("#komersilResiduValueID").val().replace(/,/g, ''));
+            var fisresVal = parseFloat($("#fiskalResiduValueID").val().replace(/,/g, ''));
+            if(priceID < komresVal)
+            {
+                swal("Warning", "Commercial Residu Value can\'t higher then Original Price", "warning");
+                $("#komersilResiduValueID").val(0);
+            }
+            if (priceID < fisresVal)
+            {
+                swal("Warning", "Fiscal Residu Value can\'t higher then Original Price", "warning");
+                $("#fiskalResiduValueID").val(0);
+            }
+        }
+
+        function isValidDate(date) {
+            //var format = 'yyyy-MM-dd';
+            var temp = date.split('-');
+            var d = new Date(temp[1] + '-' + temp[0] + '-' + temp[2]);
+            return (d && (d.getMonth() + 1) == temp[1] && d.getDate() == Number(temp[0]) && d.getFullYear() == Number(temp[2]));
+        }
+
+        function CalculateByKurs() {
+            $("#assetvalueUSDID").autoNumeric("init", {
+                aSep: ',',
+                aDec: '.',
+                aPad: false,
+                mDec: '2',
+                vMin: 0,
+            });
+            /*$("#kursID").autoNumeric("init", {
+                aSep: ',',
+                aDec: '.',
+                aPad: false,
+                mDec: '2',
+                vMin: 0,
+            });*/
+            var priceID = parseFloat($('#priceID').val().replace(/,/g, ''));
+            var bookValue = parseFloat($('#assetvalueUSDID').val().replace(/,/g, ''));
+            var bookValueIDR = parseFloat($('#assetvalueIDRID').val().replace(/,/g, ''));
+            var KursID = parseFloat($('#kursID').val().replace(/,/g, ''));
+            var IDRKursID = parseFloat($('#IDRkursID').val().replace(/,/g, ''));
+            var CurrencyType = $('#currencyID').select2('data');
+            if (KursID == 0)
+            {
+                swal("Warning", "IDR Kurs or USD Kurs can\'t zero value", "warning");
+                $("#kursID").val(1);
+            }
+            else if (IDRKursID == 0) {
+                swal("Warning", "IDR Kurs or USD Kurs can\'t zero value", "warning");
+                $("#IDRkursID").val(1);
+            }
+            else
+            {
+                if (!isNaN(priceID)) {
+                    //alert("Please Input Price first");
+                    if (CurrencyType[0].text != "Select Currency") {
+                        if (CurrencyType[0].text == "Indonesia Rupiah") {
+                            if (!isNaN(KursID)) {
+                                bookValue = priceID / KursID;
+                                if (!isNaN(bookValue)) {
+                                    $("#assetvalueUSDID").autoNumeric("init", {
+                                        aSep: ',',
+                                        aDec: '.',
+                                        aPad: false,
+                                        mDec: '2',
+                                        vMin: 0,
+                                    });
+                                    /*$("#kursID").autoNumeric("init", {
+                                        aSep: ',',
+                                        aDec: '.',
+                                        aPad: false,
+                                        mDec: '2',
+                                        vMin: 0,
+                                    });*/
+                                    $("#IDRkursID").val(1);
+                                    //$("#kursID").val(KursID);
+                                    $("#assetvalueUSDID").autoNumeric("set", bookValue);
+                                    $("#assetvalueIDRID").autoNumeric("set", priceID);
+                                }
+
+                            }
+                        }
+                        else if (CurrencyType[0].text == "US Dollar") {
+                            if (!isNaN(KursID)) {
+                                bookValue = priceID / 1;
+                                IDRkursID = priceID / bookValueIDR;
+                                $("#assetvalueUSDID").autoNumeric("init", {
+                                    aSep: ',',
+                                    aDec: '.',
+                                    aPad: false,
+                                    mDec: '2',
+                                    vMin: 0,
+                                });
+                                $("#assetvalueIDRID").autoNumeric("init", {
+                                    aSep: ',',
+                                    aDec: '.',
+                                    aPad: false,
+                                    mDec: '2',
+                                    vMin: 0,
+                                });
+                                $("#IDRkursID").autoNumeric("init", {
+                                    aSep: ',',
+                                    aDec: '.',
+                                    aPad: false,
+                                    mDec: '2',
+                                    vMin: 0,
+                                });
+                                /*$("#kursID").autoNumeric("init", {
+                                    aSep: ',',
+                                    aDec: '.',
+                                    aPad: false,
+                                    mDec: '2',
+                                    vMin: 0,
+                                });*/
+                                //$("#kursID").val(1);
+                                $("#IDRkursID").val(IDRkursID);
+                                $("#assetvalueUSDID").autoNumeric("set", priceID);
+                                $("#assetvalueIDRID").autoNumeric("set", bookValueIDR);
+                            }
+                        }
+                        else if (CurrencyType[0].text != "Indonesia Rupiah" && CurrencyType[0].text != "US Dollar") {
+                            if (!isNaN(KursID)) {
+                                bookValue = priceID * KursID;
+                                if (!isNaN(bookValue)) {
+                                    $("#assetvalueUSDID").autoNumeric("init", {
+                                        aSep: ',',
+                                        aDec: '.',
+                                        aPad: false,
+                                        mDec: '2',
+                                        vMin: 0,
+                                    });
+                                    $("#assetvalueIDRID").autoNumeric("init", {
+                                        aSep: ',',
+                                        aDec: '.',
+                                        aPad: false,
+                                        mDec: '2',
+                                        vMin: 0,
+                                    });
+                                    $("#assetvalueUSDID").autoNumeric("set", 0);
+                                    $("#assetvalueIDRID").autoNumeric("set", 0);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        function CalculateByBookValue() {
+            var priceID = parseFloat($('#priceID').val().replace(/,/g, ''));
+            var bookValue = parseFloat($('#assetvalueUSDID').val().replace(/,/g, ''));
+            var bookValueIDR = parseFloat($('#assetvalueIDRID').val().replace(/,/g, ''));
+            var KursID = parseFloat($('#kursID').val().replace(/,/g, ''));
+            var IDRKursID = parseFloat($('#IDRkursID').val().replace(/,/g, ''));
+            var CurrencyType = $('#currencyID').select2('data');
+
+            if (!isNaN(priceID)) {
+                if (CurrencyType[0].text != "Select Currency") {
+                    if (CurrencyType[0].text == "Indonesia Rupiah") {
+                        KursID = priceID / bookValue; // calc KURS USD
+                        IDRKursID = priceID / 1; // calc KURS IDR
+                        AssetValueUSD =  priceID / KursID;
+                        $("#kursID").autoNumeric("init", {
+                            aSep: ',',
+                            aDec: '.',
+                            aPad: false,
+                            mDec: '2',
+                            vMin: 0,
+                        });
+                        $("#IDRkursID").autoNumeric("init", {
+                            aSep: ',',
+                            aDec: '.',
+                            aPad: false,
+                            mDec: '2',
+                            vMin: 0,
+                        });
+                        /*$("#assetvalueUSDID").autoNumeric("init", {
+                            aSep: ',',
+                            aDec: '.',
+                            aPad: false,
+                            mDec: '2',
+                            vMin: 0,
+                        });*/
+                        $("#assetvalueIDRID").autoNumeric("init", {
+                            aSep: ',',
+                            aDec: '.',
+                            aPad: false,
+                            mDec: '2',
+                            vMin: 0,
+                        });
+                        $("#kursID").autoNumeric("set", KursID);
+                        $("#IDRkursID").autoNumeric("set", 1);
+                        //$("#assetvalueUSDID").autoNumeric("set", AssetValueUSD);
+                        $("#assetvalueIDRID").autoNumeric("set", IDRKursID);
+                    }
+                    else if (CurrencyType[0].text == "US Dollar") {
+                        KursID = priceID / 1; // calc KURS USD
+                        IDRKursID = bookValueIDR / priceID; // calc KURS IDR
+                        $("#kursID").autoNumeric("init", {
+                            aSep: ',',
+                            aDec: '.',
+                            aPad: false,
+                            mDec: '2',
+                            vMin: 0,
+                        });
+                        $("#IDRkursID").autoNumeric("init", {
+                            aSep: ',',
+                            aDec: '.',
+                            aPad: false,
+                            mDec: '2',
+                            vMin: 0,
+                        });
+                        /*$("#assetvalueUSDID").autoNumeric("init", {
+                            aSep: ',',
+                            aDec: '.',
+                            aPad: false,
+                            mDec: '2',
+                            vMin: 0,
+                        });*/
+                        $("#assetvalueIDRID").autoNumeric("init", {
+                            aSep: ',',
+                            aDec: '.',
+                            aPad: false,
+                            mDec: '2',
+                            vMin: 0,
+                        });
+                        $("#kursID").autoNumeric("set", 1);
+                        $("#IDRkursID").autoNumeric("set", IDRKursID);
+                        //$("#assetvalueUSDID").autoNumeric("set", priceID);
+                    }
+                    else if (CurrencyType[0].text != "Indonesia Rupiah" && CurrencyType[0].text != "US Dollar") {
+                        KursID = bookValue / priceID; // calc KURS USD
+                        IDRKursID = bookValueIDR / priceID; // calc KURS IDR
+                        //$("#kursID").val(KursID);
+                        $("#kursID").autoNumeric("init", {
+                            aSep: ',',
+                            aDec: '.',
+                            aPad: false,
+                            mDec: '2',
+                            vMin: 0,
+                        });
+                        $("#IDRkursID").autoNumeric("init", {
+                            aSep: ',',
+                            aDec: '.',
+                            aPad: false,
+                            mDec: '2',
+                            vMin: 0,
+                        });
+                        $("#kursID").autoNumeric("set", KursID);
+                        $("#IDRkursID").autoNumeric("set", IDRKursID);
+                    }
+                }
+            }
+            else {
+
+
+            }
+        }
+
+        function CalculateByPrice() {
+            var CurrencyType = $('#currencyID').select2('data');
+            if (CurrencyType[0].text != "Select Currency") {
+                var priceID = parseFloat($('#priceID').val().replace(/,/g, ''));
+                var bookValue = parseFloat($('#assetvalueUSDID').val().replace(/,/g, ''));
+                var KursID = parseFloat($('#kursID').val().replace(/,/g, ''));
+                var CurrencyType = $('#currencyID').select2('data');
+                if (!isNaN(priceID)) {
+                    if (CurrencyType[0].text == "Indonesia Rupiah") {
+                        if (!isNaN(KursID)) {
+                            KursID = priceID / bookValue;
+                            //$("#kursID").val(KursID);
+                            IDRKursID = 1;
+                            $("#kursID").autoNumeric("init", {
+                                aSep: ',',
+                                aDec: '.',
+                                aPad: false,
+                                mDec: '2',
+                                vMin: 0,
+                            });
+                            $("#IDRkursID").autoNumeric("init", {
+                                aSep: ',',
+                                aDec: '.',
+                                aPad: false,
+                                mDec: '2',
+                                vMin: 0,
+                            });
+                            $("#assetvalueUSDID").autoNumeric("init", {
+                                aSep: ',',
+                                aDec: '.',
+                                aPad: false,
+                                mDec: '2',
+                                vMin: 0,
+                            });
+                            $("#assetvalueIDRID").autoNumeric("init", {
+                                aSep: ',',
+                                aDec: '.',
+                                aPad: false,
+                                mDec: '2',
+                                vMin: 0,
+                            });
+                            $("#kursID").autoNumeric("set", KursID);
+                            $("#IDRkursID").autoNumeric("set", IDRKursID);
+                            $("#assetvalueUSDID").autoNumeric("set", 0);
+                            $("#assetvalueIDRID").autoNumeric("set", priceID);
+                        }
+                        else
+                        {
+                            IDRKursID = 1;
+                            $("#kursID").autoNumeric("init", {
+                                aSep: ',',
+                                aDec: '.',
+                                aPad: false,
+                                mDec: '2',
+                                vMin: 0,
+                            });
+                            $("#IDRkursID").autoNumeric("init", {
+                                aSep: ',',
+                                aDec: '.',
+                                aPad: false,
+                                mDec: '2',
+                                vMin: 0,
+                            });
+                            $("#assetvalueUSDID").autoNumeric("init", {
+                                aSep: ',',
+                                aDec: '.',
+                                aPad: false,
+                                mDec: '2',
+                                vMin: 0,
+                            });
+                            $("#assetvalueIDRID").autoNumeric("init", {
+                                aSep: ',',
+                                aDec: '.',
+                                aPad: false,
+                                mDec: '2',
+                                vMin: 0,
+                            });
+                            $("#kursID").autoNumeric("set", KursID);
+                            $("#IDRkursID").autoNumeric("set", IDRKursID);
+                            $("#assetvalueIDRID").autoNumeric("set", priceID);
+                            $("#assetvalueUSDID").autoNumeric("set", 0);
+                        }
+                    }
+                    else if (CurrencyType[0].text == "US Dollar") {
+                        if (!isNaN(KursID)) {
+                            $("#kursID").autoNumeric("init", {
+                                aSep: ',',
+                                aDec: '.',
+                                aPad: false,
+                                mDec: '2',
+                                vMin: 0,
+                            });
+                            $("#IDRkursID").autoNumeric("init", {
+                                aSep: ',',
+                                aDec: '.',
+                                aPad: false,
+                                mDec: '2',
+                                vMin: 0,
+                            });
+                            $("#assetvalueUSDID").autoNumeric("init", {
+                                aSep: ',',
+                                aDec: '.',
+                                aPad: false,
+                                mDec: '2',
+                                vMin: 0,
+                            });
+                            $("#assetvalueIDRID").autoNumeric("init", {
+                                aSep: ',',
+                                aDec: '.',
+                                aPad: false,
+                                mDec: '2',
+                                vMin: 0,
+                            });
+                            $("#kursID").autoNumeric("set", 1);
+                            $("#IDRkursID").autoNumeric("set", 0);
+                            $("#assetvalueIDRID").autoNumeric("set", 0);
+                            $("#assetvalueUSDID").autoNumeric("set", priceID);
+                        }
+                        else
+                        {
+                            KursID = 1;
+                            $("#kursID").autoNumeric("init", {
+                                aSep: ',',
+                                aDec: '.',
+                                aPad: false,
+                                mDec: '2',
+                                vMin: 0,
+                            });
+                            $("#IDRkursID").autoNumeric("init", {
+                                aSep: ',',
+                                aDec: '.',
+                                aPad: false,
+                                mDec: '2',
+                                vMin: 0,
+                            });
+                            $("#assetvalueUSDID").autoNumeric("init", {
+                                aSep: ',',
+                                aDec: '.',
+                                aPad: false,
+                                mDec: '2',
+                                vMin: 0,
+                            });
+                            $("#assetvalueIDRID").autoNumeric("init", {
+                                aSep: ',',
+                                aDec: '.',
+                                aPad: false,
+                                mDec: '2',
+                                vMin: 0,
+                            });
+                            $("#kursID").autoNumeric("set", KursID);
+                            $("#IDRkursID").autoNumeric("set", 0);
+                            $("#assetvalueIDRID").autoNumeric("set", 0);
+                            $("#assetvalueUSDID").autoNumeric("set", priceID);
+                        }
+                    }
+                    else if (CurrencyType[0].text != "Indonesia Rupiah" && CurrencyType[0].text != "US Dollar") {
+                        if (!isNaN(KursID)) {
+                            //KursID = bookValue / priceID;
+                            //$("#kursID").val(KursID);
+                            $("#kursID").autoNumeric("init", {
+                                aSep: ',',
+                                aDec: '.',
+                                aPad: false,
+                                mDec: '2',
+                                vMin: 0,
+                            });
+                            $("#IDRkursID").autoNumeric("init", {
+                                aSep: ',',
+                                aDec: '.',
+                                aPad: false,
+                                mDec: '2',
+                                vMin: 0,
+                            });
+                            $("#kursID").autoNumeric("set", "");
+                            $("#IDRkursID").autoNumeric("set", "");
+                        }
+                    }
+                }
+
+            }
+            else {
+                swal("Warning", "Please select currency first", "warning");
+            }
+        }
+
+        function New() {
+            $("#assetID").val("");
+            $("#modeID").val("New");
+            $("#assetCodeID").val("");
+            $("#assetNameID").val("");
+            $("#receiptDateID").val("");
+
+            $("#priceID").val("");
+            $("#elips_date").val("");
+            $("#kursID").val("");
+            $("#IDRkursID").val("");
+            $("#assetvalueUSDID").val("");
+            $("#assetvalueIDRID").val("");
+            $("#komersilResiduValueID").val("");
+            $("#fiskalResiduValueID").val("");
+
+            $("#komersilUsefulLifeValueID").val("");
+            $("#fiskalUsefulLifeValueID").val("");
+            $('#depreMethodID').attr('readonly', true);
+            $("#depreMethodID").select2("val", "1");
+            $("#currencyID").select2("val", "0");
+
+            $('#NewBtn').prop('disabled', true);
+            $('#EditBtn').prop('disabled', true);
+            $('#DeleteBtn').prop('disabled', true);
+            //$('#CancelBtn').prop('disabled', true);
+            $('#SaveBtn').prop('disabled', true);
+        }
+
+        function Edit() {
+            $('#NewBtn').prop('disabled', true);
+            $('#SaveBtn').prop('disabled', false);
+            $('#EditBtn').prop('disabled', true);
+            //$('#CancelBtn').prop('disabled', false);
+            $('#DeleteBtn').prop('disabled', true);
+
+            $("#modeID").val("Edit");
+        }
+
+        function Delete() {
+            var urlCancel = '/depreciation/DeleteDepreciation/set';
+            $.ajax({
+                type: 'POST',
+                url: urlCancel,
+                data: $("#depre-form").serialize(),
+                success: function (result) {
+                    swal("Success", "Success Delete Depreciation", "success");
+                    New();
+                },
+                error: function (data) {
+                    swal("Error", "Error Delete Depreciation", "error");
+                }
+            })
+        }
+
+        function Save() {
+            //ValidateForm();
+            var $depreForm = $("#depre-form").validate({
+                // Rules for form validation
+                rules: {
+                    currency: {
+                        required: true,
+                    },
+                    price: {
+                        required: true,
+                    },
+                    elips_date: {
+                        required: true,
+                    },
+                    usd_kurs: {
+                        required: true,
+                    },
+                    idr_kurs: {
+                        required: true,
+                    },
+                    asset_value_usd: {
+                        required: true,
+                    },
+                    komersil_residu_value: {
+                        required: true,
+                    },
+                    fiskal_residu_value: {
+                        required: true,
+                    },
+                    komersil_life_value: {
+                        required: true,
+                    },
+                    fiskal_life_value: {
+                        required: true,
+                    },
+                },
+
+                // Messages for form validation
+                messages: {
+                    currency: {
+                        required: 'Please enter Currency'
+                    },
+                    price: {
+                        required: 'Please enter Original Price'
+                    },
+                    elips_date: {
+                        required: 'Please enter Elips Date'
+                    },
+                    usd_kurs: {
+                        required: 'Please enter USD Kurs'
+                    },
+                    idr_kurs: {
+                        required: 'Please enter IDR Kurs'
+                    },
+                    asset_value_usd: {
+                        required: 'Please enter Asset Value'
+                    },
+                    komersil_residu_value: {
+                        required: 'Please enter Commercial Asset Residu Value'
+                    },
+                    fiskal_residu_value: {
+                        required: 'Please enter Fiscal Asset Residu Value'
+                    },
+                    komersil_life_value: {
+                        required: 'Please enter Commercial Useful Life'
+                    },
+                    fiskal_life_value: {
+                        required: 'Please enter Fiscal Useful Life'
+                    },
+                },
+
+                // Do not change code below
+                errorPlacement: function (error, element) {
+                    error.insertAfter(element.parent());
+                }
+            });
+            if ($("#depre-form").valid()) {
+                var urlSave = '/depreciation/Save/';
+                $.ajax({
+                    type: 'POST',
+                    url: urlSave,
+                    data: $("#depre-form").serialize(),
+                    success: function (result) {
+                        //alert(result);
+                        swal({
+                            title: "Success",
+                            text: result,
+                            type: "success"
+                        });
+                        $('#NewBtn').prop('disabled', false);
+                        $('#SaveBtn').prop('disabled', true);
+                        $('#EditBtn').prop('disabled', false);
+                        //$('#CancelBtn').prop('disabled', true);
+                        $('#DeleteBtn').prop('disabled', false);
+
+                        $("#modeID").val("Edit");
+                        New();
+                    },
+                    error: function (data) {
+                        swal("Error", "Error Save Depreciation", "error");
+                    }
+                })
+            }
+            else {
+                swal({
+                    title: "Validation Error",
+                    text: "Please check your input data...",
+                    type: "warning"
+                });
+                var validator = $("#depre-form").validate();
+                validator.form();
+            }
+        }
+
+        function CancelButton() {
+            $('#SaveBtn').prop('disabled', true);
+            //$('#CancelBtn').prop('disabled', true);
+            $('#EditBtn').prop('disabled', false);
+            $('#NewBtn').prop('disabled', false);
+            $('#DeleteBtn').prop('disabled', false);
+            $("#modeID").val("New"); 
+            location.reload();
+        }
+
+        function ToJavaScriptDate(value) {
+            const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            var pattern = /Date\(([^)]+)\)/;
+            var results = pattern.exec(value);
+            var dt = new Date(parseFloat(results[1]));
+            return (dt.getDate() + " " + monthNames[(parseInt(dt.getMonth()))] + " " + dt.getFullYear());
+        }
+
+        function GetAssetNumber(id) {
+            //$('#CancelBtn').prop('disabled', true);
+            //document.getElementById("DeleteBtn").style.display = "inline";
+
+            $.ajax({
+                type: 'POST',
+                url: "/depreciation/GetAssetList/" + id,
+                dataType: 'json',
+                success: function (data) {
+                    for (var i in data) {
+                        $("#assetID").val(data[i].asset_id);
+                        $("#assetCodeID").val(data[i].asset_number);
+                        $("#assetNameID").val(data[i].asset_name);
+                        $("#receiptDateID").val(ToJavaScriptDate(data[i].asset_receipt_date));
+                        $("#assetCodeID").css({ 'background-color': color_input_text });
+                        $("#assetNameID").css({ 'background-color': color_input_text });
+                        $("#receiptDateID").css({ 'background-color': color_input_text });
+                    }
+                },
+                error: function (data) {
+                    swal("Error", "Error Load Asset Data", "error");
+                }
+            })
+
+            //loadData Depreciation if exists
+            if (id != "0") {
+                $.ajax({
+                    type: 'POST',
+                    url: "/depreciation/GetAssetDepreciationDetail/" + id,
+                    dataType: 'json',
+                    success: function (data) {
+                        /*$("#kursID").autoNumeric("init", {
+                            aSep: ',',
+                            aDec: '.',
+                            aPad: false,
+                            mDec: '2',
+                            vMin: 0,
+                        });*/
+                        $("#IDRkursID").autoNumeric("init", {
+                            aSep: ',',
+                            aDec: '.',
+                            aPad: false,
+                            mDec: '2',
+                            vMin: 0,
+                        });
+                        $("#assetvalueUSDID").autoNumeric("init", {
+                            aSep: ',',
+                            aDec: '.',
+                            aPad: false,
+                            mDec: '2',
+                            vMin: 0,
+                        });
+                        $("#assetvalueIDRID").autoNumeric("init", {
+                            aSep: ',',
+                            aDec: '.',
+                            aPad: false,
+                            mDec: '2',
+                            vMin: 0,
+                        });
+                        var count = 0;
+                        for (var i in data) {
+                            count++;
+                            //dropdown
+                            //alert(data[i].asset_original_currency_id);
+                            //$("#currencyID").select2();
+                            $.getJSON('/Currency/GetCurrency', function (data2) {
+                                var output = "";
+                                var output = '<option value="0"> Select Currency </option>';
+                                $.each(data2, function (key, entry) {
+                                    if (data[i].asset_original_currency_id == entry.currency_id) {
+                                        output += '<option value=' + entry.currency_id + ' selected>' + entry.currency_name + '</option>';
+
+                                    }
+                                    else {
+                                        output += '<option value=' + entry.currency_id + '>' + entry.currency_name + '</option>';
+                                    }
+                                    //output += '<option value=' + entry.country_id + '>' + entry.country_name + '</option>';
+                                });
+                                $("#currencyID").html(output);
+                            });
+
+                            $.getJSON('/depreciation/GetDepreciationMethod', function (data2) {
+                                var output = "";
+                                var output = '<option value="0"> Select Method </option>';
+                                $.each(data2, function (key, entry) {
+                                    if (data[i].depreciation_type_id == entry.depreciation_type_id) {
+                                        output += '<option value=' + entry.depreciation_type_id + ' selected>' + entry.depreciation_type_name + '</option>';
+
+                                    }
+                                    else {
+                                        output += '<option value=' + entry.depreciation_type_id + '>' + entry.depreciation_type_name + '</option>';
+                                    }
+                                    //output += '<option value=' + entry.country_id + '>' + entry.country_name + '</option>';
+                                });
+                                $("#depreMethodID").html(output);
+                            });
+                            $("#priceID").val(data[i].asset_original_value);
+                            $("#elips_date").val(data[i].elips_date);
+                            $("#kursID").val(data[i].usd_kurs);
+                            $("#IDRkursID").val(data[i].idr_kurs);
+                            $("#assetvalueUSDID").val(data[i].asset_book_value);
+                            $("#komersilResiduValueID").val(data[i].mkt_asset_residu_value);
+                            $("#fiskalResiduValueID").val(data[i].fis_asset_residu_value);
+
+                            $("#komersilUsefulLifeValueID").val(data[i].mkt_asset_usefull_life);
+                            $("#fiskalUsefulLifeValueID").val(data[i].fis_asset_usefull_life);
+
+                            $('#EditBtn').prop('disabled', false);
+                            //$('#DeleteBtn').prop('disabled', false);
+                            $('#SaveBtn').prop('disabled', true);
+                        }
+
+                        if (count == 0) {
+                            //$("#currencyID").val(0);
+                            //$("#depreMethodID").val(0);
+                            //$("#currencyID").select2();
+
+                            $("#currencyID").select2("val", "0");
+                            $("#depreMethodID").select2("val", "1");
+
+
+                            $("#priceID").val("");
+                            $("#elips_date").val("");
+                            $("#kursID").val("");
+                            $("#IDRkursID").val("");
+                            $("#assetvalueUSDID").val("");
+                            $("#komersilResiduValueID").val("");
+                            $("#fiskalResiduValueID").val("");
+
+                            $("#komersilUsefulLifeValueID").val("");
+                            $("#fiskalUsefulLifeValueID").val("");
+
+                            $("#komersialDepreciationID").val("");
+                            $("#fiskalDepreciationID").val("");
+
+                            //Bagian hsl generate
+                            $("#komersilAssetUsageID").val("");
+                            $("#fiskalAssetUsageID").val("");
+
+                            $("#komersilMonthlyDepreciationID").val("");
+                            $("#fiskalMonthlyDepreciationID").val("");
+
+                            $("#komersilTotalDepreciationID").val("");
+                            $("#fiskalTotalDepreciationID").val("");
+
+                            $("#komersilBookValueID").val("");
+                            $("#fiskalBookValueID").val("");
+
+                            $('#SaveBtn').prop('disabled', false);
+                            $('#EditBtn').prop('disabled', true);
+                            //$('#DeleteBtn').prop('disabled', true);
+                        }
+
+                        $('#NewBtn').prop('disabled', false);
+
+                    },
+                    error: function (data) {
+                        swal("Error", "Error Load Depreciation Detail Data", "error");
+                    }
+                })
+
+            }
+
+
+        }
+
+        function OpenModalAssetList() {
+            $("#Asset").html("");
+            var assetCode = $("#assetCodeID").val();
+            //alert("modal");
+
+            $.ajax({
+                url: "/depreciation/ModalAsset/",
+                success: function (data) {
+                    $("#Asset").html(data);
+                    //alert("open modal");
+                    var oTable = $('#AssetTblList').DataTable({
+                        "ajax": {
+                            "url": "/depreciation/GetAssetList/0",
+                            //"url": "/depreciation/GetUnSetAssetList/",
+                            "type": "GET",
+                            "datatype": "json",
+                        },
+                        "columns": [
+                            //{ "data": "asset_id", "autoWidth": true },
+                            { "data": "asset_number", "autoWidth": true },
+                            { "data": "asset_name", "autoWidth": true },
+                            {
+                                "data": "action",
+                                "autowidth": true,
+                                "mRender": function (data, type, full) {
+                                    return '<a class="btn btn-info btn-sm" data-dismiss="modal" onclick="GetAssetNumber(' + full['asset_id'] + ');">' + 'Select' + '</a>';
+                                }
+                            }
+                        ]
+                    });
+                }
+            });
+        }
+
+        /*function ValidateForm() {
+            var $loginForm = $("#depre-form").validate({
+                // Rules for form validation
+                rules: {
+                    kursID: {
+                        required: true,
+                        number: true
+                    },
+                    priceID: {
+                        required: true,
+                        number: true
+                    }
+                },
+
+                // Messages for form validation
+                messages: {
+                    kursID: {
+                        required: 'Please enter Kurs'
+                    },
+                    priceID: {
+                        required: 'Please enter Price'
+                    }
+                },
+
+                // Do not change code below
+                errorPlacement: function (error, element) {
+                    error.insertAfter(element.parent());
+                }
+            });
+        }*/
+
+        $(document).ready(function () {
+
+            New();
+
+            //$("#currencyID").select2();
+            $.getJSON('/currency/GetCurrency', function (data) {
+                var output = '<option value="0"> Select Currency </option>';
+                $.each(data, function (key, entry) {
+                    output += '<option value=' + entry.currency_id + '>' + entry.currency_name + '</option>';
+                })
+                $("#currencyID").html(output);
+            });
+
+            //$("#depreMethodID").select2();
+            $.getJSON('/depreciation/GetDepreciationMethod', function (data) {
+                var output = '<option value="0"> Select Method </option>';
+                $.each(data, function (key, entry) {
+                    output += '<option value=' + entry.depreciation_type_id + '>' + entry.depreciation_type_name + '</option>';
+                })
+                $("#depreMethodID").html(output);
+            });
+
+        })
+
+
+    </script>
+}

@@ -1,0 +1,161 @@
+﻿<div class="login-info">
+    <span id="activity" class="activity-dropdown">
+        <!-- <a href="javascript:void(0);" id="activity" class="activity-dropdown"> -->
+        <a href="#" id="activity" class="activity-dropdown">
+            <img src="~/content/img/avatars/sunny.png" alt="me" class="online" />
+            <span>@ASM_UI.Models.UserProfile.UserName</span>
+            <i class="fa fa-angle-down"></i>
+        </a>
+    </span>
+    <!-- AJAX-DROPDOWN : control this dropdown height, look and feel from the LESS variable file -->
+    <div class="ajax-dropdown">
+
+        <!-- the ID links are fetched via AJAX to the ajax container "ajax-notifications" -->
+
+        <div class="btn-group btn-group-justified">
+            <label class="btn btn-default">
+                Your Login Information
+            </label>
+            <a href="@Url.Action("changepassword", "account")" class="btn btn-default btn-primary" target="_self">Change Password</a>
+        </div>
+
+        @*<div class="btn btn-group-sm"">
+            <button class="btn btn-group-sm">
+                <a href="@Url.Action("changepassword", "account")">Change Password</a>
+            </button>
+        </div>*@
+
+        <!-- notification content -->
+        <div class="ajax-notifications custom-scroll">
+            <div class="alert alert-transparent table-responsive">
+                @*<h4>Your Login Info</h4>*@
+                @*<p>User ID : @ASM_UI.Models.UserProfile.UserId; </p>
+                    <p>User Name : @ASM_UI.Models.UserProfile.UserName; </p>
+                    <p>User Full Name : @ASM_UI.Models.UserProfile.UserFullName; </p>
+                    <p>Company Name : @ASM_UI.Models.UserProfile.CompanyName; </p>
+                    <p>Dept Name : @ASM_UI.Models.UserProfile.DeptName; </p>
+                    <p>Org ID : @ASM_UI.Models.UserProfile.OrgId; </p>
+                    <p>Employee ID : @ASM_UI.Models.UserProfile.employee_id; </p>
+                    <p>Employee Name : @ASM_UI.Models.UserProfile.Employee; </p>*@
+                <table class="table table-sm">
+                    <tbody>
+                        @if (ASM_UI.Models.UserProfile.UserId > 0)
+                        {
+                            <tr>
+                                <th scope="row">Login Id</th>
+                                <td>@ASM_UI.Models.UserProfile.UserId</td>
+                            </tr>
+                        }
+
+                        @if (!string.IsNullOrWhiteSpace(ASM_UI.Models.UserProfile.UserName))
+                        {
+                            <tr>
+                                <th scope="row">Login Name</th>
+                                <td>@ASM_UI.Models.UserProfile.UserName</td>
+                            </tr>
+                        }
+
+
+                        @*if (!String.IsNullOrWhiteSpace(ASM_UI.Models.UserProfile.UserFullName))
+                            {
+                                <tr>
+                                    <th scope="row">Full Name</th>
+                                    <td>@ASM_UI.Models.UserProfile.UserFullName.ToUpper()</td>
+                                </tr>
+                            }*@
+
+                        @if (ASM_UI.Models.UserProfile.ms_user_type != null)
+                        {
+                            <tr>
+                                <th scope="row">User Type</th>
+                                <td>
+                                    @ASM_UI.Models.UserProfile.ms_user_type.user_type_name
+                                </td>
+                            </tr>
+                        }
+
+                        @if (ASM_UI.Models.UserProfile.ms_job_level != null)
+                        {
+                            <tr>
+                                <th scope="row">Job Level</th>
+                                <td>
+                                    @ASM_UI.Models.UserProfile.ms_job_level.job_level_name
+                                </td>
+                            </tr>
+                        }
+
+                        @if (!String.IsNullOrWhiteSpace(ASM_UI.Models.UserProfile.CompanyName))
+                        {
+                            <tr>
+                                <th scope="row">Company</th>
+                                <td>@ASM_UI.Models.UserProfile.CompanyName.ToUpper()</td>
+                            </tr>
+                        }
+
+                        @if (ASM_UI.Models.UserProfile.register_location != null)
+                        {
+                            <tr>
+                                <th scope="row">District</th>
+                                <td>@ASM_UI.Models.UserProfile.register_location.asset_reg_location_name.ToUpper()</td>
+                            </tr>
+                        }
+
+                        @if (ASM_UI.Models.UserProfile.location_id != null)
+                        {
+                            <tr>
+                                <th scope="row">Location</th>
+                                <td>@ASM_UI.Models.UserProfile.location_name.ToUpper()</td>
+                            </tr>
+                        }
+                        @if (ASM_UI.Models.UserProfile.ms_department != null)
+                        {
+                            <tr>
+                                <th scope="row">Department</th>
+                                <td>
+                                    @ASM_UI.Models.UserProfile.ms_department.department_name
+                                </td>
+                            </tr>
+                        }
+
+
+                        @if (@ASM_UI.Models.UserProfile.ms_employee != null)
+                        {
+                            <tr>
+                                <th scope="row">Employee NIK</th>
+                                <td>
+                                    @ASM_UI.Models.UserProfile.ms_employee.employee_nik
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th scope="row">Employee Name</th>
+                                <td>
+                                    @ASM_UI.Models.UserProfile.ms_employee.employee_name.ToUpper()
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th scope="row">Employee Email</th>
+                                <td>
+                                    @ASM_UI.Models.UserProfile.ms_employee.employee_email
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+        <!-- end notification content -->
+        <!-- footer: refresh area -->
+        <span>
+            Last updated on: 12-07-2019 9:43AM
+            <button type="button" data-loading-text="<i class='fa fa-refresh fa-spin'></i> Loading..." class="btn btn-xs btn-default pull-right">
+                <i class="fa fa-refresh"></i>
+            </button>
+        </span>
+        <!-- end footer -->
+
+    </div>
+    <!-- END AJAX-DROPDOWN -->
+</div>

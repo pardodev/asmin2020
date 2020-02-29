@@ -1,0 +1,389 @@
+﻿<!-- MAIN CONTENT -->
+<div id="content">
+
+    <!-- row -->
+    <div class="row">
+        <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+            <h1 class="page-title txt-color-blueDark">
+
+                <!-- PAGE HEADER -->
+                <i class="fa-fw fa fa-pencil-square-o"></i>
+                User Management
+                <span>
+                    >
+                    User Rights
+                </span>
+            </h1>
+        </div>
+
+        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+            <!-- Button trigger modal -->
+            <a class="btn btn-primary btn-lg pull-right header-btn hidden-mobile" href="@Url.Action("form", "user_right", null, Request.Url.Scheme)"><i class='fa fa-plus'></i> New User Right</a>
+
+            @*<button class="btn btn-success btn-lg pull-right header-btn hidden-mobile">
+            </button>*@
+            @*<a data-toggle="modal" href="#btnModalFrm" class="btn btn-success btn-lg pull-right header-btn hidden-mobile" onclick="OpenModalAdd();"><i class="fa fa-plus fa-lg"></i>New User Right</a>*@
+            
+        </div>
+    </div>
+
+    <!-- widget grid -->
+    <section id="widget-grid" class="">
+
+        <!-- row -->
+        <div class="row">
+
+            <!-- NEW WIDGET START -->
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                <table id="jqgrid"></table>
+                <div id="pjqgrid"></div>
+
+
+            </article>
+            <!-- WIDGET END -->
+
+        </div>
+
+        <!-- end row -->
+
+    </section>
+    <!-- Modal -->
+    @*<div class="modal fade" id="btnModalFrm" tabindex="-1" role="dialog">
+
+    </div>*@
+    <!-- /.modal -->
+    <!-- end widget grid -->
+
+</div>
+<!-- END MAIN CONTENT -->
+
+
+@section pagespecific {
+    <script type="text/javascript">
+
+        //function OpenModalAdd() {
+        //    $("#btnModalFrm").html("");
+
+        //    //create dorpdown user type
+        //    $.ajax({
+        //        url: "/user_right/ModalFrm/",
+        //        success: function (data) {
+        //            $("#btnModalFrm").html(data);
+
+        //            //ddl user type
+        //            let ddl_1 = $('#ms_user_type');
+        //            ddl_1.empty();
+        //            ddl_1.append('<option selected="true">Select User Type</option>');
+        //            ddl_1.prop('selectedIndex', 0);
+        //            const url_1 = 'user_type/GetUserType';
+        //            $.getJSON(url_1, function (data) {
+        //                $.each(data, function (key, entry) {
+        //                    ddl_1.append($('<option value=' + entry.user_type_id + '>' + entry.user_type_name + '</option>'));
+        //                })
+        //            });
+
+        //            // ddl job level
+        //            let ddl_2 = $('#ms_job_level');
+        //            ddl_2.empty();
+        //            ddl_2.append('<option selected="true">Select Job Level</option>');
+        //            ddl_2.prop('selectedIndex', 0);
+        //            const url_2 = 'job_level/GetJobLevel';
+        //            $.getJSON(url_2, function (data) {
+        //                $.each(data, function (key, entry) {
+        //                    ddl_2.append($('<option value=' + entry.job_level_id + '>' + entry.job_level_name + '</option>'));
+        //                })
+        //            });
+
+        //            // list menu
+        //            let tbl_menu = $('#tbl_menu')
+        //            const url_3 = '/menu/GetActiveMenu_All';
+        //            $.getJSON(url_3, function (menu){
+        //                //let tr_menu = '<tr><td>Module</td><td>Menu Code</><td>Menu Name</td></tr>';
+        //                //tbl_menu.append(tr_menu);
+        //                tbl_menu.append("<tr><td>" + menu.module_id + "</td><td>" + menu.menu_code + "</td><td>" + menu.menu_name + "</td><td><input type='checkbox' id='mnu_id' /></td></tr>");
+        //                //$.each(data, function (menu) {
+        //                //    tr_menu = '<tr><td>Module</td><td>Menu Code</><td>Menu Name</td></tr>'
+        //                //    tbl_menu.append(tr_menu)
+        //                //})
+        //            });
+
+        //        }
+        //    });
+
+        //    //jqggrid
+        //    /*
+        //    $("#jqgrid_frm").jqGrid({
+        //        url: 'menu/GetActiveMenu',
+        //        datatype: "json",
+        //        colNames: ['ID', 'Parent', 'Code', 'Menu', 'Access'],
+        //        colModel: [
+        //            { name: 'menu_id', index: 'menu_id', width: 50, key: true },
+        //            { name: 'module_id', index: 'module_id', width: 100 },
+        //            { name: 'menu_code', index: 'menu_code', width: 100 },
+        //            { name: 'menu_name', index: 'menu_name', width: 250 },
+        //            { name: 'act', index: 'act', width: 50, sortable: false }
+        //        ],
+
+        //        jsonReader: {
+        //            root: "rows",
+        //            page: "page",
+        //            total: "total",
+        //            records: "records",
+        //            repeatitems: false,
+        //            Id: "0"
+        //        },
+
+        //        editurl: null, //'/user_right/CRUDUserRight'
+        //        caption: "User Right",
+        //        emptyrecords: 'Data Not Available',
+        //        multiselect: false,
+        //        autowidth: true
+
+        //    });
+        //    jQuery("#jqgrid_frm").jqGrid('navGrid', "#pjqgrid", {
+        //        edit: false,
+        //        add: false,
+        //        del: true,
+        //        refresh: true,
+        //        closeAfterSearch: true
+        //    }, {
+        //        zIndex: 100,
+        //        caption: "Search User Right",
+        //        sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+        //        closeAfterSearch: true
+        //    });
+
+        //    jQuery("#jqgrid_frm").jqGrid('inlineNav', "#pjqgrid_frm");
+        //             */
+
+        //};
+
+
+        //function showlink(cellvalue, options, rowObject) {
+        //    alert(cellvalue);
+        //    alert(options);
+        //    alert(rowObject);
+        //    return '<a href=\'javascript:;\' onclick="alert(\'navigate to url\');" />';
+        //}
+
+        //function pickupdata(element, val) {
+        //    var Dialog = $('<div id="dialog" style="display:hidden" title="Select Address"><table id="selector"></table></div>').appendTo('body');
+        //    Dialog.dialog({
+        //        width: 'auto',
+        //        modal: true,
+        //        position: { my: "left top", at: "left bottom", of: $(element) },
+        //        open: function (ev, ui) {
+        //            $(".ui-dialog").css('font-size', '0.9em');
+        //            pickupgrid(element, val);
+        //        },
+        //        close: function (e, ui) {
+        //            Dialog.remove();
+        //        }
+        //    });
+        //    Dialog.dialog('widget').css('font-size', '12px');
+        //}
+        //function pickupgrid(element, val) {
+        //    $("#selector").jqGrid({
+        //        url: 'data.json',
+        //        loadonce: true,
+        //        datatype: "json",
+        //        colModel: [
+        //            {
+        //                name: "ShipAddress", label: "Address"
+        //            }
+        //        ],
+        //        onSelectRow: function (id, stat, e) {
+        //            var cd = $(this).jqGrid('getCell', id, 0);
+        //            $(element).val(cd);
+        //            $("#dialog").remove();
+        //            $(element).focus();
+        //        },
+        //        // focus search field
+        //        gridComplete: function (data, response) {
+        //            $("#gs_ShipAddress").focus();
+        //        }
+        //    });
+        //    $('#selector').jqGrid('filterToolbar', { searchOnEnter: false });
+        //}
+
+        $(document).ready(function () {
+
+            jQuery("#jqgrid").jqGrid({
+                url: '/user_right/List',
+                datatype: "json",
+                mtype: 'Get',
+                height: 'auto',
+                colNames: ['Actions', '', '', 'User Type', 'Job Level', ''],
+                colModel: [{
+                    name: 'act',
+                    index: 'act',
+                    sortable: false,
+                    width: 15
+                }, {
+                    name: 'user_type_id',
+                    index: 'user_type_id',
+                    sortable: false,
+                    editable: false,
+                    hidden: true,
+                    editrules: { edithidden: false }
+
+                }, {
+                    name: 'job_level_id',
+                    index: 'job_level_id',
+                    sortable: true,
+                    editable: true,
+                    hidden: true,
+                    editrules: { edithidden: false }
+                }, {
+                    name: 'user_type_name',
+                    index: 'user_type_name',
+                    sortable: true,
+                    width: 30,
+                    editable: false,
+                    //formatter: "showlink",
+                    //formatoptions:
+                    //    {
+                    //        baseLinkUrl: "user_right/List",
+                    //        idName: "",
+                    //        //addParam: "user_type_id=&job_level_id="
+                    //        addParam: function (options) {
+                    //            return {
+                    //                user_type_id: options.rowData.user_type_id,
+                    //                job_level_id: options.rowData.job_level_id
+                    //            };
+                    //        }
+                    //    },
+
+                }, {
+                    name: 'job_level_name',
+                    index: 'job_level_name',
+                    sortable: true,
+                    width: 30,
+                    editable: false
+                }, {
+                    name: 'view_form',
+                    index: 'view_form',
+                    sortable: false,
+                    editable: false,
+                    width: 15
+                }],
+                rowNum: 10,
+                rowList: [10, 20, 30],
+                pager: '#pjqgrid',
+                sortname: 'user_type_name',
+                toolbarfilter: true,
+                viewrecords: true,
+                sortorder: "asc",
+
+                gridComplete: function () {
+                    var ids = jQuery("#jqgrid").jqGrid('getDataIDs');
+                    for (var i = 0; i < ids.length; i++) {
+                        var rowdata = $("#jqgrid").jqGrid("getRowData", ids[i]);
+                        var get_data = JSON.parse(JSON.stringify(rowdata));
+                        var c1 = get_data['job_level_id'];
+                        var c2 = get_data['user_type_id'];
+                        //alert("index :"+i+" C1:" + c1 + " C2:" + c2);
+                        //be = "<button class='btn btn-xs btn-default' data-original-title='Edit Row' onclick=\"jQuery('#jqgrid').editRow('" + cl +"');\"><i class='fa fa-pencil'></i></button>";
+                        //se = "<button class='btn btn-xs btn-default' data-original-title='Save Row' onclick=\"jQuery('#jqgrid').saveRow('" + cl + "');\"><i class='fa fa-save'></i></button>";
+                        //ca = "<button class='btn btn-xs btn-default' data-original-title='Cancel' onclick=\"jQuery('#jqgrid').restoreRow('" + cl + "');\"><i class='fa fa-times'></i></button>";
+                        //ce = "<button class='btn btn-xs btn-default' onclick=\"jQuery('#jqgrid').restoreRow('" + cl + "');\"><i class='fa fa-pencil'></i></button>";
+                        be = "<a data-toggle='modal' href='/user_right/form/" + c1 + "/" + c2 + "' class='btn btn-xs btn-default'><i class='fa fa-pencil'></i></a>";
+
+                        //jQuery("#jqgrid").jqGrid('setRowData',ids[i],{act:be+se+ce});
+                        jQuery("#jqgrid").jqGrid('setRowData', ids[i], {
+                            //act: be + se + ca
+                            act: be
+                            //view_form: be
+                        });
+                    }
+                },
+
+                jsonReader: {
+                    root: "rows",
+                    page: "page",
+                    total: "total",
+                    records: "records",
+                    repeatitems: false,
+                    Id: "0"
+                },
+
+                editurl: '/user_right/FormSave',
+                caption: "User Right",
+                emptyrecords: 'Data Not Available',
+                multiselect: false,
+                autowidth: true
+
+            });
+
+            jQuery("#jqgrid").jqGrid('navGrid', "#pjqgrid", {
+                edit: false,
+                add: false,
+                del: true,
+                refresh: true,
+                closeAfterSearch: true
+            }, {
+                zIndex: 100,
+                caption: "Search User Right",
+                sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+                closeAfterSearch: true
+            });
+
+            jQuery("#jqgrid").jqGrid('inlineNav', "#pjqgrid", {
+                edit: false,
+                add: false,
+            });
+            /* Add tooltips */
+            $('.navtable .ui-pg-button').tooltip({
+                container: 'body'
+            });
+
+            jQuery("#m1").click(function () {
+                var s;
+                s = jQuery("#jqgrid").jqGrid('getGridParam', 'selarrrow');
+                alert(s);
+            });
+            jQuery("#m1s").click(function () {
+                jQuery("#jqgrid").jqGrid('setSelection', "13");
+            });
+
+            // remove classes
+            $(".ui-jqgrid").removeClass("ui-widget ui-widget-content");
+            $(".ui-jqgrid-view").children().removeClass("ui-widget-header ui-state-default");
+            $(".ui-jqgrid-labels, .ui-search-toolbar").children().removeClass("ui-state-default ui-th-column ui-th-ltr");
+            $(".ui-jqgrid-pager").removeClass("ui-state-default");
+            $(".ui-jqgrid").removeClass("ui-widget-content");
+
+            // add classes
+            $(".ui-jqgrid-htable").addClass("table table-bordered table-hover");
+            $(".ui-jqgrid-btable").addClass("table table-bordered table-striped");
+
+            $(".ui-pg-div").removeClass().addClass("btn btn-sm btn-primary");
+            $(".ui-icon.ui-icon-plus").removeClass().addClass("fa fa-plus");
+            $(".ui-icon.ui-icon-pencil").removeClass().addClass("fa fa-pencil");
+            $(".ui-icon.ui-icon-trash").removeClass().addClass("fa fa-trash-o");
+            $(".ui-icon.ui-icon-search").removeClass().addClass("fa fa-search");
+            $(".ui-icon.ui-icon-refresh").removeClass().addClass("fa fa-refresh");
+            $(".ui-icon.ui-icon-disk").removeClass().addClass("fa fa-save").parent(".btn-primary").removeClass("btn-primary").addClass("btn-success");
+            $(".ui-icon.ui-icon-cancel").removeClass().addClass("fa fa-times").parent(".btn-primary").removeClass("btn-primary").addClass("btn-danger");
+
+            $(".ui-icon.ui-icon-seek-prev").wrap("<div class='btn btn-sm btn-default'></div>");
+            $(".ui-icon.ui-icon-seek-prev").removeClass().addClass("fa fa-backward");
+
+            $(".ui-icon.ui-icon-seek-first").wrap("<div class='btn btn-sm btn-default'></div>");
+            $(".ui-icon.ui-icon-seek-first").removeClass().addClass("fa fa-fast-backward");
+
+            $(".ui-icon.ui-icon-seek-next").wrap("<div class='btn btn-sm btn-default'></div>");
+            $(".ui-icon.ui-icon-seek-next").removeClass().addClass("fa fa-forward");
+
+            $(".ui-icon.ui-icon-seek-end").wrap("<div class='btn btn-sm btn-default'></div>");
+            $(".ui-icon.ui-icon-seek-end").removeClass().addClass("fa fa-fast-forward");
+
+        });
+
+        $(window).on('resize.jqGrid', function () {
+            $("#jqgrid").jqGrid('setGridWidth', $("#content").width());
+        })
+
+    </script>
+}

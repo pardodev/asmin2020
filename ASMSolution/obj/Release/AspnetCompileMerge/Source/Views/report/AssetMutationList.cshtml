@@ -1,0 +1,208 @@
+﻿@using ReportViewerForMvc
+@using Microsoft.Reporting.WebForms;
+@using System.IO;
+@model ASM_UI.Models.Report_AssetRPT04AssetMutationViewModel
+
+<!-- MAIN CONTENT -->
+<div id="content">
+    <div class="row">
+
+        <!-- col -->
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+            <h1 class="page-title txt-color-blueDark">
+                <!-- PAGE HEADER --><i class="fa-fw fa fa-home"></i> Reports <span>
+                    >
+                    List of Mutation
+                </span>
+            </h1>
+        </div>
+        <!-- end col -->
+
+    </div>
+
+    <section id="widget-grid" class="">
+
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                        <h2>List of Mutation</h2>
+
+                    </header>
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+
+                        </div>
+
+                        <div class="widget-body no-padding">
+                            @using (Html.BeginForm("AssetMutationList", "report", FormMethod.Get, htmlAttributes: new { @class = "smart-form", @target = "_blank" }))
+                            {
+                                <header>
+                                    Search Form
+                                </header>
+
+                                <fieldset>
+                                    <section>
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-8">
+                                                @Html.HiddenFor(model => model.report_id)
+                                                @Html.ValidationMessageFor(model => model.mutation_message, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <fieldset title="Reports Parameter">
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.company_name, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label class="input">
+                                                        @Html.DisplayFor(model => model.company_name)
+                                                    </label>
+                                                </div>
+
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelRequiredFor(model => model.mutation_start_date, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label class="input">
+                                                        @{var mutation_start_date = string.Format("{0:dd-MM-yyyy}", Model.mutation_start_date); }
+                                                        @Html.EditorFor(model => mutation_start_date, new { htmlAttributes = new { @class = "form-control", id = "mutation_start_date" } })
+                                                        @Html.ValidationMessageFor(model => model.mutation_start_date, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.location_reg_name, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label class="input">
+                                                        @Html.DisplayFor(model => model.location_reg_name)
+                                                    </label>
+                                                </div>
+
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelRequiredFor(model => model.mutation_end_date, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label class="input">
+                                                        @{var mutation_end_date = string.Format("{0:dd-MM-yyyy}", Model.mutation_end_date); }
+                                                        @Html.EditorFor(model => mutation_end_date, new { htmlAttributes = new { @class = "form-control", id = "mutation_end_date" } })
+                                                        @Html.ValidationMessageFor(model => model.mutation_end_date, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelRequiredFor(model => model.location_id, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label class="input">
+                                                        @Html.DropDownListFor(model => model.location_id, new SelectList(Model.asset_location_list, "location_id", "location_name"), "- Select Location -", htmlAttributes: new { @class = "form-control select2" })
+                                                        @Html.ValidationMessageFor(model => model.location_id, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </div>
+
+                                                @*<div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelRequiredFor(model => model.fin_statement_id, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label class="input">
+                                                        @Html.DropDownListFor(model => model.fin_statement_id, new SelectList(Model.fin_statement_list, "value", "text"), "- Select Fin Statement -", htmlAttributes: new { @class = "form-control select2" })
+                                                        @Html.ValidationMessageFor(model => model.fin_statement_id, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </div>*@
+                                            </div>
+                                        </section>
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    @Html.CheckBoxFor(model => model.fl_consolidated, false) <span>@Html.DisplayNameFor(model => model.fl_consolidated)</span>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </fieldset>
+
+                                </fieldset>
+
+                                <footer>
+                                    <div class="form-group">
+                                        <div class="col-md-7">
+                                            <input type="submit" value="Search" class="btn btn-primary" />
+                                        </div>
+                                    </div>
+                                </footer>
+
+                                                            }
+
+                        </div>
+                    </div>
+                </div>
+            </article>
+            @*@if (ViewBag.ReportViewer != null)
+                {
+                    <div class="row">
+                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div id="reportView" class="table-responsive">
+                                @Html.ReportViewer(ViewBag.ReportViewer as ReportViewer, new { scrolling = "yes", width = "100%", height = "100%" })
+                            </div>
+                        </article>
+                    </div>
+                }*@
+        </div>
+
+    </section>
+
+</div>
+
+@section pagespecific {
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#mutation_start_date').datepicker({
+                dateFormat: 'dd-mm-yy',
+                prevText: '<i class="fa fa-chevron-left"></i>',
+                nextText: '<i class="fa fa-chevron-right"></i>',
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+        $(document).ready(function () {
+            $('#mutation_end_date').datepicker({
+                dateFormat: 'dd-mm-yy',
+                prevText: '<i class="fa fa-chevron-left"></i>',
+                nextText: '<i class="fa fa-chevron-right"></i>',
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+
+    </script>
+}

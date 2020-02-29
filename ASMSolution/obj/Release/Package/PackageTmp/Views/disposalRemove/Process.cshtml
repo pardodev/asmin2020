@@ -1,0 +1,465 @@
+﻿@model ASM_UI.Models.disposalViewModel
+
+@{
+    ViewBag.Title = "Disposal Asset";
+}
+
+<div id="content">
+    <div class="row">
+        <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+            <h1 class="page-title txt-color-blueDark">
+
+                <!-- PAGE HEADER -->
+                <i class="fa-fw fa fa-pencil-square-o"></i>
+                Disposal
+                <span>
+                    >
+                    Asset
+                </span>
+            </h1>
+        </div>
+    </div>
+
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false" data-widget-togglebutton="false" data-widget-collapsed="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                        <h2>
+                            Disposal Asset
+                        </h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+
+                            @using (Html.BeginForm("DisposalFollowup", "disposalRemove", FormMethod.Post, htmlAttributes: new { @class = "smart-form", enctype = "multipart/form-data" }))
+                            {
+                                <header>
+                                    Disposal Process View
+                                </header>
+
+                                <fieldset>
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <fieldset>
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <b>@Html.DisplayNameFor(model => model.disposal_number)</b>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="input">
+                                                        @Html.DisplayFor(model => model.disposal_number, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                    @Html.HiddenFor(model => model.asset_id)
+
+                                                    @Html.HiddenFor(model => model.announcement_id)
+
+                                                    @Html.HiddenFor(model => model.request_id)
+                                                    @Html.ValidationMessageFor(model => model.request_id, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <b>@Html.DisplayNameFor(model => model.asset_number)</b>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label class="input">
+                                                        @Html.HiddenFor(model => model.asset_number)
+                                                        <a id="ahrefmodal" data-toggle="modal" href="#InfoAsset" onclick="OpenModalAsset(@Model.asset_id);">@Html.DisplayFor(model => model.asset_number)</a>
+                                                    </label>
+                                                </div>
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <img id="myImage" src="@Url.Content(string.Format("{0}{1}", Model.path_address, Model.asset_img_address))" width="150" />
+                                                    <br /><label><i>*Focus on the image to Zoom</i></label>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <b>@Html.DisplayNameFor(model => model.asset_name)</b>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="input">
+                                                        @Html.EditorFor(model => model.asset_name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <b>@Html.DisplayNameFor(model => model.asset_receipt_date)</b>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="input">
+                                                        @Html.EditorFor(model => model.asset_receipt_date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <br />
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <b>@Html.DisplayNameFor(model => model.currency_code)</b>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label class="input">
+                                                        @Html.EditorFor(model => model.currency_code, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                                    </label>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-1">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <b>@Html.DisplayNameFor(model => model.location_id)</b>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <label class="input">
+                                                            @Html.EditorFor(model => model.location_name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <b>@Html.DisplayNameFor(model => model.asset_book_value)</b>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label class="input">
+                                                        @Html.EditorFor(model => model.asset_book_value, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", @style = "text-align:right" } })
+                                                    </label>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-1">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <b>@Html.DisplayNameFor(model => model.department_id)</b>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <label class="input">
+                                                            @Html.EditorFor(model => model.department_name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <b>@Html.DisplayNameFor(model => model.Currency_kurs)</b>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label class="input">
+                                                        @Html.EditorFor(model => model.Currency_kurs, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", @style = "text-align:right" } })
+                                                    </label>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-1">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <b>@Html.DisplayNameFor(model => model.employee_id)</b>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <label class="input">
+                                                            @Html.EditorFor(model => model.employee_name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <b>@Html.DisplayNameFor(model => model.asset_original_value)</b>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label class="input">
+                                                        @Html.EditorFor(model => model.asset_original_value, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", @style = "text-align:right" } })
+                                                    </label>
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <label>In USD</label>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <b>@Html.DisplayNameFor(model => model.request_description)</b>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="input">
+                                                        <textarea name="request_description" rows="5" class="form-control" readonly="readonly">@Model.request_description </textarea>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </fieldset>
+                                    <fieldset>
+                                        <section>
+                                            <header>
+                                                <h2>
+                                                    Disposal Approval History
+                                                </h2>
+                                            </header>
+                                            <div class="row">
+                                                <br />
+                                                <br />
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <div class="widget-body no-padding">
+                                                        <table class="table table-striped table-bordered table-hover" width="100%" id="table_basic">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>
+                                                                        @Html.DisplayNameFor(model => model.approval_employee_name)
+                                                                    </th>
+                                                                    <th>
+                                                                        @Html.DisplayNameFor(model => model.approval_level_name)
+                                                                    </th>
+                                                                    <th>
+                                                                        @Html.DisplayNameFor(model => model.approval_status_Name)
+                                                                    </th>
+                                                                    <th>
+                                                                        @Html.DisplayNameFor(model => model.approval_date)
+                                                                    </th>
+                                                                    <th>
+                                                                        @Html.DisplayNameFor(model => model.approval_suggestion_id)
+                                                                    </th>
+                                                                </tr>
+                                                            </thead>
+                                                            @foreach (var item in Model.disposal_Approval_list)
+                                                            {
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>
+                                                                            @Html.DisplayFor(modelItem => item.approval_employee_name)
+                                                                        </td>
+                                                                        <td>
+                                                                            @Html.DisplayFor(modelItem => item.approval_level_name)
+                                                                        </td>
+                                                                        <td>
+                                                                            @Html.DisplayFor(modelItem => item.approval_status_Name)
+                                                                        </td>
+                                                                        <td>
+                                                                            @Html.DisplayFor(modelItem => item.approval_date)
+                                                                        </td>
+                                                                        <td>
+                                                                            @Html.DisplayFor(modelItem => item.approval_suggestion_name)
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            }
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </fieldset>
+                                    <fieldset>
+                                        <header>
+                                            <h2>
+                                                Disposal Process Information
+                                            </h2>
+                                        </header>
+                                        @if (Model.announcement_description != null && Model.announcement_description != "")
+                                        {
+                                            <section>
+                                                <br />
+                                                <div class="row">
+                                                    <div class="col-md-1">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <b>@Html.DisplayNameFor(model => model.announcement_description)</b>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <label class="input">
+                                                            <textarea name="announcement_description" readonly="readonly" rows="5" class="form-control">@Model.announcement_description </textarea>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        }
+                                        <section>
+                                            <br />
+                                            <div class="row">
+
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <b>@Html.DisplayNameFor(model => model.announcement_upload_address)</b>
+                                                </div>
+                                                @if (Model.fl_announcement_status == true)
+                                                {
+                                                    <div class="col-md-3">
+                                                        <input type="checkbox" name="fl_announcement_status" id="chk_announcement" disabled="disabled" value="true" @(Model.fl_announcement_status.GetValueOrDefault() ? "checked=\"checked\"" : "") />
+                                                        <i></i> Berita Acara
+                                                        <br />
+                                                        <a data-toggle="modal" href="#pdfmodal" class="btn btn-success btn-sm" onclick="OpenModalPDF();">View Document</a>
+                                                    </div>
+                                                }
+                                                <div class="col-md-1">
+                                                </div>
+                                                @if (Model.fl_fin_announcement == true)
+                                                {
+                                                    <div class="col-md-3">
+                                                        <input type="checkbox" name="fl_fin_announcement" id="chk_announcement" disabled="disabled" value="true" @(Model.fl_fin_announcement.GetValueOrDefault() ? "checked=\"checked\"" : "") />
+                                                        <i></i> Finance
+                                                        <br />
+                                                        <a data-toggle="modal" href="#pdfmodal" class="btn btn-success btn-sm" onclick="OpenModalPDFFin();">View Document</a>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </section>
+                                    </fieldset>
+                                    <fieldset>
+                                        <header>
+                                            <h2>
+                                                Disposal Asset
+                                            </h2>
+                                        </header>
+                                        <section>
+                                            <br />
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <b>@Html.DisplayNameFor(model => model.remove_asset_description)</b>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="input">
+                                                        <textarea name="remove_asset_description" rows="5" class="form-control">@Model.remove_asset_description </textarea>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </fieldset>
+                                </fieldset>
+                                <footer>
+                                    <div class="form-group">
+                                        <div class="col-md-7">
+                                            @Html.ActionLink("Close", "Index", "disposal", htmlAttributes: new { @class = "btn btn-default" })
+                                            <input type="submit" value="Save" class="btn btn-primary" />
+                                        </div>
+                                    </div>
+                                </footer>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+    <!-- Modal -->
+    <div class="modal fade" id="pdfmodal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    </div>
+    <div class="modal fade" id="InfoAsset" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"></div>
+</div>
+
+@section pagespecific {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#myImage').width(100);
+            $('#myImage').mouseover(function () {
+                $(this).css("cursor", "pointer");
+                $(this).animate({ width: "500px" }, 'slow');
+
+            });
+            $('#myImage').mouseout(function () {
+                $(this).animate({ width: "150px" }, 'slow');
+            });
+        });
+
+        function OpenModalPDF() {
+            $("#pdfmodal").html("");
+            var link = "@Url.Content(string.Format(@"{0}{1}", Model.path_address, Model.announcement_upload_address))"
+            $.ajax({
+                url: "/disposalProcess/ModalPDF/",
+                success: function (data) {
+                    $("#pdfmodal").html(data);
+                    try {
+                        $("#framePDF").attr("src", link);
+                    }
+                    catch (err) {
+                        message.innerHTML = "Input is " + err + link;
+                    }
+                }
+
+            });
+        }
+
+        function OpenModalPDFFin() {
+            $("#pdfmodal").html("");
+            var link = "@Url.Content(string.Format(@"{0}{1}", Model.path_address, Model.fin_announcement_upload_address))"
+            $.ajax({
+                url: "/disposalProcess/ModalPDF/",
+                success: function (data) {
+                    $("#pdfmodal").html(data);
+                    try {
+                        $("#framePDF").attr("src", link);
+                    }
+                    catch (err) {
+                        message.innerHTML = "Input is " + err + link;
+                    }
+                }
+
+            });
+        }
+
+        function OpenModalAsset(id) {
+            $("#InfoAsset").html("");
+            $.ajax({
+                url: "/modals/ModalInfoAsset/" + id,
+                success: function (data) {
+                    //alert("data");
+                    $("#InfoAsset").html(data);
+                },
+                error: function (data) {
+                    //console.log(data);
+                    alert("Error!\n" + JSON.stringify(data));
+                }
+            });
+        }
+    </script>
+}

@@ -1,0 +1,361 @@
+﻿@model ASM_UI.Models.asset_insuranceViewModel
+
+@{
+    ViewBag.Title = "New Asset Insurance";
+}
+
+<div id="content">
+    <div class="row">
+        <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+            <h1 class="page-title txt-color-blueDark">
+
+                <!-- PAGE HEADER -->
+                <i class="fa-fw fa fa-pencil-square-o"></i>
+                Registration
+                <span>
+                    >
+                    Asset Insurance Form
+                </span>
+            </h1>
+        </div>
+    </div>
+
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false" data-widget-togglebutton="false" data-widget-collapsed="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                        <h2>Insurance Asset </h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+
+                            @using (Html.BeginForm("Create", "asset_insurance", FormMethod.Post, htmlAttributes: new { @class = "smart-form", enctype = "multipart/form-data" }))
+                            {
+                                <header>
+                                    Asset insurance Form
+                                </header>
+
+                                <fieldset>
+                                    <fieldset title="Asset Parent">
+                                        @Html.AntiForgeryToken()
+                                        <br />
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelRequiredFor(model => model.asset_parent_id, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                @Html.HiddenFor(model => model.asset_parent_id, htmlAttributes: new { @id = "parent_asset_id" })
+                                                @Html.ValidationMessageFor(model => model.asset_parent_id, "", new { @class = "text-danger" })
+                                                <div class="col-lg-5">
+                                                    <label class="input">
+                                                        @Html.EditorFor(model => model.asset_number, new { htmlAttributes = new { @class = "form-control col-lg-6", @readonly = "readonly", placeholder = "Asset No", id = "parent_asset_number" } })
+                                                    </label>
+                                                </div>
+                                                <div class="col-lg-1">
+                                                    <a data-toggle="modal" href="#Asset" class="btn btn-success btn-sm" onclick="OpenModalAssetList();"><i class="fa fa-search fa-lg"></i></a>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                </div>
+                                                <div class="col-lg-8">
+                                                    <label class="input">
+                                                        <input type="text" name="asset_name" id="parent_asset_name" placeholder="Asset Name" class="form-control" readonly="readonly" />
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.vendor_name, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-lg-8">
+                                                    <label class="input">
+                                                        <input type="text" name="vendor_name" id="parent_vendor_name" placeholder="Vendor Name" class="form-control" readonly="readonly" />
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelRequiredFor(model => model.insurance_activa_number, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="input">
+                                                        @Html.EditorFor(model => model.insurance_activa_number, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.insurance_activa_number, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelRequiredFor(model => model.insurance_activa_name, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="input">
+                                                        @Html.EditorFor(model => model.insurance_activa_name, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.insurance_activa_name, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelRequiredFor(model => model.insurance_activa_date, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label class="input">
+                                                        @{var insurance_activa_date = string.Format("{0:dd-MM-yyyy}", Model.insurance_activa_date); }
+                                                        @Html.EditorFor(model => insurance_activa_date, new { htmlAttributes = new { @class = "form-control", id = "insurance_date" } })
+                                                        @Html.ValidationMessageFor(model => model.insurance_activa_date, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelRequiredFor(model => model.insurance_activa_exp_date, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label class="input">
+                                                        @{var insurance_activa_exp_date = string.Format("{0:dd-MM-yyyy}", Model.insurance_activa_exp_date); }
+                                                        @Html.EditorFor(model => insurance_activa_exp_date, new { htmlAttributes = new { @class = "form-control", id = "insurance_exp_date" } })
+                                                        @Html.ValidationMessageFor(model => model.insurance_activa_exp_date, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelRequiredFor(model => model.insurance_id, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="input">
+                                                        @Html.DropDownListFor(model => model.insurance_id, new SelectList(Model.insurance_list, "insurance_id", "insurance_name"), "- Select Insurance Company -", htmlAttributes: new { @class = "form-control select2", @readonly = "true" })
+                                                        @Html.ValidationMessageFor(model => model.insurance_id, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.insurance_activa_description, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="input">
+                                                        <textarea id="insurance_activa_description" name="insurance_activa_description" rows="5" class="form-control" placeholder="Description or specification"></textarea>
+                                                        @Html.ValidationMessageFor(model => model.insurance_activa_description, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </fieldset>
+                                </fieldset>
+
+                                <footer>
+                                    <div class="form-group">
+                                        <div class="col-md-7">
+                                            @Html.ActionLink("Cancel", "Index", "asset_insurance", htmlAttributes: new { @class = "btn btn-default" })
+                                            <input type="submit" value="Save" class="btn btn-primary" />
+                                        </div>
+                                    </div>
+                                </footer>
+
+                                <fieldset>
+                                    <section>
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-10">
+                                                <div class="widget-body no-padding">
+                                                    <table class="table table-striped table-bordered table-hover" width="100%" id="table_basic">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>
+                                                                    @Html.DisplayNameFor(model => model.insurance_activa_number)
+                                                                </th>
+                                                                <th>
+                                                                    @Html.DisplayNameFor(model => model.insurance_activa_name)
+                                                                </th>
+                                                                <th>
+                                                                    @Html.DisplayNameFor(model => model.insurance_activa_date)
+                                                                </th>
+                                                                <th>
+                                                                    @Html.DisplayNameFor(model => model.insurance_activa_exp_date)
+                                                                </th>
+                                                                <th>
+                                                                    @Html.DisplayNameFor(model => model.insurance_name)
+                                                                </th>
+                                                                <th>
+                                                                    @Html.DisplayNameFor(model => model.insurance_activa_description)
+                                                                </th>
+                                                                @*<th></th>*@
+                                                            </tr>
+                                                        </thead>
+                                                        @foreach (var item in Model.detail_insurance_list)
+                                                        {
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.insurance_activa_number)
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.insurance_activa_name)
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.insurance_activa_date)
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.insurance_activa_exp_date)
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.insurance_name)
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.insurance_activa_description)
+                                                                    </td>
+                                                                    @*<td>
+                                                                            @Html.ActionLink("Edit", "Edit", new { id = Model.asset_parent_id, idw = item.insurance_id }) |
+                                                                            @Html.ActionLink("Delete", "DeleteItem", new { id = item.insurance_id }, new { onclick = "return confirm('Are you sure you wish to delete this data?');" })
+                                                                        </td>*@
+                                                                </tr>
+                                                            </tbody>
+                                                        }
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </fieldset>
+                                                            }
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+    <!-- Modal -->
+    <div class="modal fade" id="Asset" tabindex="-1" role="dialog">
+    </div>
+</div>
+
+@section pagespecific {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#insurance_date').datepicker({
+                dateFormat: 'dd-mm-yy',
+                prevText: '<i class="fa fa-chevron-left"></i>',
+                nextText: '<i class="fa fa-chevron-right"></i>',
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+        $(document).ready(function () {
+            $('#insurance_exp_date').datepicker({
+                dateFormat: 'dd-mm-yy',
+                prevText: '<i class="fa fa-chevron-left"></i>',
+                nextText: '<i class="fa fa-chevron-right"></i>',
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+        function GetAssetNumber(id) {
+            $('#CancelBtn').prop('disabled', true);
+
+            $.ajax({
+                type: 'POST',
+                url: "/asset_insurance/GetAssetList/" + id,
+                dataType: 'json',
+                success: function (data) {
+                    for (var i in data) {
+                        $("#parent_asset_id").val(data[i].asset_parent_id);
+                        $("#parent_asset_number").val(data[i].asset_number);
+                        $("#parent_asset_name").val(data[i].asset_name);
+                        $("#parent_vendor_name").val(data[i].vendor_name);
+                        $("#parent_asset_name").css({ 'background-color': color_input_text });
+                        $("#parent_asset_number").css({ 'background-color': color_input_text });
+                        $("#parent_vendor_name").css({ 'background-color': color_input_text });
+                    }
+                },
+                error: function (data) {
+                    alert("error!");
+                }
+            })
+        }
+        function OpenModalAssetList() {
+            $("#Asset").html("");
+            var assetCode = $("#assetCodeID").val();
+            //alert("modal");
+
+            $.ajax({
+                url: "/asset_insurance/ModalAsset/",
+                success: function (data) {
+                    $("#Asset").html(data);
+                    //alert("open modal");
+                    var oTable = $('#AssetTblList').DataTable({
+                        "ajax": {
+                            "url": "/asset_insurance/GetAssetList/0",
+                            "type": "GET",
+                            "datatype": "json",
+                        },
+                        "columns": [
+                            { "data": "asset_parent_id", "autoWidth": true },
+                            { "data": "asset_number", "autoWidth": true },
+                            { "data": "asset_name", "autoWidth": true },
+                            { "data": "vendor_name", "autoWidth": true },
+                            {
+                                "data": "action",
+                                "autowidth": true,
+                                "mRender": function (data, type, full) {
+                                    return '<a class="btn btn-info btn-sm" data-dismiss="modal" onclick="GetAssetNumber(' + full['asset_parent_id'] + ');">' + 'Select' + '</a>';
+                                }
+                            }
+                        ]
+                    });
+                }
+            });
+        }
+
+    </script>
+}

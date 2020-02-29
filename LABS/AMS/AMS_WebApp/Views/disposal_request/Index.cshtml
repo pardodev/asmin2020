@@ -1,0 +1,123 @@
+﻿@model IEnumerable<ASM_UI.Models.tr_disposal_request>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.asset_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.request_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.request_emp_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.request_dept_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.request_location_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fl_approval)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.approval_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.request_status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fl_active)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.created_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.created_by)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.updated_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.update_by)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.deleted_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.deleted_by)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.org_id)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.asset_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.request_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.request_emp_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.request_dept_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.request_location_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fl_approval)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.approval_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.request_status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fl_active)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.created_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.created_by)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.updated_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.update_by)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.deleted_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.deleted_by)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.org_id)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.request_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.request_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.request_id })
+        </td>
+    </tr>
+}
+
+</table>

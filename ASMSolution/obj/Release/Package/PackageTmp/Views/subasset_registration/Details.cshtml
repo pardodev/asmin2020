@@ -1,0 +1,247 @@
+﻿@model Tuple<ASM_UI.Models.subasset_registrationViewModel, string>
+@{
+    ViewBag.Title = "Asset Details";
+}
+
+<div id="content">
+    <div class="row">
+        <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+            <h1 class="page-title txt-color-blueDark">
+
+                <!-- PAGE HEADER -->
+                <i class="fa-fw fa fa-pencil-square-o"></i>
+                Registration
+                <span>
+                    >
+                    Sub Asset Registration Detail
+                </span>
+            </h1>
+        </div>
+    </div>
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false" data-widget-togglebutton="false" data-widget-collapsed="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                        <h2>Registration Sub Asset Detail</h2>
+
+                    </header>
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                            <form class="smart-form">
+                                <header>
+                                    Parent Asset Information
+                                </header>
+                                <fieldset>
+                                    <section>
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <b>@Html.DisplayNameFor(model => model.Item1.asset_parent_id)</b>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="input">
+                                                    @Html.DisplayFor(model => model.Item1.asset_parent.asset_number, new { htmlAttributes = new { @class = "form-control", @readonly = "true", placeholder = "Auto" } })
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <b>@Html.DisplayNameFor(model => model.Item1.asset_parent)</b>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <label class="input">
+                                                    @Html.DisplayFor(model => model.Item1.asset_parent.asset_name, new { htmlAttributes = new { @class = "form-control", @readonly = "true", placeholder = "Auto" } })
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <header>
+                                        Sub Asset
+                                    </header>
+                                    <br />
+                                    <section>
+                                        <div class="row" style="padding-left:50px;">
+                                            <div class="col-md-8">
+                                                <section>
+                                                    <div class="row">
+                                                        <div class="col-md-1">
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <b>@Html.DisplayNameFor(model => model.Item1.asset_number)</b>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label class="input">
+                                                                @Html.DisplayFor(model => model.Item1.asset_number, new { htmlAttributes = new { @class = "form-control", @readonly = "true", placeholder = "Auto" } })
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-1">
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <b>@Html.DisplayNameFor(model => model.Item1.asset_name)</b>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label class="input">
+                                                                @Html.DisplayFor(model => model.Item1.asset_name, new { htmlAttributes = new { @class = "form-control", @readonly = "true", placeholder = "Auto" } })
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-1">
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <b>@Html.DisplayNameFor(model => model.Item1.asset_po_number)</b>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label class="input">
+                                                                @Html.DisplayFor(model => model.Item1.asset_po_number, new { htmlAttributes = new { @class = "form-control", @readonly = "true", placeholder = "Auto" } })
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    </section>
+                                                <section>
+                                                    <div class="row">
+                                                        <div class="col-md-1">
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <b>@Html.DisplayNameFor(model => model.Item1.asset_do_number)</b>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label class="input">
+                                                                @Html.DisplayFor(model => model.Item1.asset_do_number, new { htmlAttributes = new { @class = "form-control", @readonly = "true", placeholder = "Auto" } })
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-1">
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <b>@Html.DisplayNameFor(model => model.Item1.asset_receipt_date)</b>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label class="input">
+                                                                @Html.DisplayFor(model => model.Item1.asset_receipt_date, new { htmlAttributes = new { @class = "form-control", @readonly = "true", placeholder = "Auto" } })
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </section>
+                                                <section>
+                                                    <div class="row">
+                                                        <div class="col-md-1">
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <b>@Html.DisplayNameFor(model => model.Item1.asset_merk)</b>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label class="input">
+                                                                @Html.DisplayFor(model => model.Item1.asset_merk, new { htmlAttributes = new { @class = "form-control", @readonly = "true", placeholder = "Auto" } })
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-1">
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <b>@Html.DisplayNameFor(model => model.Item1.asset_serial_number)</b>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label class="input">
+                                                                @Html.DisplayFor(model => model.Item1.asset_serial_number, new { htmlAttributes = new { @class = "form-control", @readonly = "true", placeholder = "Auto" } })
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-1">
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <b>@Html.DisplayNameFor(model => model.Item1.vendor_id)</b>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label class="input">
+                                                                @Html.DisplayFor(model => model.Item1.vendor.vendor_name, new { htmlAttributes = new { @class = "form-control", @readonly = "true", placeholder = "Auto" } })
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <img src="@Url.Content(string.Format("{0}{1}", Model.Item2, Model.Item1.tr_asset_images.asset_img_address))" width="200" alt="" />
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <header>
+                                        Sub Asset Location
+                                    </header>
+                                    <section>
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <b>@Html.DisplayNameFor(model => model.Item1.location_id)</b>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="input">
+                                                    @Html.DisplayFor(model => model.Item1.asset_location.location_name, new { htmlAttributes = new { @class = "form-control", @readonly = "true", placeholder = "Auto" } })
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <b>@Html.DisplayNameFor(model => model.Item1.department_id)</b>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="input">
+                                                    @Html.DisplayFor(model => model.Item1.department.department_name, new { htmlAttributes = new { @class = "form-control", @readonly = "true", placeholder = "Auto" } })
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <b>@Html.DisplayNameFor(model => model.Item1.vendor_id)</b>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="input">
+                                                    @Html.DisplayFor(model => model.Item1.vendor.vendor_cp_name, new { htmlAttributes = new { @class = "form-control", @readonly = "true", placeholder = "Auto" } })
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </fieldset>
+                                <footer>
+                                    <div class="form-group">
+                                        <div class="col-md-7">
+                                            @Html.ActionLink("Edit", "Edit", "subasset_registration", new { id = Model.Item1.asset_id }, htmlAttributes: new { @class = "btn btn-primary" })
+                                            @Html.ActionLink("Close", "Index", "subasset_registration", htmlAttributes: new { @class = "btn btn-default" })
+                                        </div>
+                                    </div>
+                                </footer>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>
+<p>
+
+</p>

@@ -1,0 +1,211 @@
+﻿@model ASM_UI.Models.asset_takingViewModel
+
+@{
+    ViewBag.Title = "Asset Taking";
+}
+
+<div id="content">
+    <!-- row -->
+    <div class="row">
+        <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+            <h1 class="page-title txt-color-blueDark">
+
+                <!-- PAGE HEADER -->
+                <i class="fa-fw fa fa-pencil-square-o"></i>
+                Asset Taking
+                <span>
+                    >
+                    Data
+                </span>
+            </h1>
+        </div>
+
+        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+            <!-- Button trigger modal -->
+            <a class="btn btn-primary btn-lg pull-right header-btn hidden-mobile" href="@Url.Action("UploadData", "asset_taking", new { id = 0 }, Request.Url.Scheme)"><i class='fa fa-plus'></i> Asset Taking</a>
+        </div>
+    </div>
+    @using (Html.BeginForm("Index", "asset_taking", FormMethod.Post))
+    {
+        <section id="widget-grid" class="">
+            <div class="row">
+                <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="jarviswidget jarviswidget-color-darken" id="wid-id-filter" data-widget-editbutton="false">
+                        <header>
+                            <h2>Search Criteria</h2>
+                        </header>
+                        <div class="row">
+                            <br />
+                            <section>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <b>@Html.DisplayNameFor(model => model.location_id)</b>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <label class="input">
+                                            @Html.DropDownListFor(model => model.location_id, new SelectList(Model.location_list, "location_id", "location_name"), "- Select Location -", htmlAttributes: new {@id="location_id", @class = "form-control select2", @readonly = "true" })
+                                            @Html.ValidationMessageFor(model => model.location_id, "", new { @class = "text-danger" })
+                                        </label>
+                                    </div>
+                                </div>
+                            </section>
+                            <section>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <b>@Html.DisplayNameFor(model => model.period_year)</b>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <label class="input">
+                                            @Html.DropDownListFor(model => model.period_year, new SelectList(Model.period_year_list, "value", "text"), "- Select Year -", htmlAttributes: new { @id = "year", @class = "form-control select2", @readonly = "true" })
+                                            @Html.ValidationMessageFor(model => model.period_year, "", new { @class = "text-danger" })
+                                        </label>
+                                    </div>
+                                </div>
+                            </section>
+                            <section>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <b>@Html.DisplayNameFor(model => model.period_month)</b>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <label class="input">
+                                            @Html.DropDownListFor(model => model.period_month, new SelectList(Model.period_month_list, "value", "text"), "- Select Month -", htmlAttributes: new { @id = "month", @class = "form-control select2", @readonly = "true" })
+                                            @Html.ValidationMessageFor(model => model.period_month, "", new { @class = "text-danger" })
+                                        </label>
+                                    </div>
+                                </div>
+                            </section>
+                            <br />
+                            <footer>
+                                <input type="submit" value="Search" class="btn btn-primary" />
+                                <a class="btn btn-default" href="@Url.Action("Index", "asset_taking")">Cancel</a>
+                            </footer>
+                            <br />
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+    }
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
+
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>Asset Taking Data List</h2>
+
+                    </header>
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+
+                        </div>
+                        <!-- end widget edit box -->
+                        <div class="widget-body no-padding">
+                            <table class="table table-striped table-bordered table-responsive table-hover" id="table_basic">
+                                <thead>
+                                    <tr>
+                                        @*<th>
+                                            @Html.DisplayNameFor(model => model.company_name)
+                                        </th>*@
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.location_name)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.asset_taking_date)
+                                        </th>
+                                        <th>
+                                            PIC Name
+                                        </th>
+                                        @*<th>
+                                            @Html.DisplayNameFor(model => model.file_name)
+                                        </th>*@
+                                        <th width="10%">View</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+    </section>
+</div>
+
+
+
+@section pagespecific {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var responsiveHelper_dt_basic = undefined;
+            var responsiveHelper_datatable_fixed_column = undefined;
+            var responsiveHelper_datatable_col_reorder = undefined;
+            var responsiveHelper_datatable_tabletools = undefined;
+
+            var breakpointDefinition = {
+                tablet: 1024,
+                phone: 480
+            };
+
+            $('#table_basic').dataTable(
+                {
+                    "ajax": {
+                        "url": "/asset_taking/GetAssetTakingList/?location_id=" + document.getElementById('location_id').value +
+                                                           "&year=" + document.getElementById('year').value +
+                                                           "&month=" + document.getElementById('month').value,
+                        "type": "GET",
+                        "datatype": "json",
+                    },
+                    "columns": [
+                        //{ "data": "company_name", "autoWidth": true },
+                        { "data": "location_name", "autoWidth": true },
+                          {
+                              "data": "asset_taking_date", "autoWidth": true,
+                              "mRender": function (data, type, full) {
+                                  var currentTime = new Date(parseInt(full['asset_taking_date'].substr(6)));
+                                  var month = currentTime.getMonth() + 1;
+                                  var day = currentTime.getDate();
+                                  var year = currentTime.getFullYear();
+                                  return day + "-" + month + "-" + year;
+                              }
+                          },
+                        { "data": "created_name", "autoWidth": true },
+                        //{ "data": "file_name", "autoWidth": true },
+                        {
+                            "data": "asset_taking_id",
+                            "autowidth": true,
+                            "mRender": function (data, type, full) {
+                                return '<a href="/asset_taking/Details/' + full['asset_taking_id'] + '">' + "Detail" + '</a>';
+                            }
+                        }
+                    ]
+                },
+                {
+                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
+                        "t" +
+                        "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+                    "autoWidth": true,
+                    "oLanguage": {
+                        "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+                    },
+                    "preDrawCallback": function () {
+                        // Initialize the responsive datatables helper once.
+                        if (!responsiveHelper_dt_basic) {
+                            responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#table_basic'), breakpointDefinition);
+                        }
+                    },
+                    "rowCallback": function (nRow) {
+                        responsiveHelper_dt_basic.createExpandIcon(nRow);
+                    },
+                    "drawCallback": function (oSettings) {
+                        responsiveHelper_dt_basic.respond();
+                    }
+                });
+        });
+
+    </script>
+}

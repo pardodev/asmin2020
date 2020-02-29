@@ -1,0 +1,142 @@
+﻿<!DOCTYPE html>
+<html lang="en-us" id="@ViewBag.PageId" class="@Settings.CurrentTheme">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Asset Management System</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!-- Basic Styles -->
+    @Styles.Render("~/content/smartadmin")
+    <!-- FAVICONS -->
+    <link rel="shortcut icon" href="~/content/img/favicon/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="~/content/img/favicon/favicon.ico" type="image/x-icon">
+
+    <!-- GOOGLE FONT -->
+    <link rel="stylesheet" href="~/content/css/OpenSans.css">
+    <style type="text/css">
+          .clock {
+        position: absolute;
+        top: 68%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        color: slategray;
+        font-size: 12pt;
+        font-weight: bold;
+        font-family: Arial;
+        /*letter-spacing: 7px; */
+    }
+
+    .date {
+        position: absolute;
+        top: 30%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        color: slategray;
+        font-size: 12pt;
+        font-weight: bold;
+        font-family: Arial;
+        /*letter-spacing: 7px; */
+    }
+    </style>
+    <!-- Specifying a Webpage Icon for Web Clip
+         Ref: https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html -->
+    <link rel="apple-touch-icon" href="~/content/img/splash/sptouch-icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="~/content/img/splash/touch-icon-ipad.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="~/content/img/splash/touch-icon-iphone-retina.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="~/content/img/splash/touch-icon-ipad-retina.png">
+
+    <!-- iOS web-app metas : hides Safari UI Components and Changes Status Bar Appearance -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!-- Startup image for web apps -->
+    <link rel="apple-touch-startup-image" href="~/content/img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
+    <link rel="apple-touch-startup-image" href="~/content/img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
+    <link rel="apple-touch-startup-image" href="~/content/img/splash/iphone.png" media="screen and (max-device-width: 320px)">
+</head>
+<body class="@ViewBag.PageClass @Settings.CurrentTheme">
+    @{ Html.RenderPartial("_Header", RenderSection("topright", false)); }
+    @if (Request.IsAuthenticated)
+    {
+        @Html.Action("MenuNavigation", "menu_navigation")
+    }
+
+    @*@{ Html.RenderPartialIf("_Aside", Request.IsAuthenticated); }*@
+
+        @*@{ Html.RenderPartial("_Aside"); }*@
+
+        <div id="main" role="main">
+            @{ Html.RenderPartialIf("_Ribbon", Request.IsAuthenticated); }
+            @RenderBody()
+        </div>
+
+        @if (Request.IsAuthenticated)
+        {
+            Html.RenderPartial("_Footer");
+            Html.RenderPartialIf("_Tiles", Settings.EnableTiles);
+        }
+        @{ Html.RenderPartial("_Scripts", RenderSection("pagespecific", false)); }
+
+        @*@{ Html.RenderPartial("_Aside"); }
+            <div id="main" role="main">
+                @{ Html.RenderPartial("_Ribbon"); }
+                @RenderBody()
+            </div>
+            @{ Html.RenderPartial("_Footer");
+            @{ Html.RenderPartialIf("_Tiles", Settings.EnableTiles); }
+            @{ Html.RenderPartial("_Scripts", RenderSection("pagespecific", false)); }*@
+    </body>
+</html>
+<script type="text/javascript">
+        function showDate() {
+            var date = new Date();
+            var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            var dys = days[date.getDay()];
+            var dt = date.getDate();
+            var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            var mnt = months[date.getMonth()];
+            var y = date.getFullYear();
+
+            var dates = dys + ", " + dt + " " + mnt + " " + y;
+            document.getElementById("MyDateDisplay").innerText = dates;
+            document.getElementById("MyDateDisplay").textContent = dates;
+
+            setTimeout(showDate, 1000);
+        }
+        function showTime() {
+            var clock = new Date();
+            var h = clock.getHours(); // 0 - 23
+            var m = clock.getMinutes(); // 0 - 59
+            var s = clock.getSeconds(); // 0 - 59
+
+            var session = "AM";
+
+            if (h == 0) {
+                h = 12;
+            }
+
+            if (h > 12) {
+                h = h - 12;
+                session = "PM";
+            }
+
+            h = (h < 10) ? "0" + h : h;
+            m = (m < 10) ? "0" + m : m;
+            s = (s < 10) ? "0" + s : s;
+
+            var times = h + ":" + m + ":" + s + " " + session;
+            document.getElementById("MyClockDisplay").innerText = times;
+            document.getElementById("MyClockDisplay").textContent = times;
+
+            setTimeout(showTime, 1000);
+
+        }
+        showDate();
+        showTime();
+        
+</script>

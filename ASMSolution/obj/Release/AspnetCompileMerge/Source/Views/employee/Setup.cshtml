@@ -1,0 +1,188 @@
+﻿@model ASM_UI.Models.employee_setupViewModel
+@{
+    ViewBag.Title = "Employee Setup";
+}
+
+<div id="content">
+    <div class="row">
+        <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+            <h1 class="page-title txt-color-blueDark">
+
+                <!-- PAGE HEADER -->
+                <i class="fa-fw fa fa-pencil-square-o"></i>
+                Employee
+                <span>
+                    >
+                    Setup
+                </span>
+            </h1>
+        </div>
+    </div>
+
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false" data-widget-togglebutton="false" data-widget-collapsed="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                        <h2>Employee Setup</h2>
+                    </header>
+
+                    <!-- widget div-->
+                    <div>
+
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+
+                            @using (Html.BeginForm("Setup", "employee", FormMethod.Post, htmlAttributes: new { @class = "smart-form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.HiddenFor(model => Model.employee_id)
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                <header>
+                                    Employee Setup
+                                </header>
+
+                                <fieldset>
+
+                                    <fieldset>
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.employee_nik, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="input">@Model.ms_employee.employee_nik</label>
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.employee_name, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="input">@Model.ms_employee.employee_name</label>
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.employee_email, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="input">@Model.ms_employee.employee_email</label>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.ip_address, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="input">@Model.ms_employee.ip_address</label>
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                    </fieldset>
+
+                                    <fieldset title="Company">
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1"></div>
+                                                @{
+                                                    if (Model.company_list != null)
+                                                    {
+                                                        <div class="col-md-12">
+                                                            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                                <table class="table table-bordered table-hover table-responsive table-striped" id="ms_menu" style="width:100%">
+                                                                    <tr>
+                                                                        <th>Company</th>
+                                                                        <th>District</th>
+                                                                        <th>Location</th>
+                                                                        <th>Department</th>
+                                                                        <th>Level Job</th>
+                                                                        <th>User Type</th>
+                                                                    </tr>
+                                                                    @{
+                                                                        int i_loop = 0;
+                                                                        foreach (var item in Model.employee_details)
+                                                                        {
+                                                                            var str_checked = (Model.checkbox_approver[i_loop].Checked) ? "checked=checked" : "";
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <input type="hidden" value="@item.ms_asmin_company.company_id" name="selected_company_id" id="selected_company_id" />
+                                                                                    <label class="input">@item.ms_asmin_company.company_name</label>
+                                                                                </td>
+
+                                                                                <td>@Html.DropDownListFor(x => x.selected_register_id, new SelectList(item.sli_register_list, "Value", "Text", item.sli_register_list), new { @class = "form-control select" })</td>
+                                                                                <td>@Html.DropDownListFor(x => x.selected_location_id, new SelectList(item.sli_location_list, "Value", "Text", item.sli_location_list), new { @class = "form-control select" })</td>
+
+                                                                                <td>@Html.DropDownListFor(x => x.selected_department_id, new SelectList(item.sli_department_list, "Value", "Text", item.selected_department_id), new { @class = "form-control select" })</td>
+                                                                                <td>@Html.DropDownListFor(x => x.selected_job_level_id, new SelectList(item.sli_job_level_list, "Value", "Text", item.selected_job_level_id), new { @class = "form-control select" })</td>
+                                                                                <td>@Html.DropDownListFor(x => x.selected_user_type_id, new SelectList(item.sli_user_type_list, "Value", "Text", item.selected_user_type_id), new { @class = "form-control select" })</td>
+                                                                            </tr>
+                                                                            i_loop += 1;
+                                                                        }
+                                                                    }
+                                                                </table>
+
+                                                            </article>
+                                                        </div>
+                                                                        }
+                                                }
+
+                                            </div>
+                                        </section>
+                                    </fieldset>
+
+                                </fieldset>
+
+                                <footer>
+                                    <div class="form-group">
+                                        <div class="col-md-7">
+                                            @Html.ActionLink("Close", "Index", "employee", htmlAttributes: new { @class = "btn btn-default" })
+                                            <input type="submit" value="Save" class="btn btn-primary" />
+                                        </div>
+                                    </div>
+                                </footer>
+
+                                                                        }
+
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+
+
+        </div>
+    </section>
+</div>
+
+
+@section pagespecific {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#asset_receipt_date').datepicker({
+                dateFormat: 'dd-mm-yy',
+                prevText: '<i class="fa fa-chevron-left"></i>',
+                nextText: '<i class="fa fa-chevron-right"></i>',
+            });
+        });
+    </script>
+}

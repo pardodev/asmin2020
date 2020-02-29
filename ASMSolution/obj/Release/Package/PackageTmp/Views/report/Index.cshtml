@@ -1,0 +1,43 @@
+﻿@using ReportViewerForMvc
+@using Microsoft.Reporting.WebForms;
+@*@model ASM_UI.Models.Report_AssetDisposalViewModel*@
+
+<div id="content">
+    @if (ViewBag.ReportViewer != null)
+    {
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div id="reportView" class="table-responsive">
+                    @Html.ReportViewer(ViewBag.ReportViewer as ReportViewer, new { scrolling = "yes", width = "100%", height = "95%" })
+                </div>
+            </article>
+        </div>
+    }
+    else
+    {
+        <div style="background-color:lightgrey;text-align:center">
+            <h2>
+                <b>Report Not Found!</b>
+            </h2>
+        </div>
+
+        <h4><u>Error Message:</u></h4>
+
+        <fieldset>
+            <section>
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-8">
+                    @if (ViewBag.ErrorMessage == null)
+                    {
+                        <label>Unable to populate data, please check if mandatory value is entered correctly.</label>
+                    }
+                    else
+                    {
+                        <label>@ViewBag.ErrorMessage</label>
+                    }
+                </div>
+            </section>
+        </fieldset>
+    }
+</div>

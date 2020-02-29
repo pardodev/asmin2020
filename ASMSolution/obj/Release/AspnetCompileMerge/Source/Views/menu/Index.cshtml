@@ -1,0 +1,233 @@
+﻿<!-- MAIN CONTENT -->
+<div id="content">
+
+    <!-- row -->
+    <div class="row">
+
+        <!-- col -->
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+            <h1 class="page-title txt-color-blueDark">
+                <!-- PAGE HEADER --><i class="fa-fw fa fa-home"></i> User Management <span>
+                    >
+                    Menu
+                </span>
+            </h1>
+        </div>
+        <!-- end col -->
+
+    </div>
+    <!-- end row -->
+    <!--
+    The ID "widget-grid" will start to initialize all widgets below
+    You do not need to use widgets if you dont want to. Simply remove
+    the <section></section> and you can use wells or panels instead
+    -->
+    <!-- widget grid -->
+    <section id="widget-grid" class="">
+
+        <!-- row -->
+        <div class="row">
+
+            <!-- NEW WIDGET START -->
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                <table id="jqgrid"></table>
+                <div id="pjqgrid"></div>
+
+
+            </article>
+            <!-- WIDGET END -->
+
+        </div>
+
+        <!-- end row -->
+
+    </section>
+    <!-- end widget grid -->
+
+</div>
+<!-- END MAIN CONTENT -->
+
+
+@section pagespecific {
+    <script type="text/javascript">
+    $(document).ready(function () {
+        pageSetUp();
+
+        jQuery("#jqgrid").jqGrid({
+            url: '/menu/List',
+            mtype: 'Get',
+            contentType: "application/json",
+            datatype: "json",
+            height: 'auto',
+            colNames: ['Actions', '', 'Code', 'Menu', 'Module', 'URL', 'Order', 'Is Active', 'Modified Date', 'Modified By'],
+            colModel: [{
+                name: 'act',
+                index: 'act',
+                sortable: false, width: 80
+            }, {
+                key: true,
+                name: 'menu_id',
+                index: 'menu_id',
+                sortable: false,
+                editable: false,
+                hidden: true,
+                editrules: { edithidden: false }
+
+            }, {
+                name: 'menu_code',
+                index: 'menu_code',
+                editable: true,
+                sortable: true, width: 80
+            }, {
+                name: 'menu_name',
+                index: 'menu_name',
+                editable: true,
+                sortable: true, width: 200
+            }, {
+                name: 'module_name',
+                index: 'module_name',
+                editable: true,
+                sortable: true,
+                width: 150,
+                edittype: 'select',
+                editoptions: {
+                    dataUrl: '/module/GetModule/',
+                    buildSelect: function (data) {
+                        var s = "<select><option value=''>-Select-</option>";
+                        $.each(JSON.parse(data), function (i, value) {
+                            s += '<option value="' + value.module_id + '">' + value.module_name + '</option>';
+                        });
+                        return s + "</select>";
+                    }
+                }
+            }, {
+                name: 'menu_url',
+                index: 'menu_url',
+                editable: true,
+                sortable: true, width: 200
+            }, {
+                name: 'rec_order',
+                index: 'rec_order',
+                editable: true,
+                sortable: true, width: 50
+            }, {
+                name: 'fl_active',
+                index: 'fl_active',
+                align: "center",
+                editable: true,
+                sortable: true, width: 70,
+                edittype: 'select', 
+                editoptions: { value: 'Yes:Yes;No:No' }
+            }, {
+                name: 'updated_date',
+                index: 'updated_date',
+                align: "center",
+                editable: false,
+                sortable: true, width: 170,
+                formatter: "date",
+                formatoptions: { newformat: "m/d/Y H:i:s" }
+            }, {
+                name: 'updated_by',
+                index: 'updated_by',
+                align: "center",
+                editable: false, width: 100,
+                sortable: true
+            }],
+            rowNum: 10,
+            rowList: [10, 20, 30],
+            pager: '#pjqgrid',
+            sortname: 'menu_code',
+            toolbarfilter: true,
+            viewrecords: true,
+            sortorder: "asc",
+            gridComplete: function () {
+                var ids = jQuery("#jqgrid").jqGrid('getDataIDs');
+                for (var i = 0; i < ids.length; i++) {
+                    var cl = ids[i];
+                    be = "<button class='btn btn-xs btn-default' data-original-title='Edit Row' onclick=\"jQuery('#jqgrid').editRow('" + cl + "');\"><i class='fa fa-pencil'></i></button>";
+                    se = "<button class='btn btn-xs btn-default' data-original-title='Save Row' onclick=\"jQuery('#jqgrid').saveRow('" + cl + "');\"><i class='fa fa-save'></i></button>";
+                    ca = "<button class='btn btn-xs btn-default' data-original-title='Cancel' onclick=\"jQuery('#jqgrid').restoreRow('" + cl + "');\"><i class='fa fa-times'></i></button>";
+                    //ce = "<button class='btn btn-xs btn-default' onclick=\"jQuery('#jqgrid').restoreRow('"+cl+"');\"><i class='fa fa-times'></i></button>";
+                    //jQuery("#jqgrid").jqGrid('setRowData',ids[i],{act:be+se+ce});
+                    jQuery("#jqgrid").jqGrid('setRowData', ids[i], {
+                        act: be + se + ca
+                    });
+                }
+            },
+            jsonReader: {
+                root: "rows",
+                page: "page",
+                total: "total",
+                records: "records",
+                repeatitems: false,
+                Id: "0"
+            },
+            editurl: "/menu/CRUDMenu",
+            caption: "Menu Management",
+            emptyrecords: 'No Records',
+            multiselect: true,
+            autowidth: true
+
+        });
+        jQuery("#jqgrid").jqGrid('navGrid', "#pjqgrid", {
+            edit: false,
+            add: false,
+            del: true,
+            refresh: true,
+            closeAfterSearch: true
+        }, {
+            zIndex: 100,
+            caption: "Search Country",
+            sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+            closeAfterSearch: true,
+        });
+        jQuery("#jqgrid").jqGrid('inlineNav', "#pjqgrid", {
+            edit: false,
+        });
+        /* Add tooltips */
+        $('.navtable .ui-pg-button').tooltip({
+            container: 'body'
+        });
+
+
+        // remove classes
+        $(".ui-jqgrid").removeClass("ui-widget ui-widget-content");
+        $(".ui-jqgrid-view").children().removeClass("ui-widget-header ui-state-default");
+        $(".ui-jqgrid-labels, .ui-search-toolbar").children().removeClass("ui-state-default ui-th-column ui-th-ltr");
+        $(".ui-jqgrid-pager").removeClass("ui-state-default");
+        $(".ui-jqgrid").removeClass("ui-widget-content");
+
+        // add classes
+        $(".ui-jqgrid-htable").addClass("table table-bordered table-hover");
+        $(".ui-jqgrid-btable").addClass("table table-bordered table-striped");
+
+        $(".ui-pg-div").removeClass().addClass("btn btn-sm btn-primary");
+        $(".ui-icon.ui-icon-plus").removeClass().addClass("fa fa-plus");
+        $(".ui-icon.ui-icon-pencil").removeClass().addClass("fa fa-pencil");
+        $(".ui-icon.ui-icon-trash").removeClass().addClass("fa fa-trash-o");
+        $(".ui-icon.ui-icon-search").removeClass().addClass("fa fa-search");
+        $(".ui-icon.ui-icon-refresh").removeClass().addClass("fa fa-refresh");
+        $(".ui-icon.ui-icon-disk").removeClass().addClass("fa fa-save").parent(".btn-primary").removeClass("btn-primary").addClass("btn-success");
+        $(".ui-icon.ui-icon-cancel").removeClass().addClass("fa fa-times").parent(".btn-primary").removeClass("btn-primary").addClass("btn-danger");
+
+        $(".ui-icon.ui-icon-seek-prev").wrap("<div class='btn btn-sm btn-default'></div>");
+        $(".ui-icon.ui-icon-seek-prev").removeClass().addClass("fa fa-backward");
+
+        $(".ui-icon.ui-icon-seek-first").wrap("<div class='btn btn-sm btn-default'></div>");
+        $(".ui-icon.ui-icon-seek-first").removeClass().addClass("fa fa-fast-backward");
+
+        $(".ui-icon.ui-icon-seek-next").wrap("<div class='btn btn-sm btn-default'></div>");
+        $(".ui-icon.ui-icon-seek-next").removeClass().addClass("fa fa-forward");
+
+        $(".ui-icon.ui-icon-seek-end").wrap("<div class='btn btn-sm btn-default'></div>");
+        $(".ui-icon.ui-icon-seek-end").removeClass().addClass("fa fa-fast-forward");
+
+    })
+
+    $(window).on('resize.jqGrid', function () {
+        $("#jqgrid").jqGrid('setGridWidth', $("#content").width());
+    })
+
+    </script>
+}

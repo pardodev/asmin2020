@@ -1,0 +1,31 @@
+﻿Step2 develop reports
+---------------------------------------------------------
+1. istall package
+ install-package Microsoft.ReportingServices.ReportViewerControl.WebForms.
+
+2. menambah control di VS
+- tambahkan control reports designer di toolbox
+- add choose item lalu cari dll : Microsoft.ReportingServices.ReportViewerControl.WebForms\lib\net40 folder and add WebForms.dll.
+
+
+---------------------------------------------------------
+3. installa package
+install-package ReportViewerForMvc
+- ini akan mebuat file baru bernama : ReportViewerWebForm.aspx di root Solution
+
+4. Buat Dataset sebagai sumberdata utk report
+
+5. buat report dengan tipe file .rdlc
+
+6. panggil di controller
+- lihat reportController
+
+7. buat view nya utk memanggil di controller
+
+8. coba. 
+
+9. done
+
+
+contoh :
+lihat di https://www.youtube.com/watch?v=BTmg3bH-8tc

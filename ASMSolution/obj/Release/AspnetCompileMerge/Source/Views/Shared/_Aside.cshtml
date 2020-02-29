@@ -1,0 +1,106 @@
+﻿<!-- Left panel : Navigation area -->
+<!-- Note: This width of the aside area can be adjusted through LESS variables -->
+<aside id="left-panel">
+
+    <!-- User info -->
+    @{ Html.RenderPartial("_CurrentUser"); }
+    <!-- end user info -->
+    <!-- NAVIGATION : This navigation is also responsive
+
+    To make this navigation dynamic please make sure to link the node
+    (the reference to the nav > ul) after page load. Or the navigation
+    will not initialize.
+    -->
+    @{
+        String currentUrl = Request.Url.ToString();
+        string set_active = "";
+        string set_style = "";
+
+    }
+    @model IEnumerable<ASM_UI.Models.MenuViewModel>
+
+    @if (Model != null && Request.IsAuthenticated)
+    {
+        <nav>
+            <ul>
+                @foreach (var Module in Model.Select(n => new { n.module_id, n.module_name }).Distinct())
+                {
+                    <li class="@Html.RouteIf(Module.module_name.ToLower(), "active")">
+                        <a href="#">
+                            <i class="fa fa-lg fa-fw fa-table"></i>
+                            <span class="menu-item-parent">
+                                @Module.module_name
+                            </span>
+                        </a>
+                        @if (Request.Url.Segments.Length > 1)
+                        {
+                            String controllerUrl = Request.Url.Segments[1].ToString().ToLower();
+                            foreach (ASM_UI.Models.MenuViewModel mn in Model.Where(n => n.module_id == Module.module_id))
+                            {
+                                String controller_main = controllerUrl.Replace(@"/", "");
+                                set_style = (mn.menu_url.ToLower().Equals(controller_main)) ? "display:block;" : "";
+                            }
+                        }
+
+                        <ul style="@set_style">
+                            @foreach (ASM_UI.Models.MenuViewModel mn in Model.Where(n => n.module_id == Module.module_id))
+                            {
+                                if ((Request.Url.Segments.Length > 1) && (Request.Url.Segments.Length < 3))
+                                {
+                                    String controller_url = Request.Url.Segments[1].ToString().ToLower();
+                                    String controller_1 = controller_url.Replace(@"/", "");
+                                    set_active = (mn.menu_url.ToLower().Equals(controller_1)) ? "active" : "";
+
+                                }
+                                else if (Request.Url.Segments.Length == 3)
+                                {
+                                    String controller_url = Request.Url.Segments[1].ToString().ToLower();
+                                    String controller_url_2 = Request.Url.Segments[2].ToString().ToLower();
+                                    String controller_final = controller_url + controller_url_2;
+                                    set_active = (mn.menu_url.ToLower().Equals(controller_final)) ? "active" : "";
+                                }
+                                else if (Request.Url.Segments.Length > 3)
+                                {
+                                    String controller_url = Request.Url.Segments[1].ToString().ToLower();
+                                    String controller_1 = controller_url.Replace(@"/", "");
+                                    set_active = (mn.menu_url.ToLower().Equals(controller_1)) ? "active" : "";
+                                }
+                                else
+                                {
+                                    if(Request.Url.Segments[0] == @"/")
+                                    {
+                                        String controller_url = Request.Url.Segments[0].ToString().ToLower();
+                                        set_active = (mn.menu_url.ToLower().Equals("")) ? "active" : "";
+                                        //set_active = "active";
+                                    }
+                                    else
+                                    {
+                                        String controller_url = Request.Url.Segments[1].ToString().ToLower();
+                                        set_active = (mn.menu_url.ToLower().Equals(controller_url)) ? "active" : "";
+                                    }
+
+                                }
+
+                                <li class="@set_active">
+                                    @*"../@menu_name.menu_url"*@
+                                    <a href="@Url.Action("index", mn.menu_url, null, Request.Url.Scheme, Request.Url.Host)">
+                                        <i class="fa fa-lg fa-fw fa-inbox"></i>
+                                        <span class="menu-item-parent">@mn.menu_name</span>
+                                    </a>
+                                </li>
+                            }
+
+                        </ul>
+                    </li>
+                }
+            </ul>
+        </nav>
+
+    }
+
+    <span class="minifyme" data-action="minifyMenu">
+        <i class="fa fa-arrow-circle-left hit"></i>
+    </span>
+
+</aside>
+<!-- END NAVIGATION -->

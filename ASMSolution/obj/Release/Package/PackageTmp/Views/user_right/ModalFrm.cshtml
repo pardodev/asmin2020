@@ -1,0 +1,114 @@
+﻿
+<script type="text/javascript">
+
+    $('#ms_user_type').select2({
+        placeholder: 'Select User Type',
+        allowClear: true
+    });
+
+    $('#ms_job_level').select2({
+        placeholder: 'Select Job Level',
+        allowClear: true
+    });
+
+    $(document).ready(function () {
+        var $loginForm = $("#user_right-form").validate({
+            // Rules for form validation
+            rules: {
+                ms_user_type: {
+                    required: true
+                },
+                ms_job_level: {
+                    required: true,
+                    number: true
+                },
+                ms_menu: {
+                    required: true
+                }
+            },
+            // Messages for form validation
+            messages: {
+                ms_user_type: {
+                    required: 'Please User Type'
+                },
+                ms_job_level: {
+                    required: 'Please Job Level'
+                },
+                ms_menu: {
+                    required: 'Please select menu'
+                }
+            },
+
+            // Do not change code below
+            errorPlacement: function (error, element) {
+                error.insertAfter(element.parent());
+            }
+        });
+
+    })
+</script>
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                &times;
+            </button>
+            <h4 class="modal-title">
+                <h3>User Right</h3>
+            </h4>
+        </div>
+        <div class="modal-body no-padding">
+
+            <form id="user_right-form" class="smart-form" method="post" action="@Url.Action("FormSave", "user_right")">
+
+                <fieldset>
+                    <section>
+                        <div class="row">
+                            <label class="label col col-3">User Type</label>
+                            <div class="col col-9">
+                                <select id="ms_user_type" name="ms_user_type" placeholder="Select User Type" style="width:100%" class="select2"></select>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section>
+                        <div class="row">
+                            <label class="label col col-3">Job Level</label>
+                            <div class="col col-9">
+                                <select id="ms_job_level" name="ms_job_level" placeholder="Select Job Level" style="width:100%" class="select2"></select>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section>
+                        <div class="row">
+                            <label class="label col col-3">Menu Access</label>
+                            <div class="col col-9">
+                                <table id="tbl_menu">
+                                    <tbody>
+                                        <tr><td>Module</td><td>Menu Code</><td>Menu Name</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+
+                </fieldset>
+
+                <footer>
+                    <button type="submit" class="btn btn-primary">
+                        Save
+                    </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Cancel
+                    </button>
+
+                </footer>
+            </form>
+
+
+        </div>
+
+    </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->

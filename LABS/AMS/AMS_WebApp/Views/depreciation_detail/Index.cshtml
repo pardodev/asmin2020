@@ -1,0 +1,105 @@
+﻿@model IEnumerable<ASM_UI.Models.tr_depreciation_detail>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.depreciation_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.depreciation_type_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.period)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.period_year)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.period_month)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fl_active)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.created_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.created_by)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.updated_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.updated_by)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.deleted_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.deleted_by)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.org_id)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.depreciation_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.depreciation_type_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.period)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.period_year)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.period_month)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fl_active)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.created_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.created_by)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.updated_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.updated_by)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.deleted_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.deleted_by)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.org_id)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.depreciation_detail_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.depreciation_detail_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.depreciation_detail_id })
+        </td>
+    </tr>
+}
+
+</table>

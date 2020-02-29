@@ -1,0 +1,365 @@
+﻿@model ASM_UI.Models.printLabelViewModel
+@{
+    ViewBag.Title = "Print Label";
+}
+
+<div id="content">
+    <!-- row -->
+    <div class="row">
+        <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+            <h1 class="page-title txt-color-blueDark">
+
+                <!-- PAGE HEADER -->
+                <i class="fa-fw fa fa-pencil-square-o"></i>
+                General
+                <span>
+                    >
+                    Print Label
+                </span>
+            </h1>
+        </div>
+    </div>
+    <section id="widget-grid" class="">
+
+        @using (Html.BeginForm("Index", "print", FormMethod.Get, htmlAttributes: new { id = "frmSearchAsset" }))
+        {
+            <div class="row">
+                <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="jarviswidget jarviswidget-color-darken" id="wid-id-filter" data-widget-editbutton="false">
+
+                        <header>
+                            <h2>Search Criteria</h2>
+                        </header>
+                        <div class="row">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label class="control-label"><b>Company</b></label>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>
+                                        @Html.TextBox(Model.company.company_name, Model.company.company_name, htmlAttributes: new { id = "company_name", @class = "form-control", @disabled = "disabled" })
+                                    </label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="control-label"><b>Category</b></label>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>
+                                        @Html.DropDownListFor(model => model.category_id, new SelectList(Model.asset_category_list, "category_id", "category_name"), " All Category ", htmlAttributes: new { @class = "form-control select2", id = "category_id" })
+                                        @Html.ValidationMessageFor(model => model.category_id, "", new { @class = "text-danger" })
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label class="control-label"><b>Asset Taking Location *</b></label>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="input">
+                                        @Html.TextBox(Model.asset_reg_location.asset_reg_location_code, Model.asset_reg_location.asset_reg_location_code, htmlAttributes: new { id = "asset_reg_location_code", @class = "form-control", @disabled = "disabled" })
+                                        @Html.DropDownListFor(model => model.asset_location_id, new SelectList(Model.asset_location_list, "location_id", "location_name"), "- Select Location -", htmlAttributes: new { @class = "form-control select2", id = "asset_location_id" })
+                                        @Html.ValidationMessageFor(model => model.asset_location_id, "", new { @class = "text-danger" })
+                                    </label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="control-label"><b>Department</b></label>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="input">
+                                        @Html.DropDownListFor(model => model.department_id, new SelectList(Model.department_list, "department_id", "department_name"), " All Department ", htmlAttributes: new { @class = "form-control select2", id = "department_id" })
+                                        @Html.ValidationMessageFor(model => model.department_id, "", new { @class = "text-danger" })
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label class="control-label"><b></b></label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="submit" value="Search" class="btn btn-primary" />
+                                    <a class="btn btn-default" href="@Url.Action("Index", "home")">Close</a>
+                                </div>
+
+                                <div class="col-md-1"></div>
+
+                                <div class="col-md-2">
+                                    <label class="control-label"><b></b></label>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="input"></label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-11">
+                                    @*@Html.HiddenFor(model => model.company_id)
+                                        @Html.HiddenFor(model => model.asset_reg_location_id)
+                                        @Html.AntiForgeryToken()
+                                        @Html.ValidationMessageFor(model => model.print_message, "", new { @class = "text-danger" })*@
+                                </div>
+                            </div>
+
+                            <footer>
+                                <div class="form-group">
+                                    <div class="col-md-7">
+                                    </div>
+                                </div>
+                            </footer>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        }
+
+        @if (Model.print_asset_items != null)
+        {
+            <form name="frmPrint" action="print/PrintToTextFile" method="post">
+                <div class="row">
+                    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
+
+                            <header>
+                                <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                                <h2>Asset List</h2>
+
+                            </header>
+                            <div>
+                                <!-- widget edit box -->
+                                <div class="jarviswidget-editbox">
+                                    <!-- This area used as dropdown edit box -->
+
+                                </div>
+                                <!-- end widget edit box -->
+                                <div class="widget-body no-padding">
+                                    @if (Model.print_asset_items.Count > 0)
+                                    {
+                                        @*@Html.BeginForm("PrintToTextFile", "print", FormMethod.Post, htmlAttributes: new { id = "frmPrintLabel" })
+                                            {*@
+                                        @Html.HiddenFor(model => model.company_id)
+                                        @Html.HiddenFor(model => model.asset_reg_location_id)
+                                        @Html.AntiForgeryToken()
+                                        @Html.ValidationMessageFor(model => model.print_message, "", new { @class = "text-danger" })
+
+                                        <!-- <table class="table table-striped table-bordered table-hover" width="100%" id="table_basic">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.print_asset_items[0].asset_number)
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.print_asset_items[0].asset_name)
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.print_asset_items[0].category_name)
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.print_asset_items[0].department_name)
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                        </table> -->
+                                        <table id="jqgrid"></table>
+                                            <div id="pjqgrid">
+
+                                            </div>
+                                            <br />
+                                            <div>
+                                                <center><input type="button" value="Print" class="btn btn-md btn-primary" onclick="ProcessPrint()"/></center> <br />
+                                            </div>
+                                        //}
+                                    }
+                                    else
+                                    {
+                                        <div class="col-md-11">
+                                            <label class="alert alert-warning">No Item Found</label>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </form>
+        }
+    </section>
+</div>
+
+
+@section pagespecific {
+    <script type="text/javascript">
+
+        function ProcessPrint() {
+            var selRow = jQuery("#jqgrid").jqGrid('getGridParam', 'selarrrow');  //get selected rows
+
+            var urlProcessPrint = '/print/ProcessPrintSelectedData/' + selRow;
+
+            $.ajax({
+                type: 'POST',
+                url: urlProcessPrint,
+                success: function (result) {
+                    swal({
+                        title: "Success",
+                        text: result,
+                        type: "success"
+                    });
+                    $('#jqgrid').trigger('reloadGrid');
+                },
+                error: function (data) {
+                    swal("Error", "Error Process Print List Asset Data", "error");
+                }
+            })
+        }
+
+        $(document).ready(function () {
+            var company_id = document.getElementById('company_id').value;
+            var asset_reg_location_id = document.getElementById('asset_reg_location_id').value;
+            var department_id = document.getElementById('department_id').value;
+            var asset_location_id = document.getElementById('asset_location_id').value;
+            var category_id = document.getElementById('category_id').value;
+
+            //pageSetUp();
+            jQuery("#jqgrid").jqGrid({
+                url: "/print/GetAssetSearchList?company_id=" + company_id +
+                         "&asset_reg_location_id=" + asset_reg_location_id +
+                         "&department_id=" + department_id +
+                         "&asset_location_id=" + asset_location_id +
+                         "&category_id=" + category_id,
+                datatype: "json",
+                mtype: 'Get',
+                height: 'auto',
+                colNames: ['', 'Asset Number', 'Asset Name', 'Category Name', 'Department Name'],
+                colModel: [
+                    //{ name: 'act', index: 'act', sortable: false, width: 20 },
+                    { name: 'asset_id', key: true, index: 'asset_id', width: 10, editable: false, hidden: true, editrules: { edithidden: false } },
+                    { name: 'asset_number', index: 'asset_number', sortable: true, editable: true, width: 20 },
+                    { name: 'asset_name', index: 'asset_name', sortable: true, editable: true, width: 25 },
+                    { name: 'category_name', index: 'category_name', sortable: true, editable: true, width: 20 },
+                    { name: 'department_name', index: 'department_name', sortable: true, editable: true, width: 25 },
+
+                ],
+
+                rowNum: 10,
+                rowList: [10, 20, 30],
+                pager: '#pjqgrid',
+                sortname: 'asset_number',
+                toolbarfilter: true,
+                viewrecords: true,
+                sortorder: "asc",
+                gridComplete: function () {
+                    var ids = jQuery("#jqgrid").jqGrid('getDataIDs');
+                },
+                jsonReader: {
+                    root: "rows",
+                    page: "page",
+                    total: "total",
+                    records: "records",
+                    repeatitems: false,
+                    Id: "0"
+                },
+                //editurl: '/depreciationProcess/CrudCategory',
+                caption: "Asset Print List",
+                emptyrecords: 'No List Print Asset Records are Available to Display',
+                multiselect: true,
+                autowidth: true,
+
+            });
+            jQuery("#jqgrid").jqGrid('navGrid', "#pjqgrid", {
+                edit: false,
+                add: false,
+                del: false,
+                refresh: false,
+                search : false,
+                closeAfterSearch: true
+            }, {
+                zIndex: 100,
+                caption: "Search Asset",
+                sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+                closeAfterSearch: true
+            });
+            /*remark utk add, edit*/
+            //jQuery("#jqgrid").jqGrid('inlineNav', "#pjqgrid");
+
+            /* Add tooltips */
+            $('.navtable .ui-pg-button').tooltip({
+                container: 'body'
+            });
+
+
+            // remove classes
+            $(".ui-jqgrid").removeClass("ui-widget ui-widget-content");
+            $(".ui-jqgrid-view").children().removeClass("ui-widget-header ui-state-default");
+            $(".ui-jqgrid-labels, .ui-search-toolbar").children().removeClass("ui-state-default ui-th-column ui-th-ltr");
+            $(".ui-jqgrid-pager").removeClass("ui-state-default");
+            $(".ui-jqgrid").removeClass("ui-widget-content");
+
+            // add classes
+            $(".ui-jqgrid-htable").addClass("table table-bordered table-hover");
+            $(".ui-jqgrid-btable").addClass("table table-bordered table-striped");
+
+            $(".ui-pg-div").removeClass().addClass("btn btn-sm btn-primary");
+            $(".ui-icon.ui-icon-plus").removeClass().addClass("fa fa-plus");
+            $(".ui-icon.ui-icon-pencil").removeClass().addClass("fa fa-pencil");
+            $(".ui-icon.ui-icon-trash").removeClass().addClass("fa fa-trash-o");
+            $(".ui-icon.ui-icon-search").removeClass().addClass("fa fa-search");
+            $(".ui-icon.ui-icon-refresh").removeClass().addClass("fa fa-refresh");
+            $(".ui-icon.ui-icon-disk").removeClass().addClass("fa fa-save").parent(".btn-primary").removeClass("btn-primary").addClass("btn-success");
+            $(".ui-icon.ui-icon-cancel").removeClass().addClass("fa fa-times").parent(".btn-primary").removeClass("btn-primary").addClass("btn-danger");
+
+            $(".ui-icon.ui-icon-seek-prev").wrap("<div class='btn btn-sm btn-default'></div>");
+            $(".ui-icon.ui-icon-seek-prev").removeClass().addClass("fa fa-backward");
+
+            $(".ui-icon.ui-icon-seek-first").wrap("<div class='btn btn-sm btn-default'></div>");
+            $(".ui-icon.ui-icon-seek-first").removeClass().addClass("fa fa-fast-backward");
+
+            $(".ui-icon.ui-icon-seek-next").wrap("<div class='btn btn-sm btn-default'></div>");
+            $(".ui-icon.ui-icon-seek-next").removeClass().addClass("fa fa-forward");
+
+            $(".ui-icon.ui-icon-seek-end").wrap("<div class='btn btn-sm btn-default'></div>");
+            $(".ui-icon.ui-icon-seek-end").removeClass().addClass("fa fa-fast-forward");
+
+        $(window).on('resize.jqGrid', function () {
+            $("#jqgrid").jqGrid('setGridWidth', $("#content").width());
+        })
+  });
+
+
+        function checkAll(ele) {
+            var checkboxes = document.getElementById('checked_asset_id');
+            var bool_cheked = eval(ele.checked);
+            //alert(bool_cheked);
+            //alert(checkboxes.childElementCount);
+            if (checkboxes) {
+                for (var i_loop = 0; i_loop < checkboxes.length; i_loop++) {
+                    if (checkboxes[i_loop].type == 'checkbox') {
+                        checkboxes[i_loop].checked = bool_cheked;
+                    }
+                }
+            }
+
+            //if (ele.checked)
+            //{
+            //    for (var i_loop = 0; i_loop < checkboxes.length; i_loop++) {
+            //        if (checkboxes[i_loop].type == 'checkbox') {
+            //            checkboxes[i_loop].checked = true;
+            //        }
+            //    }
+            //} else
+            //{
+            //    for (var i_loop = 0; i_loop < checkboxes.length; i_loop++) {
+            //        //console.log(i)
+            //        if (checkboxes[i_loop].type == 'checkbox') {
+            //            checkboxes[i_loop].checked = false;
+            //        }
+            //    }
+            //}
+        }
+
+
+    </script>
+}

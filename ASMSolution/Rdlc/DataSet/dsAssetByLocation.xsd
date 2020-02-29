@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsAssetByLocation" targetNamespace="http://tempuri.org/dsAssetByLocation.xsd" xmlns:mstns="http://tempuri.org/dsAssetByLocation.xsd" xmlns="http://tempuri.org/dsAssetByLocation.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsAssetByLocation" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsAssetByLocation" msprop:Generator_UserDSName="dsAssetByLocation">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="TAssetByLocation" msprop:Generator_TableClassName="TAssetByLocationDataTable" msprop:Generator_TableVarName="tableTAssetByLocation" msprop:Generator_TablePropName="TAssetByLocation" msprop:Generator_RowDeletingName="TAssetByLocationRowDeleting" msprop:Generator_RowChangingName="TAssetByLocationRowChanging" msprop:Generator_RowEvHandlerName="TAssetByLocationRowChangeEventHandler" msprop:Generator_RowDeletedName="TAssetByLocationRowDeleted" msprop:Generator_UserTableName="TAssetByLocation" msprop:Generator_RowChangedName="TAssetByLocationRowChanged" msprop:Generator_RowEvArgName="TAssetByLocationRowChangeEvent" msprop:Generator_RowClassName="TAssetByLocationRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="distric_name" msprop:Generator_ColumnVarNameInTable="columndistric_name" msprop:Generator_ColumnPropNameInRow="distric_name" msprop:Generator_ColumnPropNameInTable="distric_nameColumn" msprop:Generator_UserColumnName="distric_name" type="xs:string" minOccurs="0" />
+              <xs:element name="location_name" msprop:Generator_ColumnVarNameInTable="columnlocation_name" msprop:Generator_ColumnPropNameInRow="location_name" msprop:Generator_ColumnPropNameInTable="location_nameColumn" msprop:Generator_UserColumnName="location_name" type="xs:string" minOccurs="0" />
+              <xs:element name="category_name" msprop:Generator_ColumnVarNameInTable="columncategory_name" msprop:Generator_ColumnPropNameInRow="category_name" msprop:Generator_ColumnPropNameInTable="category_nameColumn" msprop:Generator_UserColumnName="category_name" type="xs:string" minOccurs="0" />
+              <xs:element name="asset_number" msprop:Generator_ColumnVarNameInTable="columnasset_number" msprop:Generator_ColumnPropNameInRow="asset_number" msprop:Generator_ColumnPropNameInTable="asset_numberColumn" msprop:Generator_UserColumnName="asset_number" type="xs:string" minOccurs="0" />
+              <xs:element name="asset_name" msprop:Generator_ColumnVarNameInTable="columnasset_name" msprop:Generator_ColumnPropNameInRow="asset_name" msprop:Generator_ColumnPropNameInTable="asset_nameColumn" msprop:Generator_UserColumnName="asset_name" type="xs:string" minOccurs="0" />
+              <xs:element name="asset_spec" msprop:Generator_ColumnVarNameInTable="columnasset_spec" msprop:Generator_ColumnPropNameInRow="asset_spec" msprop:Generator_ColumnPropNameInTable="asset_specColumn" msprop:Generator_UserColumnName="asset_spec" type="xs:string" minOccurs="0" />
+              <xs:element name="asset_merk" msprop:Generator_ColumnVarNameInTable="columnasset_merk" msprop:Generator_ColumnPropNameInRow="asset_merk" msprop:Generator_ColumnPropNameInTable="asset_merkColumn" msprop:Generator_UserColumnName="asset_merk" type="xs:string" minOccurs="0" />
+              <xs:element name="asset_vendor" msprop:Generator_ColumnVarNameInTable="columnasset_vendor" msprop:Generator_ColumnPropNameInRow="asset_vendor" msprop:Generator_ColumnPropNameInTable="asset_vendorColumn" msprop:Generator_UserColumnName="asset_vendor" type="xs:string" minOccurs="0" />
+              <xs:element name="acq_date" msprop:Generator_ColumnVarNameInTable="columnacq_date" msprop:Generator_ColumnPropNameInRow="acq_date" msprop:Generator_ColumnPropNameInTable="acq_dateColumn" msprop:Generator_UserColumnName="acq_date" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="akhir_pakai_date" msprop:Generator_ColumnVarNameInTable="columnakhir_pakai_date" msprop:Generator_ColumnPropNameInRow="akhir_pakai_date" msprop:Generator_ColumnPropNameInTable="akhir_pakai_dateColumn" msprop:Generator_UserColumnName="akhir_pakai_date" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="usd_perolehan" msprop:Generator_ColumnVarNameInTable="columnusd_perolehan" msprop:Generator_ColumnPropNameInRow="usd_perolehan" msprop:Generator_ColumnPropNameInTable="usd_perolehanColumn" msprop:Generator_UserColumnName="usd_perolehan" type="xs:int" minOccurs="0" />
+              <xs:element name="idr_perolehan" msprop:Generator_ColumnVarNameInTable="columnidr_perolehan" msprop:Generator_ColumnPropNameInRow="idr_perolehan" msprop:Generator_ColumnPropNameInTable="idr_perolehanColumn" msprop:Generator_UserColumnName="idr_perolehan" type="xs:int" minOccurs="0" />
+              <xs:element name="depre_tarif" msprop:Generator_ColumnVarNameInTable="columndepre_tarif" msprop:Generator_ColumnPropNameInRow="depre_tarif" msprop:Generator_ColumnPropNameInTable="depre_tarifColumn" msprop:Generator_UserColumnName="depre_tarif" type="xs:decimal" minOccurs="0" />
+              <xs:element name="depre_usd" msprop:Generator_ColumnVarNameInTable="columndepre_usd" msprop:Generator_ColumnPropNameInRow="depre_usd" msprop:Generator_ColumnPropNameInTable="depre_usdColumn" msprop:Generator_UserColumnName="depre_usd" type="xs:string" minOccurs="0" />
+              <xs:element name="depre_idr" msprop:Generator_ColumnVarNameInTable="columndepre_idr" msprop:Generator_ColumnPropNameInRow="depre_idr" msprop:Generator_ColumnPropNameInTable="depre_idrColumn" msprop:Generator_UserColumnName="depre_idr" type="xs:int" minOccurs="0" />
+              <xs:element name="lasty_usage" msprop:Generator_ColumnVarNameInTable="columnlasty_usage" msprop:Generator_ColumnPropNameInRow="lasty_usage" msprop:Generator_ColumnPropNameInTable="lasty_usageColumn" msprop:Generator_UserColumnName="lasty_usage" type="xs:int" minOccurs="0" />
+              <xs:element name="lasty_usage_usd" msprop:Generator_ColumnVarNameInTable="columnlasty_usage_usd" msprop:Generator_ColumnPropNameInRow="lasty_usage_usd" msprop:Generator_ColumnPropNameInTable="lasty_usage_usdColumn" msprop:Generator_UserColumnName="lasty_usage_usd" type="xs:string" minOccurs="0" />
+              <xs:element name="lasty_usage_idr" msprop:Generator_ColumnVarNameInTable="columnlasty_usage_idr" msprop:Generator_ColumnPropNameInRow="lasty_usage_idr" msprop:Generator_ColumnPropNameInTable="lasty_usage_idrColumn" msprop:Generator_UserColumnName="lasty_usage_idr" type="xs:string" minOccurs="0" />
+              <xs:element name="ytd_usage" msprop:Generator_ColumnVarNameInTable="columnytd_usage" msprop:Generator_ColumnPropNameInRow="ytd_usage" msprop:Generator_ColumnPropNameInTable="ytd_usageColumn" msprop:Generator_UserColumnName="ytd_usage" type="xs:string" minOccurs="0" />
+              <xs:element name="ytd_usage_usd" msprop:Generator_ColumnVarNameInTable="columnytd_usage_usd" msprop:Generator_ColumnPropNameInRow="ytd_usage_usd" msprop:Generator_ColumnPropNameInTable="ytd_usage_usdColumn" msprop:Generator_UserColumnName="ytd_usage_usd" type="xs:string" minOccurs="0" />
+              <xs:element name="ytd_usage_idr" msprop:Generator_ColumnVarNameInTable="columnytd_usage_idr" msprop:Generator_ColumnPropNameInRow="ytd_usage_idr" msprop:Generator_ColumnPropNameInTable="ytd_usage_idrColumn" msprop:Generator_UserColumnName="ytd_usage_idr" type="xs:string" minOccurs="0" />
+              <xs:element name="tot_usage" msprop:Generator_ColumnVarNameInTable="columntot_usage" msprop:Generator_ColumnPropNameInRow="tot_usage" msprop:Generator_ColumnPropNameInTable="tot_usageColumn" msprop:Generator_UserColumnName="tot_usage" type="xs:string" minOccurs="0" />
+              <xs:element name="tot_usage_usd" msprop:Generator_ColumnVarNameInTable="columntot_usage_usd" msprop:Generator_ColumnPropNameInRow="tot_usage_usd" msprop:Generator_ColumnPropNameInTable="tot_usage_usdColumn" msprop:Generator_UserColumnName="tot_usage_usd" type="xs:string" minOccurs="0" />
+              <xs:element name="tot_usage_idr" msprop:Generator_ColumnVarNameInTable="columntot_usage_idr" msprop:Generator_ColumnPropNameInRow="tot_usage_idr" msprop:Generator_ColumnPropNameInTable="tot_usage_idrColumn" msprop:Generator_UserColumnName="tot_usage_idr" type="xs:string" minOccurs="0" />
+              <xs:element name="bv_usage_usd" msprop:Generator_ColumnVarNameInTable="columnbv_usage_usd" msprop:Generator_ColumnPropNameInRow="bv_usage_usd" msprop:Generator_ColumnPropNameInTable="bv_usage_usdColumn" msprop:Generator_UserColumnName="bv_usage_usd" type="xs:string" minOccurs="0" />
+              <xs:element name="bv_usage_idr" msprop:Generator_ColumnVarNameInTable="columnbv_usage_idr" msprop:Generator_ColumnPropNameInRow="bv_usage_idr" msprop:Generator_ColumnPropNameInTable="bv_usage_idrColumn" msprop:Generator_UserColumnName="bv_usage_idr" type="xs:string" minOccurs="0" />
+              <xs:element name="remain_usage" msprop:Generator_ColumnVarNameInTable="columnremain_usage" msprop:Generator_ColumnPropNameInRow="remain_usage" msprop:Generator_ColumnPropNameInTable="remain_usageColumn" msprop:Generator_UserColumnName="remain_usage" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

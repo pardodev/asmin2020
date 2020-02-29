@@ -1,0 +1,363 @@
+﻿@model ASM_UI.Models.disposalViewModel
+
+@{
+    ViewBag.Title = "Disposal Request";
+}
+
+<div id="content">
+    <div class="row">
+        <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+            <h1 class="page-title txt-color-blueDark">
+
+                <!-- PAGE HEADER -->
+                <i class="fa-fw fa fa-pencil-square-o"></i>
+                Disposal
+                <span>
+                    >
+                    Request Form
+                </span>
+            </h1>
+        </div>
+    </div>
+
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false" data-widget-togglebutton="false" data-widget-collapsed="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                        <h2>Disposal Request </h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+
+                            @using (Html.BeginForm("RequestDisposal", "disposal", FormMethod.Post, htmlAttributes: new { @class = "smart-form", enctype = "multipart/form-data" }))
+                            {
+                                <header>
+                                    Disposal Request Form
+                                </header>
+
+                                <fieldset>
+                                    <fieldset title="Asset Parent">
+                                        @Html.AntiForgeryToken()
+                                        @*@Html.ValidationBootstrap()*@
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        <br />
+
+                                        <section>    
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.disposal_number, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="input">
+                                                        @Html.EditorFor(model => model.disposal_number, new { htmlAttributes = new { @class = "form-control col-lg-6", @readonly = "readonly", placeholder = "AUTO" } })
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelRequiredFor(model => model.asset_number, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                @Html.HiddenFor(model => Model.asset_id, htmlAttributes: new { @id = "parent_asset_id" })
+                                                @Html.ValidationMessageFor(model => model.asset_id, "", new { @class = "text-danger" })
+                                                <div class="col-lg-5">
+                                                    <label class="input">
+                                                        @Html.EditorFor(model => model.asset_number, new { htmlAttributes = new { @class = "form-control col-lg-6", @readonly = "readonly", placeholder = "Asset No", id = "parent_asset_number" } })
+                                                        @Html.ValidationMessageFor(model => model.asset_number, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </div>
+                                                <div class="col-lg-1">
+                                                    <a data-toggle="modal" href="#Asset" class="btn btn-success btn-sm" onclick="OpenModalAssetList();"><i class="fa fa-search fa-lg"></i></a>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.asset_name, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="input">
+                                                        @*<input type="text" name="asset_name" id="parent_asset_name" placeholder="Parent Asset Name" class="form-control" readonly="readonly" />*@
+                                                        @Html.EditorFor(model => model.asset_name, new { htmlAttributes = new { @class = "form-control col-lg-6", @readonly = "readonly", placeholder = "Asset Name", id = "parent_asset_name" } })
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.asset_receipt_date, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="input">
+                                                        <input type="text" name="asset_receipt_date" id="parent_asset_receiptdate" placeholder="Asset Receipt Date" class="form-control" readonly="readonly" />
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <br />
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.currency_code, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label class="input">
+                                                        <input type="text" name="currency_code" id="currencycode" placeholder="Currency" class="form-control" readonly="readonly" />
+                                                    </label>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-1">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        @Html.LabelFor(model => model.location_id, htmlAttributes: new { @class = "control-label" })
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <label class="input">
+                                                            @Html.EditorFor(model => model.location_name, new { htmlAttributes = new { @class = "form-control col-lg-6", @readonly = "readonly", placeholder = "Location Name", id = "locationname" } })
+                                                            @Html.HiddenFor(model => model.location_id, htmlAttributes: new { @id = "locationid" })
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.asset_book_value, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label class="input">
+                                                        <input type="text" name="asset_book_value" id="bookvalue" placeholder="Price" class="numeric" style="text-align:right;" readonly="readonly" />
+                                                    </label>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-1">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        @Html.LabelFor(model => model.department_id, htmlAttributes: new { @class = "control-label" })
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <label class="input">
+                                                            @Html.EditorFor(model => model.department_name, new { htmlAttributes = new { @class = "form-control col-lg-6", @readonly = "readonly", placeholder = "Department Name", id = "departmentname" } })
+
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.Currency_kurs, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label class="input">
+                                                        <input type="text" name="Currency_kurs" id="kurs" placeholder="Kurs" class="numeric" style="text-align:right;" readonly="readonly" />
+                                                    </label>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-1">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        @Html.LabelFor(model => model.employee_id, htmlAttributes: new { @class = "control-label" })
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <label class="input">
+                                                            <input type="text" name="employee_name" id="employeename" placeholder="Employee Name" class="form-control" readonly="readonly" />
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.asset_original_value, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label class="input">
+                                                        <input type="text" name="asset_original_value" id="assetvalue" placeholder="Asset Value" class="numeric" style="text-align:right;" readonly="readonly" />
+                                                    </label>
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <label>In USD</label>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.request_description, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="input">
+                                                        <textarea id="request_description" name="request_description" rows="5" class="form-control" placeholder="Description or specification"></textarea>
+                                                        @Html.ValidationMessageFor(model => model.request_description, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </fieldset>
+                                    <fieldset title="Image">
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelRequiredFor(model => model.asset_img_address, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="input">
+                                                        <span class="input-group-btn">
+                                                            <span class="btn btn-default btn-file">
+                                                                Browse asset image ( *.jpg | *.gif | *.png )
+                                                                @Html.TextBoxFor(model => model.asset_img_address, new { type = "file", @class = "form-control" })
+                                                            </span>
+                                                        </span>
+                                                        @Html.ValidationMessageFor(model => model.asset_img_address, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </fieldset>
+                                </fieldset>
+
+                                <footer>
+                                    <div class="form-group">
+                                        <div class="col-md-7">
+                                            @Html.ActionLink("Cancel", "Index", "disposal", htmlAttributes: new { @class = "btn btn-default" })
+                                            <input type="submit" value="Save" class="btn btn-primary" />
+                                        </div>
+                                    </div>
+                                </footer>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+    <!-- Modal -->
+    <div class="modal fade" id="Asset" tabindex="-1" role="dialog">
+    </div>
+</div>
+
+@section pagespecific {
+    <script type="text/javascript">
+        function GetAssetNumber(id) {
+            $('#CancelBtn').prop('disabled', true);
+
+            $.ajax({
+                type: 'POST',
+                url: "/disposal/GetAssetList/" + id,
+                dataType: 'json',
+                success: function (data) {
+                    for (var i in data) {
+
+                        var dateString = data[i].asset_receipt_date.substr(6);
+                        var currentTime = new Date(parseInt(dateString));
+                        var month = currentTime.getMonth() + 1;
+                        var day = currentTime.getDate();
+                        var year = currentTime.getFullYear();
+                        var date = day + "-" + month + "-" + year;
+
+                        $("#parent_asset_id").val(data[i].asset_id);
+                        $("#parent_asset_number").val(data[i].asset_number);
+                        $("#parent_asset_name").val(data[i].asset_name);
+                        $("#parent_asset_receiptdate").val(date);
+                        $("#currencycode").val(data[i].currency_code);
+                        $("#bookvalue").val(data[i].asset_book_value);
+                        $("#kurs").val(data[i].Currency_kurs);
+                        $("#assetvalue").val(data[i].asset_original_value);
+                        $("#locationid").val(data[i].location_id);
+                        $("#locationname").val(data[i].location_name);
+                        $("#departmentname").val(data[i].department_name);
+                        $("#employeename").val(data[i].employee_name);
+
+                        $("#parent_asset_number").css({ 'background-color': color_input_text });
+                        $("#parent_asset_name").css({ 'background-color': color_input_text });
+                        $("#parent_asset_receiptdate").css({ 'background-color': color_input_text });
+                        $("#currencycode").css({ 'background-color': color_input_text });
+                        $("#bookvalue").css({ 'background-color': color_input_text });
+                        $("#kurs").css({ 'background-color': color_input_text });
+                        $("#assetvalue").css({ 'background-color': color_input_text });
+                        $("#locationname").css({ 'background-color': color_input_text });
+                        $("#departmentname").css({ 'background-color': color_input_text });
+                        $("#employeename").css({ 'background-color': color_input_text });
+                    }
+                },
+                error: function (data) {
+                    swal("Error", "Error Load Data Asset", "error");
+                }
+            })
+        }
+        function OpenModalAssetList() {
+            $("#Asset").html("");
+            var assetCode = $("#assetCodeID").val();
+            //alert("modal");
+
+            $.ajax({
+                url: "/disposal/ModalAsset/",
+                success: function (data) {
+                    $("#Asset").html(data);
+                    //alert("open modal");
+                    var oTable = $('#AssetTblList').DataTable({
+                        "ajax": {
+                            "url": "/disposal/GetAssetList/0",
+                            "type": "GET",
+                            "datatype": "json",
+                        },
+                        "columns": [
+                            { "data": "asset_id", "autoWidth": true },
+                            { "data": "asset_number", "autoWidth": true },
+                            { "data": "asset_name", "autoWidth": true },
+                            {
+                                "data": "action",
+                                "autowidth": true,
+                                "mRender": function (data, type, full) {
+                                    return '<a class="btn btn-info btn-sm" data-dismiss="modal" onclick="GetAssetNumber(' + full['asset_id'] + ');">' + 'Select' + '</a>';
+                                }
+                            }
+                        ]
+                    });
+                }
+            });
+        }
+
+    </script>
+}

@@ -1,0 +1,276 @@
+﻿@model ASM_UI.Models.asset_warrantyViewModel
+@{
+    ViewBag.Title = "Edit Asset Warranty";
+}
+
+<div id="content">
+    <div class="row">
+        <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+            <h1 class="page-title txt-color-blueDark">
+
+                <!-- PAGE HEADER -->
+                <i class="fa-fw fa fa-pencil-square-o"></i>
+                Registration
+                <span>
+                    >
+                    Edit Warranty Asset
+                </span>
+            </h1>
+        </div>
+    </div>
+
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false" data-widget-togglebutton="false" data-widget-collapsed="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                        <h2>Warranty Asset </h2>
+
+                    </header>
+                    <!-- widget div-->
+                    <div>
+
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+
+                            @using (Html.BeginForm("Edit", "asset_warranty", FormMethod.Post, htmlAttributes: new { @class = "smart-form", enctype = "multipart/form-data" }))
+                            {
+                                <header>
+                                    Edit Warranty Asset
+                                </header>
+                                <fieldset>
+                                    <section>
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-10">
+                                                <div class="widget-body no-padding">
+                                                    <table class="table table-striped table-bordered table-hover" width="100%" id="table_basic">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>
+                                                                    @Html.DisplayNameFor(model => model.warranty_number)
+                                                                </th>
+                                                                <th>
+                                                                    @Html.DisplayNameFor(model => model.warranty_item_name)
+                                                                </th>
+                                                                <th>
+                                                                    @Html.DisplayNameFor(model => model.warranty_date)
+                                                                </th>
+                                                                <th>
+                                                                    @Html.DisplayNameFor(model => model.warranty_exp_date)
+                                                                </th>
+                                                                <th>
+                                                                    @Html.DisplayNameFor(model => model.warranty_description)
+                                                                </th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+                                                        @foreach (var item in Model.asset_warranty_list)
+                                                        {
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.warranty_number)
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.warranty_item_name)
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.warranty_date)
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.warranty_exp_date)
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.warranty_description)
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.ActionLink("Edit", "Edit", new { id = Model.asset_parent_id, idw = item.warranty_id }) |
+                                                                        @Html.ActionLink("Delete", "DeleteItem", new { id = item.warranty_id }, new { onclick = "return confirm('Are you sure you wish to delete this data?');" })
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        }
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </fieldset>
+                                <fieldset>
+                                    @Html.AntiForgeryToken()
+                                    <br />
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <section>
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-2">
+                                                @Html.LabelRequiredFor(model => model.asset_number, htmlAttributes: new { @class = "control-label" })
+                                            </div>
+                                            @Html.HiddenFor(model => model.asset_parent_id, htmlAttributes: new { @id = "parent_asset_id" })
+                                            @Html.ValidationMessageFor(model => model.asset_parent_id, "", new { @class = "text-danger" })
+
+                                            @Html.HiddenFor(model => model.warranty_id)
+                                            @Html.ValidationMessageFor(model => model.warranty_id, "", new { @class = "text-danger" })
+                                            <div class="col-md-8">
+                                                <label class="input">
+                                                    @Html.EditorFor(model => model.asset_parent.asset_number, new { htmlAttributes = new { @class = "form-control", @readonly = "true", placeholder = "Auto" } })
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <section>
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-2">
+                                                @Html.LabelFor(model => model.asset_name, htmlAttributes: new { @class = "control-label" })
+                                            </div>
+                                            <div class="col-md-8">
+                                                <label class="input">
+                                                    @Html.EditorFor(model => model.asset_parent.asset_name, new { htmlAttributes = new { @class = "form-control", @readonly = "true", placeholder = "Auto" } })
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <section>
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-2">
+                                                @Html.LabelFor(model => model.vendor_name, htmlAttributes: new { @class = "control-label" })
+                                            </div>
+                                            <div class="col-md-8">
+                                                <label class="input">
+                                                    @Html.EditorFor(model => model.vendor_name, new { htmlAttributes = new { @class = "form-control", @readonly = "true", placeholder = "Auto" } })
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <section>
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-2">
+                                                @Html.LabelRequiredFor(model => model.warranty_number, htmlAttributes: new { @class = "control-label" })
+                                            </div>
+                                            <div class="col-md-8">
+                                                <label class="input">
+                                                    @Html.EditorFor(model => model.warranty_number, new { htmlAttributes = new { @class = "form-control", id = "lblwarranty_number" } })
+                                                    @Html.ValidationMessageFor(model => model.warranty_number, "", new { @class = "text-danger" })
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <section>
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-2">
+                                                @Html.LabelRequiredFor(model => model.warranty_item_name, htmlAttributes: new { @class = "control-label" })
+                                            </div>
+                                            <div class="col-md-8">
+                                                <label class="input">
+                                                    @Html.EditorFor(model => model.warranty_item_name, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => Model.warranty_item_name, "", new { @class = "text-danger" })
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <section>
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-2">
+                                                @Html.LabelRequiredFor(model => model.warranty_date, htmlAttributes: new { @class = "control-label" })
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label class="input">
+                                                    @{var warranty_date = string.Format("{0:dd-MM-yyyy}", Model.warranty_date); }
+                                                    @Html.EditorFor(model => warranty_date, new { htmlAttributes = new { @class = "form-control", id = "warranty_date" } })
+                                                    @Html.ValidationMessageFor(model => model.warranty_date, "", new { @class = "text-danger" })
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <section>
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-2">
+                                                @Html.LabelRequiredFor(model => model.warranty_exp_date, htmlAttributes: new { @class = "control-label" })
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label class="input">
+                                                    @{var warranty_exp_date = string.Format("{0:dd-MM-yyyy}", Model.warranty_exp_date); }
+                                                    @Html.EditorFor(model => warranty_exp_date, new { htmlAttributes = new { @class = "form-control", id = "warranty_exp_date" } })
+                                                    @Html.ValidationMessageFor(model => model.warranty_exp_date, "", new { @class = "text-danger" })
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <section>
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-2">
+                                                @Html.LabelFor(model => model.warranty_description, htmlAttributes: new { @class = "control-label" })
+                                            </div>
+                                            <div class="col-md-8">
+                                                <label class="input">
+                                                    <textarea name="warranty_description" rows="5" class="form-control" placeholder="Description or specification">@Model.warranty_description </textarea>
+                                                    @Html.ValidationMessageFor(model => model.warranty_description, "", new { @class = "text-danger" })
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </fieldset>
+                                <footer>
+                                    <div class="form-group">
+                                        <div class="col-md-7">
+                                            @Html.ActionLink("Cancel", "Index", "asset_warranty", htmlAttributes: new { @class = "btn btn-default" })
+                                            <input type="submit" value="Save" class="btn btn-primary" />
+                                        </div>
+                                    </div>
+                                </footer>
+                                                        }
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </section>
+</div>
+
+@section pagespecific {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#warranty_date').datepicker({
+                dateFormat: 'dd-mm-yy',
+                prevText: '<i class="fa fa-chevron-left"></i>',
+                nextText: '<i class="fa fa-chevron-right"></i>',
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+        $(document).ready(function () {
+            $('#warranty_exp_date').datepicker({
+                dateFormat: 'dd-mm-yy',
+                prevText: '<i class="fa fa-chevron-left"></i>',
+                nextText: '<i class="fa fa-chevron-right"></i>',
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+    </script>
+}

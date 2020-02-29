@@ -1,0 +1,194 @@
+﻿@model ASM_UI.Models.user_accountViewModel
+@{
+    ViewBag.Title = "Edit User Account";
+}
+<div id="content">
+    <div class="row">
+        <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+            <h1 class="page-title txt-color-blueDark">
+
+                <!-- PAGE HEADER -->
+                <i class="fa-fw fa fa-pencil-square-o"></i>
+                User Management
+                <span>
+                    >
+                    User Account Form
+                </span>
+            </h1>
+        </div>
+    </div>
+
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false" data-widget-togglebutton="false" data-widget-collapsed="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                        <h2>User Account</h2>
+
+                    </header>
+                    <!-- widget div-->
+                    <div>
+
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+
+                            @using (Html.BeginForm("Edit", "user_account", FormMethod.Post, htmlAttributes: new { @class = "smart-form" }))
+                            {
+                                <header>
+                                    Edit User Account Form
+                                </header>
+
+                                <fieldset>
+
+                                    <fieldset>
+                                        @Html.AntiForgeryToken()
+                                        <br />
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        @Html.HiddenFor(model => model.user_id)
+                                        @Html.HiddenFor(model => model.employee_id)
+
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.employee_nik, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="input">
+                                                        @Html.EditorFor(model => model.employee_nik, new { htmlAttributes = new { @class = "form-control", @readonly = "true", placeholder = "Employee NIK" } })
+                                                        @Html.ValidationMessageFor(model => model.employee_nik, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.employee_name, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="input">
+                                                        @Html.EditorFor(model => model.employee_name, new { htmlAttributes = new { @class = "form-control", @readonly = "true", placeholder = "Employee Name" } })
+                                                        @Html.ValidationMessageFor(model => model.employee_name, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.employee_email, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="input">
+                                                        @Html.EditorFor(model => model.employee_email, new { htmlAttributes = new { @class = "form-control", @readonly = "true", placeholder = "Employee Email Address" } })
+                                                        @Html.ValidationMessageFor(model => model.employee_email, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.user_name, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="input">
+                                                        @Html.EditorFor(model => model.user_name, new { htmlAttributes = new { @class = "form-control", placeholder = "User Login" } })
+                                                        @Html.ValidationMessageFor(model => model.user_name, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.user_password, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="input">
+                                                        @Html.EditorFor(model => model.user_password, new { htmlAttributes = new { @class = "form-control", placeholder = "User Password" } })
+                                                        @Html.ValidationMessageFor(model => model.user_password, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.fl_active, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="checkbox">
+                                                        @{var str_checked = "";
+                                                            if (Model.fl_active == true)
+                                                            {
+                                                                str_checked = "checked=\"checked\"";
+                                                            }
+                                                        }
+                                                        <input type="checkbox" value="true" @str_checked name="fl_active" id="fl_active" />
+                                                        <input type="hidden" name="hdn_fl_active" value="false" />
+                                                        <i></i>Yes
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                    </fieldset>
+
+                                </fieldset>
+
+                                <footer>
+                                    <div class="form-group">
+                                        <div class="col-md-7">
+                                            @Html.ActionLink("Cancel", "Index", "user_account", htmlAttributes: new { @class = "btn btn-default" })
+                                            <input type="submit" value="Save" class="btn btn-primary" />
+                                        </div>
+                                    </div>
+                                </footer>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </section>
+</div>
+
+@section pagespecific {
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            //$('#a_date').datepicker({
+            //    dateFormat: 'dd-mm-yy',
+            //    prevText: '<i class="fa fa-chevron-left"></i>',
+            //    nextText: '<i class="fa fa-chevron-right"></i>',
+            //});
+
+        });
+    </script>
+}

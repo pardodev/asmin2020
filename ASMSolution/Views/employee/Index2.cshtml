@@ -1,0 +1,120 @@
+﻿@model IEnumerable<ASM_UI.Models.ms_employee>
+
+@{
+    ViewBag.Title = "Daftar Employee";
+}
+
+<h2>Employee</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<section id="widget-grid" class="">
+
+    <!-- row -->
+    <div class="row">
+
+        <!-- NEW WIDGET START -->
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+            <table id="jqgrid"></table>
+            <div id="pjqgrid"></div>
+
+            <br>
+            <a href="javascript:void(0)" id="m1">Get Selected id's</a>
+            <br>
+            <a href="javascript:void(0)" id="m1s">Select(Unselect) row 13</a>
+
+        </article>
+        <!-- WIDGET END -->
+
+    </div>
+
+    <!-- end row -->
+
+</section>
+
+
+@*<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.employee_nik)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.employee_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.employee_email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fl_active)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.created_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.created_by)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.updated_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.updated_by)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.deleted_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.deleted_by)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.org_id)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.employee_nik)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.employee_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.employee_email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fl_active)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.created_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.created_by)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.updated_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.updated_by)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.deleted_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.deleted_by)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.org_id)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.employee_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.employee_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.employee_id })
+        </td>
+    </tr>
+}
+
+</table>*@

@@ -1,0 +1,256 @@
+﻿@model ASM_UI.Models.user_accountViewModel
+@{
+    ViewBag.Title = "New User Account";
+}
+<div id="content">
+    <div class="row">
+        <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+            <h1 class="page-title txt-color-blueDark">
+
+                <!-- PAGE HEADER -->
+                <i class="fa-fw fa fa-pencil-square-o"></i>
+                User Management
+                <span>
+                    >
+                    User Account Form
+                </span>
+            </h1>
+        </div>
+    </div>
+
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false" data-widget-togglebutton="false" data-widget-collapsed="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                        <h2>User Account</h2>
+
+                    </header>
+                    <!-- widget div-->
+                    <div>
+
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+
+                            @using (Html.BeginForm("Create", "user_account", FormMethod.Post, htmlAttributes: new { @class = "smart-form" }))
+                            {
+                                <header>
+                                    New User Account Form
+                                </header>
+
+                                <fieldset>
+
+                                    <fieldset>
+                                        @Html.AntiForgeryToken()
+                                        <br />
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        @Html.HiddenFor(model => model.user_id)
+                                        @Html.HiddenFor(model => model.employee_id)
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.employee_nik, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <label class="input">
+                                                        @Html.EditorFor(model => model.employee_nik, new { htmlAttributes = new { @class = "form-control", placeholder = "Employee NIK" } })
+                                                        @Html.ValidationMessageFor(model => model.employee_nik, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </div>
+
+                                                <div class="col-lg-1">
+                                                    <a data-toggle="modal" href="#Employee" class="btn btn-success btn-sm" onclick="OpenModalEmployeeList();"><i class="fa fa-search fa-lg"></i></a>
+                                                </div>
+
+                                            </div>
+                                        </section>
+
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.employee_name, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="input">
+                                                        @Html.EditorFor(model => model.employee_name, new { htmlAttributes = new { @class = "form-control", @readonly = "true", placeholder = "Employee Name" } })
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.employee_email, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="input">
+                                                        @Html.EditorFor(model => model.employee_email, new { htmlAttributes = new { @class = "form-control", @readonly = "true", placeholder = "Employee Email Address" } })
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.user_name, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="input">
+                                                        @Html.EditorFor(model => model.user_name, new { htmlAttributes = new { @class = "form-control", placeholder = "User Login" } })
+                                                        @Html.ValidationMessageFor(model => model.user_name, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.user_password, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="input">
+                                                        @Html.EditorFor(model => model.user_password, new { htmlAttributes = new { @class = "form-control", placeholder = "User Password" } })
+                                                        @Html.ValidationMessageFor(model => model.user_password, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.fl_active, htmlAttributes: new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-md-8">
+                                                        <label class="checkbox">
+                                                            @{var str_checked = "";
+                                                                if (Model.fl_active == true)
+                                                                {
+                                                                    str_checked = "checked=\"checked\"";
+                                                                }
+                                                            }
+                                                            <input type="checkbox" @str_checked name="fl_active" id="fl_active" />
+                                                            <i></i>Yes
+
+                                                        </label>
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                    </fieldset>
+
+                                </fieldset>
+
+                                <footer>
+                                    <div class="form-group">
+                                        <div class="col-md-7">
+                                            @Html.ActionLink("Cancel", "Index", "user_account", htmlAttributes: new { @class = "btn btn-default" })
+                                            <input type="submit" value="Save" class="btn btn-primary" />
+                                        </div>
+                                    </div>
+                                </footer>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </section>
+    <!-- Modal -->
+    <div class="modal fade" id="Employee" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    </div>
+</div>
+
+@section pagespecific {
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            //$('#a_date').datepicker({
+            //    dateFormat: 'dd-mm-yy',
+            //    prevText: '<i class="fa fa-chevron-left"></i>',
+            //    nextText: '<i class="fa fa-chevron-right"></i>',
+            //});
+
+        });
+
+        function GetEmployee(id) {
+            $('#CancelBtn').prop('disabled', true);
+
+            $.ajax({
+                type: 'POST',
+                url: "/user_account/GetEmployeeList/" + id,
+                dataType: 'json',
+                success: function (data) {
+                    for (var i in data) {
+                        $("#employee_id").val(data[i].employee_id);
+                        $("#employee_nik").val(data[i].employee_nik);
+                        $("#employee_name").val(data[i].employee_name);
+                        $("#employee_email").val(data[i].employee_email);
+                    }
+                },
+                error: function (data) {
+                    alert("error!");
+                }
+            })
+        }
+
+
+        function OpenModalEmployeeList() {
+            $("#Employee").html("");
+            var empployee_id = $("#employee_id").val();
+            //alert("modal \n" + empployee_id);
+
+            $.ajax({
+                url: "/user_account/EmployeeModal/",
+                success: function (data) {
+                    $("#Employee").html(data);
+                    //alert("open modal");
+                    var oTable = $('#EmployeeTblList').DataTable({
+                        "ajax": {
+                            "url": "/user_account/GetEmployeeList/0",
+                            "type": "GET",
+                            "datatype": "json",
+                        },
+                        "columns": [
+                            { "data": "employee_id", "autoWidth": true },
+                            { "data": "employee_nik", "autoWidth": true },
+                            { "data": "employee_name", "autoWidth": true },
+                            { "data": "employee_email", "autoWidth": true },
+                            {
+                                "data": "action",
+                                "autowidth": true,
+                                "mRender": function (data, type, full) {
+                                    return '<a class="btn btn-xs btn-primary" data-dismiss="modal" onclick="GetEmployee(' + full['employee_id'] + ');">' + 'Select' + '</a>';
+                                }
+                            }
+                        ]
+                    });
+                }
+            });
+        }
+
+    </script>
+}

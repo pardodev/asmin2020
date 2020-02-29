@@ -1,0 +1,4 @@
+D:\BUSINESS\ASMIN\CODE\ASM\ASMSolution\ASM_DataAccess\bin\Debug\ASM_DataAccess.dll
+D:\BUSINESS\ASMIN\CODE\ASM\ASMSolution\ASM_DataAccess\bin\Debug\ASM_DataAccess.pdb
+D:\BUSINESS\ASMIN\CODE\ASM\ASMSolution\ASM_DataAccess\obj\Debug\ASM_DataAccess.dll
+D:\BUSINESS\ASMIN\CODE\ASM\ASMSolution\ASM_DataAccess\obj\Debug\ASM_DataAccess.pdb

@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="test2.vendora.id" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^F:\\My\ Project\\AsminPama\\Asset\ management\\ASM\\ASM\\ASMSolution\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^F:\\My\ Project\\AsminPama\\Asset\ management\\ASM\\ASM\\ASMSolution\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="ModelAsmRemote-Web.config Connection String" description="" value="data source=103.82.243.11;initial catalog=AMS;persist security info=True;user id=sa;password=@dm1n@db;MultipleActiveResultSets=True;App=EntityFramework" tags="">
+    <parameterEntry kind="XmlFile" scope="F:\\My\ Project\\AsminPama\\Asset\ management\\ASM\\ASM\\ASMSolution\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='ModelAsmRemote']/@connectionString" />
+  </parameter>
+</parameters>

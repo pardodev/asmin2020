@@ -1,0 +1,105 @@
+﻿@model IEnumerable<ASM_UI.Models.ms_menu>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.menu_code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.menu_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.module_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fl_active)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.created_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.created_by)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.updated_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.updated_by)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.deleted_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.deleted_by)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.org_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.menu_url)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.rec_order)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.menu_code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.menu_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.module_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fl_active)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.created_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.created_by)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.updated_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.updated_by)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.deleted_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.deleted_by)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.org_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.menu_url)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.rec_order)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.menu_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.menu_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.menu_id })
+        </td>
+    </tr>
+}
+
+</table>

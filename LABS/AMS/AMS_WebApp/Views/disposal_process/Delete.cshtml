@@ -1,0 +1,200 @@
+﻿@model ASM_UI.Models.tr_disposal_process
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>tr_disposal_process</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.request_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.request_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fl_pic_asset_comfirm)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fl_pic_asset_comfirm)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pic_asset_confirm_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pic_asset_confirm_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pic_asset_employee_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pic_asset_employee_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pic_asset_level_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pic_asset_level_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pic_asset_received_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pic_asset_received_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pic_asset_received_employee_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pic_asset_received_employee_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pic_asset_received_level_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pic_asset_received_level_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.disposal_suggestion_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.disposal_suggestion_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.disposal_sent_dept_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.disposal_sent_dept_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.disposal_sent_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.disposal_sent_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.user_asset_received_employee_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user_asset_received_employee_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.user_asset_received_level_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user_asset_received_level_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.user_asset_received_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user_asset_received_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fl_active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fl_active)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.created_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.created_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.created_by)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.created_by)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.updated_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.updated_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.updated_by)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.updated_by)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deleted_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deleted_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deleted_by)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deleted_by)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.org_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.org_id)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

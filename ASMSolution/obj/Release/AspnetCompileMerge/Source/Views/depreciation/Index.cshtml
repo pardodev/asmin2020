@@ -1,0 +1,847 @@
+﻿<!-- MAIN CONTENT -->
+<div id="content">
+
+    <!-- row -->
+    <div class="row">
+        <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+            <h1 class="page-title txt-color-blueDark">
+
+                <!-- PAGE HEADER -->
+                <i class="fa-fw fa fa-pencil-square-o"></i>
+                Depreciation
+                <span>
+                    >
+                    Asset Depreciation
+                </span>
+            </h1>
+        </div>
+    </div>
+    <div class="body-content">
+        <section id="widget-grid" class="">
+            <div class="row">
+                <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    
+                    <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false" data-widget-togglebutton="false" data-widget-collapsed="false">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                            <h2>Depreciation Asset</h2>
+
+                        </header>
+                            <div>
+                                <!-- widget edit box -->
+                                <div class="jarviswidget-editbox">
+                                    <!-- This area used as dropdown edit box -->
+
+                                </div>
+                                <div class="widget-body no-padding">
+                                    <form id="depre-form" class="smart-form">
+                                        <header>
+                                            Depreciation Asset Form
+                                            <label class="input">
+                                                <input type="hidden" name="asset_id" id="assetID" placeholder="Asset ID">
+                                            </label>
+                                            <label class="input">
+                                                <input type="hidden" name="mode" id="modeID" placeholder="Must not be viewed">
+                                            </label>
+                                        </header>
+                                        <fieldset>
+                                            @*<section>
+                                                <div class="row">
+                                                    <label class="label col col-3"></label>
+                                                    <div class="col col-6">
+                                                        
+                                                    </div>
+                                                </div>
+                                            </section>*@
+                                            <section>
+                                                <div class="row">
+                                                    <label class="label col col-3">Activa Number</label>
+                                                    <div class="col col-6">
+                                                        <label class="input">
+                                                            <input type="text" name="asset_code" id="assetCodeID" placeholder="Activa Number" readonly>
+                                                        </label>
+                                                    </div>
+                                                    <div class="col col-3">
+                                                        <a data-toggle="modal" href="#Asset" class="btn btn-success btn-sm" onclick="OpenModalAssetList();"><i class="fa fa-search fa-lg"></i> Asset</a>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                            <section>
+                                                <div class="row">
+                                                    <label class="label col col-3">Asset Name</label>
+                                                    <div class="col col-6">
+                                                        <label class="input">
+                                                            <input type="text" name="asset_name" id="assetNameID" placeholder="Asset Name" readonly>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                            <section>
+                                                <div class="row">
+                                                    <label class="label col col-3">Asset Receipt Date</label>
+                                                    <div class="col col-6">
+                                                        <label class="input">
+                                                            <input type="text" name="asset_receipt_date" id="receiptDateID" placeholder="Asset Receipt Date" readonly>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                            <section>
+                                                <div class="row">
+                                                    <hr class="Bold" />
+                                                </div>
+                                            </section>
+                                            <section>
+                                                <div class="row">
+                                                    <label class="label col col-3">Currency</label>
+                                                    <div class="col col-5">
+                                                        <select id="currencyID" name="currency" placeholder="Select Currency" style="width:100%" class="form-control select2"></select>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                            <section>
+                                                <div class="row">
+                                                    <label class="label col col-3">Price</label>
+                                                    <div class="col col-3">
+                                                        <label class="input">
+                                                            <input type="text" class="numeric" name="price" id="priceID" placeholder="Price" style="text-align:right;">
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                            <section>
+                                                <div class="row">
+                                                    <label class="label col col-3">Kurs</label>
+                                                    <div class="col col-3">
+                                                        <label class="input">
+                                                            <input type="text" class="numeric" name="kurs" id="kursID" placeholder="Kurs" style="text-align:right;">
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                            <section>
+                                                <div class="row">
+                                                    <label class="label col col-3">Asset Value (in USD)</label>
+                                                    <div class="col col-3">
+                                                        <label class="input">
+                                                            <input type="text" class="numeric" name="asset_value_usd" id="assetvalueUSDID" placeholder="Asset Value" style="text-align:right;">
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                            <section>
+                                                <div class="row">
+                                                    <hr class="Bold" />
+                                                </div>
+                                            </section>
+                                            <section>
+                                                <div class="row">
+                                                    <label class="label col col-3">Depreciation Method</label>
+                                                    <div class="col col-5">
+                                                        <select id="depreMethodID" name="depre_method" placeholder="Select Method" style="width:100%" class="form-control select2"></select>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                            <section>
+                                                <div class="row">
+                                                    <label class="label col col-3"></label>
+                                                    <div class="col col-3">
+                                                        <h3>
+                                                            <label class="input">
+                                                                <label class="label col col-3">Komersil</label>
+                                                            </label>
+                                                        </h3>
+                                                    </div>
+                                                    <div class="col col-3">
+                                                        <h3>
+                                                            <label class="input">
+                                                                <label class="label col col-3">Fiscal</label>
+                                                            </label>
+                                                        </h3>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                            <section>
+                                                <div class="row">
+                                                    <label class="label col col-3">Asset Residu Value</label>
+                                                    <div class="col col-3">
+                                                        <label class="input">
+                                                            <input type="text" name="komersil_residu_value" id="komersilResiduValueID" placeholder="Residue Value Komersil" class="numeric" style="text-align:right;">
+                                                        </label>
+                                                    </div>
+                                                    <div class="col col-3">
+                                                        <label class="input">
+                                                            <input type="text" name="fiskal_residu_value" id="fiskalResiduValueID" placeholder="Residue Value Fiskal" class="numeric" style="text-align:right;">
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                            <section>
+                                                <div class="row">
+                                                    <label class="label col col-3">Useful Life (in Month)</label>
+                                                    <div class="col col-3">
+                                                        <label class="input">
+                                                            <input type="text" name="komersil_life_value" id="komersilUsefulLifeValueID" placeholder="Useful Life Komersil" class="numeric" style="text-align:right;">
+                                                        </label>
+                                                    </div>
+                                                    <div class="col col-3">
+                                                        <label class="input">
+                                                            <input type="text" name="fiskal_life_value" id="fiskalUsefulLifeValueID" placeholder="Useful Life Fiskal" class="numeric" style="text-align:right;">
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                            <section>
+                                                <div class="row">
+                                                    <label class="label col col-3">Depreciation (%)</label>
+                                                    <div class="col col-3">
+                                                        <label class="input">
+                                                            <input type="text" name="komersial_depreciation" id="komersialDepreciationID" placeholder="Komersil Depreciation" class="numeric" style="text-align:right;">
+                                                        </label>
+                                                    </div>
+                                                    <div class="col col-3">
+                                                        @*<label class="label Bold">per Year, for DDB Purpose</label>*@
+                                                        <label class="input">
+                                                            <input type="text" name="fiskal_depreciation" id="fiskalDepreciationID" placeholder="Fiskal Depreciation" class="numeric" style="text-align:right;">
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                            <section>
+                                                <div class="row">
+                                                    <label class="label col col-3"></label>
+                                                    <div class="col col-9">
+
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </fieldset>
+                                        <fieldset>
+                                            <section>
+                                                <div class="row">
+                                                    <label class="label col col-3">Asset Usage / Lifetime (in Month)</label>
+                                                    <div class="col col-3">
+                                                        <label class="input">
+                                                            <input type="text" name="komersilAssetUsage" id="komersilAssetUsageID" placeholder="" class="numeric" readonly>
+                                                        </label>
+                                                    </div>
+                                                    <div class="col col-3">
+                                                        <label class="input">
+                                                            <input type="text" name="fiskalAssetUsage" id="fiskalAssetUsageID" placeholder="" class="numeric" readonly>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                            @*<section>
+                        <div class="row">
+                            <label class="label col col-3">Asset Lifetime (in Month)</label>
+                            <div class="col col-3">
+                                <label class="input">
+                                    <input type="text" name="komersilLifeTime" id="komersilLifeTimeID" placeholder="" readonly>
+                                </label>
+                            </div>
+                            <div class="col col-3">
+                                <label class="input">
+                                    <input type="text" name="fiskalLifeTime" id="fiskalLifeTimeID" placeholder="" readonly>
+                                </label>
+                            </div>
+                        </div>
+                    </section>*@
+                                            <section>
+                                                <div class="row">
+                                                    <label class="label col col-3">Depreciation per Month</label>
+                                                    <div class="col col-3">
+                                                        <label class="input">
+                                                            <input type="text" name="komersilMonthlyDepreciation" id="komersilMonthlyDepreciationID" placeholder="" style="text-align:right;" readonly>
+                                                        </label>
+                                                    </div>
+                                                    <div class="col col-3">
+                                                        <label class="input">
+                                                            <input type="text" name="fiskalMonthlyDepreciation" id="fiskalMonthlyDepreciationID" placeholder="" style="text-align:right;" readonly>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                            <section>
+                                                <div class="row">
+                                                    <label class="label col col-3">Depreciation Total</label>
+                                                    <div class="col col-3">
+                                                        <label class="input">
+                                                            <input type="text" name="komersilDepreciation" id="komersilTotalDepreciationID" placeholder="" style="text-align:right;" readonly>
+                                                        </label>
+                                                    </div>
+                                                    <div class="col col-3">
+                                                        <label class="input">
+                                                            <input type="text" name="fiskalDepreciation" id="fiskalTotalDepreciationID" placeholder="" style="text-align:right;" readonly>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                            <section>
+                                                <div class="row">
+                                                    <label class="label col col-3">Book Value</label>
+                                                    <div class="col col-3">
+                                                        <label class="input">
+                                                            <input type="text" name="komersilBookValue" id="komersilBookValueID" placeholder="" style="text-align:right;" readonly>
+                                                        </label>
+                                                    </div>
+                                                    <div class="col col-3">
+                                                        <label class="input">
+                                                            <input type="text" name="fiskalBookValue" id="fiskalBookValueID" placeholder="" style="text-align:right;" readonly>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </fieldset>
+
+                                        <footer>
+                                            <button type="button" class="btn btn-success" id="ProcessBtn" onclick="ProcessButton()">Process</button>
+                                            <button type="button" class="btn btn-default" id="CancelBtn" onclick="CancelButton()">Cancel</button>
+                                            <button type="button" class="btn btn-primary" id="NewBtn" onclick="New()">New</button>
+                                            <button type="button" class="btn btn-primary" id="EditBtn" onclick="Edit()">Edit</button>
+                                            @*<button type="button" class="btn btn-primary" style="display:none" onclick="Update()">Update</button>*@
+                                            <button type="button" class="btn btn-primary" id="DeleteBtn" onclick="Delete()">Delete</button>
+                                        </footer>
+                                    </form>
+                                </div>
+                            </div>  
+                        </div>
+                </article>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="Asset" tabindex="-1" role="dialog">
+
+    </div>
+
+    <div class="modal fade" id="DepreciationModalID" tabindex="-1" role="dialog">
+
+    </div>
+
+    <div class="modal fade" id="ModalApprovalID" tabindex="-1" role="dialog">
+
+    </div>
+    <!-- /.modal -->
+    <!-- end widget grid -->
+
+</div>
+<!-- END MAIN CONTENT -->
+
+
+@section pagespecific {
+    <script type="text/javascript">
+
+        function New() {
+            $("#assetID").val("");
+            $("#modeID").val("New");
+            $("#assetCodeID").val("");
+            $("#assetNameID").val("");
+            $("#receiptDateID").val("");
+
+            $("#priceID").val("");
+            $("#kursID").val("");
+            $("#assetvalueUSDID").val("");
+            $("#komersilResiduValueID").val("");
+            $("#fiskalResiduValueID").val("");
+            
+            $("#komersilUsefulLifeValueID").val("");
+            $("#fiskalUsefulLifeValueID").val("");
+            
+            $("#komersialDepreciationID").val("");
+            $("#fiskalDepreciationID").val("");
+
+            $("#komersilAssetUsageID").val("");
+            $("#fiskalAssetUsageID").val("");
+
+            $("#komersilMonthlyDepreciationID").val("");
+            $("#fiskalMonthlyDepreciationID").val("");
+
+            $("#komersilTotalDepreciationID").val("");
+            $("#fiskalTotalDepreciationID").val("");
+
+            $("#komersilBookValueID").val("");
+            $("#fiskalBookValueID").val("");
+
+            $("#depreMethodID").select2("val", "0");
+            $("#currencyID").select2("val", "0");
+
+            $('#ProcessBtn').prop('disabled', true);
+            $('#NewBtn').prop('disabled', true);
+            $('#EditBtn').prop('disabled', true);
+            $('#DeleteBtn').prop('disabled', true);
+            $('#CancelBtn').prop('disabled', true);
+
+        }
+
+        function Approved() {
+            //based on ModalApproval.cshtml
+            //var user = $('#user_nameID').val();
+            //var pass = $('#passwordID').val();
+            
+            //var approval = true;
+            //if (approval) {
+            //    $('#NewBtn').prop('disabled', true);
+            //    $('#ProcessBtn').prop('disabled', false);
+            //    $('#EditBtn').prop('disabled', true);
+            //    $('#CancelBtn').prop('disabled', false);
+
+            //    $("#modeID").val("Edit");
+            //}
+        }
+
+        function Edit() {
+            $('#NewBtn').prop('disabled', true);
+            $('#ProcessBtn').prop('disabled', false);
+            $('#EditBtn').prop('disabled', true);
+            $('#CancelBtn').prop('disabled', false);
+            $('#DeleteBtn').prop('disabled', true);
+
+            $("#modeID").val("Edit");
+
+            //$("#ModalApprovalID").html("");
+
+            //$.ajax({
+            //    url: "/depreciation/ModalApproval/",
+            //    success: function (data) {
+            //        $("#ModalApprovalID").modal('show');
+            //        $("#ModalApprovalID").html(data);
+            //    }
+            //});
+
+            //$('#ProcessBtn').prop('disabled', false);
+            //$('#NewBtn').prop('disabled', false);
+            //$('#EditBtn').prop('disabled', false);
+        }
+
+        function Delete() {
+            //CancelDepreciation();
+            var urlCancel = '/depreciation/CancelDepreciation/';
+            $.ajax({
+                type: 'POST',
+                url: urlCancel,
+                data: $("#depre-form").serialize(),
+                success: function (result) {
+                    swal("Success", "Cancel Depreciation Success", "success");
+                },
+                error: function (data) {
+                    swal("Error", "Error Cancel Depreciation", "error");
+                }
+            })
+        }
+
+        function CancelButton() {
+            $('#CancelBtn').prop('disabled', true);
+            $('#EditBtn').prop('disabled', false);
+            $('#NewBtn').prop('disabled', false);
+            $('#ProcessBtn').prop('disabled', true);
+            $('#DeleteBtn').prop('disabled', false);
+            $("#modeID").val("New");
+        }
+
+        function ProcessButton() {
+            ValidateForm();
+            var urlDepre = '/depreciation/ProcessGenerate/';
+            $("#DepreciationModal").html("");
+
+            $.ajax({
+                type: 'POST',
+                url: urlDepre,
+                data : $("#depre-form").serialize(),
+                success: function (result) {
+                    
+                    var temp_data = result;
+                    $.ajax({
+                        url: "/depreciation/ModalDepreciation/",
+                        success: function (data) {
+                            $("#DepreciationModalID").modal('show');
+                            $("#DepreciationModalID").html(data);
+
+                            var temp_data = JSON.stringify(result);
+                            var oTable = $('#DepreciationTblList').DataTable({
+                                "data": result,
+                                "columns": [
+                                    { "data": "periode", "autoWidth": true },
+                                    { "data": "asset_price_fiskal_before", "autoWidth": true },
+                                    { "data": "asset_price_fiskal_after", "autoWidth": true },
+                                    { "data": "variant_fiskal", "autoWidth": true },
+                                    { "data": "asset_price_market_before", "autoWidth": true },
+                                    { "data": "asset_price_market_after", "autoWidth": true },
+                                    { "data": "variant_market", "autoWidth": true }
+                                ]
+                            });
+                            
+                        }
+                    });
+                  
+                    //for (var i in result) {
+                    //    $("#komersilAssetUsageID").val(result[i].usage_life_time_market);
+                    //    $("#fiskalAssetUsageID").val(result[i].usage_life_time_fiskal);
+                        
+                    //    $("#komersilMonthlyDepreciationID").val(result[i].asset_price_market);
+                    //    $("#fiskalMonthlyDepreciationID").val(result[i].asset_price_fiskal);
+
+                    //    $("#komersilTotalDepreciationID").val(result[i].mkt_depreciation_value);
+                    //    $("#fiskalTotalDepreciationID").val(result[i].fis_depreciation_value);
+
+                    //    $("#komersilBookValueID").val(result[i].mkt_asset_book_value);
+                    //    $("#fiskalBookValueID").val(result[i].fis_asset_book_value);
+                        
+                    //}
+                },
+                error: function (data) {
+                    swal("Error", "Error Load Modal Depreciation", "error");
+                }
+            })
+        }
+
+        function ToJavaScriptDate(value) {
+            const monthNames = ["January", "February", "March", "April", "May", "June",  "July", "August", "September", "October", "November", "December"];
+            var pattern = /Date\(([^)]+)\)/;
+            var results = pattern.exec(value);
+            var dt = new Date(parseFloat(results[1]));
+            return (dt.getDate() + " " + monthNames[(parseInt(dt.getMonth()) + 1)] + " " + dt.getFullYear());
+        }
+
+        function GetAssetNumber(id)
+        {
+            $('#CancelBtn').prop('disabled', true);
+            //document.getElementById("DeleteBtn").style.display = "inline";
+
+            $.ajax({
+                type: 'POST',
+                url: "/depreciation/GetAssetList/" + id,
+                dataType: 'json',
+                success: function (data) {
+                    for (var i in data) {
+                        $("#assetID").val(data[i].asset_id);
+                        $("#assetCodeID").val(data[i].asset_number);
+                        $("#assetNameID").val(data[i].asset_name);
+                        $("#receiptDateID").val(ToJavaScriptDate(data[i].asset_receipt_date));
+                    }
+                },
+                error: function (data) {
+                    swal("Error", "Error Get Data Asset", "error");
+                }
+            })
+
+            //loadData Depreciation if exists
+            if (id != "0") {
+                $.ajax({
+                    type: 'POST',
+                    url: "/depreciation/GetAssetDepreciationDetail/" + id,
+                    dataType: 'json',
+                    success: function (data) {
+                        $(".numeric").autoNumeric("init", {
+                            aSep: ',',
+                            aDec: '.',
+                            aPad: false,
+                        });
+                        var count = 0;
+                        for (var i in data) {
+                            count++;
+                            //dropdown 
+                            //alert(data[i].asset_original_currency_id);
+                            //$("#currencyID").select2();
+                            $.getJSON('/Currency/GetCurrency', function (data2) {
+                                var output = "";
+                                var output = '<option value="0"> Select Currency </option>';
+                                $.each(data2, function (key, entry) {
+                                    if (data[i].asset_original_currency_id == entry.currency_id) {
+                                        output += '<option value=' + entry.currency_id + ' selected>' + entry.currency_name + '</option>';
+
+                                    }
+                                    else {
+                                        output += '<option value=' + entry.currency_id + '>' + entry.currency_name + '</option>';
+                                    }
+                                    //output += '<option value=' + entry.country_id + '>' + entry.country_name + '</option>';
+                                });
+                                $("#currencyID").html(output);
+                            });
+                            //$("#currencyID").select2("val",data[i].asset_original_currency_id);
+                            //$("#depreMethodID").val(data[i].depreciation_type_id);
+                            //$("#depreMethodID").select2();
+                            $.getJSON('/depreciation/GetDepreciationMethod', function (data2) {
+                                var output = "";
+                                var output = '<option value="0"> Select Method </option>';
+                                $.each(data2, function (key, entry) {
+                                    if (data[i].depreciation_type_id == entry.depreciation_type_id) {
+                                        output += '<option value=' + entry.depreciation_type_id + ' selected>' + entry.depreciation_type_name + '</option>';
+
+                                    }
+                                    else {
+                                        output += '<option value=' + entry.depreciation_type_id + '>' + entry.depreciation_type_name + '</option>';
+                                    }
+                                    //output += '<option value=' + entry.country_id + '>' + entry.country_name + '</option>';
+                                });
+                                $("#depreMethodID").html(output);
+                            });
+                            $("#priceID").val(data[i].asset_original_value);
+                            $("#kursID").val(data[i].Currency_kurs);
+                            $("#assetvalueUSDID").val(data[i].asset_book_value);
+                            $("#komersilResiduValueID").val(data[i].mkt_asset_residu_value);
+                            $("#fiskalResiduValueID").val(data[i].fis_asset_residu_value);
+
+                            $("#komersilUsefulLifeValueID").val(data[i].mkt_asset_usefull_life);
+                            $("#fiskalUsefulLifeValueID").val(data[i].fis_asset_usefull_life);
+
+                            $("#komersialDepreciationID").val(data[i].mkt_ddb_percentage);
+                            $("#fiskalDepreciationID").val(data[i].fis_ddb_percentage);
+
+                            $("#komersilAssetUsageID").val(data[i].usage_life_time_market);
+                            $("#fiskalAssetUsageID").val(data[i].usage_life_time_fiskal);
+
+                            $("#komersilMonthlyDepreciationID").val(data[i].mkt_depreciation_value);
+                            $("#fiskalMonthlyDepreciationID").val(data[i].fis_depreciation_value);
+
+                            $("#komersilTotalDepreciationID").val(data[i].mkt_total_depreciation);
+                            $("#fiskalTotalDepreciationID").val(data[i].fis_total_depreciation);
+
+                            $("#komersilBookValueID").val(data[i].mkt_book_value);
+                            $("#fiskalBookValueID").val(data[i].fis_book_value);
+
+                            $('#ProcessBtn').prop('disabled', true);
+                            $('#EditBtn').prop('disabled', false);
+                            $('#DeleteBtn').prop('disabled', false);
+                            
+                        }
+
+                        if (count == 0) {
+                            //$("#currencyID").val(0);
+                            //$("#depreMethodID").val(0);
+                            //$("#currencyID").select2();
+
+                            $("#currencyID").select2("val", "0");
+                            $("#depreMethodID").select2("val", "0");
+                            
+
+                            $("#priceID").val("");
+                            $("#kursID").val("");
+                            $("#assetvalueUSDID").val("");
+                            $("#komersilResiduValueID").val("");
+                            $("#fiskalResiduValueID").val("");
+
+                            $("#komersilUsefulLifeValueID").val("");
+                            $("#fiskalUsefulLifeValueID").val("");
+
+                            $("#komersialDepreciationID").val("");
+                            $("#fiskalDepreciationID").val("");
+
+                            //Bagian hsl generate
+                            $("#komersilAssetUsageID").val("");
+                            $("#fiskalAssetUsageID").val("");
+
+                            $("#komersilMonthlyDepreciationID").val("");
+                            $("#fiskalMonthlyDepreciationID").val("");
+
+                            $("#komersilTotalDepreciationID").val("");
+                            $("#fiskalTotalDepreciationID").val("");
+
+                            $("#komersilBookValueID").val("");
+                            $("#fiskalBookValueID").val("");
+
+                            $('#EditBtn').prop('disabled', true);
+                            $('#ProcessBtn').prop('disabled', false);
+                            $('#DeleteBtn').prop('disabled', true);
+                        }
+
+                        $('#NewBtn').prop('disabled', false);
+
+                    },
+                    error: function (data) {
+                        swal("Error", "Error Save Depreciation", "error");
+                    }
+                })
+                
+            }
+            
+
+        }
+
+        function OpenModalAssetList() {
+            $("#Asset").html("");
+            var assetCode = $("#assetCodeID").val();
+            //alert("modal");
+
+            $.ajax({
+                url: "/depreciation/ModalAsset/",
+                success: function (data) {
+                    $("#Asset").html(data);
+                    //alert("open modal");
+                    var oTable =  $('#AssetTblList').DataTable({
+                        "ajax": {
+                            "url": "/depreciation/GetAssetList/0",
+                            "type": "GET",
+                            "datatype": "json",
+                        },
+                        "columns": [
+                            { "data": "asset_id", "autoWidth": true },
+                            { "data": "asset_number", "autoWidth": true },
+                            { "data": "asset_name", "autoWidth": true },
+                            { "data": "action", 
+                                "autowidth": true,
+                                "mRender": function (data, type, full) {
+                                    return '<a class="btn btn-info btn-sm" data-dismiss="modal" onclick="GetAssetNumber(' + full['asset_id'] + ');">' + 'Select' + '</a>';
+                                }
+                            }
+                        ]
+                    });
+                }
+            });
+        }
+
+        function Submit() {
+            
+            $.ajax({
+                type: 'POST',
+                url: "/depreciation/SubmitDepreciation/",
+                data: $("#depre-form").serialize(),
+                success: function (result) {
+                    //alert(result);
+                    swal({
+                        title: "Success",
+                        text: result,
+                        type: "success"
+                    });
+                    $.ajax({
+                        type: 'POST',
+                        url: "/depreciation/GetAssetDepreciationDetail/",
+                        data: $("#depre-form").serialize(),
+                        success: function (data) {
+                            for (var i in data) {
+
+                                $("#komersilAssetUsageID").val(data[i].usage_life_time_market);
+                                $("#fiskalAssetUsageID").val(data[i].usage_life_time_fiskal);
+
+                                $("#komersilMonthlyDepreciationID").val(data[i].mkt_depreciation_value);
+                                $("#fiskalMonthlyDepreciationID").val(data[i].fis_depreciation_value);
+
+                                $("#komersilTotalDepreciationID").val(data[i].fis_total_depreciation);
+                                $("#fiskalTotalDepreciationID").val(data[i].mkt_total_depreciation);
+
+                                $("#komersilBookValueID").val(data[i].mkt_book_value);
+                                $("#fiskalBookValueID").val(data[i].fis_book_value);
+
+                                $('#ProcessBtn').prop('disabled', true);
+                                $('#EditBtn').prop('disabled', false);
+                                $('#DeleteBtn').prop('disabled', false);
+                            }
+
+                        },
+                        error: function (data) {
+                            swal("Error", "Error Load Detail Data Depreciation", "error");
+                        }
+                    })
+                },
+                error: function (data) {
+                    swal("Error", "Error Save Depreciation", "error");
+                }
+            })
+
+            
+
+            $('#NewBtn').prop('disabled', false);
+            $('#EditBtn').prop('disabled', false);
+            $('#ProcessBtn').prop('disabled', true);
+            $('#DeleteBtn').prop('disabled', false);
+            $('#CancelBtn').prop('disabled', true);
+        }
+
+        function CancelDepreciation() {
+            //alert("cancel");
+
+            var urlCancel = '/depreciation/CancelDepreciation/';
+            $.ajax({
+                type: 'POST',
+                url: urlCancel,
+                data: $("#depre-form").serialize(),
+                success: function (result) {
+                    swal({
+                        title: "Success",
+                        text: result,
+                        type: "success"
+                    });
+                },
+                error: function (data) {
+                    swal("Error", "Error Cancel Depreciation", "error");
+                }
+            })
+            if ($("#modeID").val() == "New") {
+                $("#komersilAssetUsageID").val("");
+                $("#fiskalAssetUsageID").val("");
+
+                $("#komersilMonthlyDepreciationID").val("");
+                $("#fiskalMonthlyDepreciationID").val("");
+
+                $("#komersilTotalDepreciationID").val("");
+                $("#fiskalTotalDepreciationID").val("");
+
+                $("#komersilBookValueID").val("");
+                $("#fiskalBookValueID").val("");
+
+                $('#NewBtn').prop('disabled', false);
+                $('#EditBtn').prop('disabled', true);
+                $('#ProcessBtn').prop('disabled', false);
+                $('#DeleteBtn').prop('disabled', true);
+                $('#CancelBtn').prop('disabled', true);
+            }
+        }
+
+        function ValidateForm() {
+            var $loginForm = $("#depre-form").validate({
+                // Rules for form validation
+                rules: {
+                    kursID: {
+                        required: true,
+                        number: true
+                    },
+                    priceID: {
+                        required: true,
+                        number: true
+                    }
+                },
+
+                // Messages for form validation
+                messages: {
+                    kursID: {
+                        required: 'Please enter Kurs'
+                    },
+                    priceID: {
+                        required: 'Please enter Price'
+                    }
+                },
+
+                // Do not change code below
+                errorPlacement: function (error, element) {
+                    error.insertAfter(element.parent());
+                }
+            });
+        }
+        $(document).ready(function () {
+
+            New();
+            
+            //$("#currencyID").select2();
+            $.getJSON('/currency/GetCurrency', function (data) {
+                var output = '<option value="0"> Select Currency </option>';
+                $.each(data, function (key, entry) {
+                    output += '<option value=' + entry.currency_id + '>' + entry.currency_name + '</option>';
+                })
+                $("#currencyID").html(output);
+            });
+            
+            //$("#depreMethodID").select2();
+            $.getJSON('/depreciation/GetDepreciationMethod', function (data) {
+                var output = '<option value="0"> Select Method </option>';
+                $.each(data, function (key, entry) {
+                    output += '<option value=' + entry.depreciation_type_id + '>' + entry.depreciation_type_name + '</option>';
+                })
+                $("#depreMethodID").html(output);
+            });
+
+        })
+
+
+    </script>
+}

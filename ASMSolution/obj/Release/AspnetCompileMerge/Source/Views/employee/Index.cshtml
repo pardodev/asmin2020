@@ -1,0 +1,216 @@
+﻿<!-- MAIN CONTENT -->
+<div id="content">
+
+    <!-- row -->
+    <div class="row">
+
+        <!-- col -->
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+            <h1 class="page-title txt-color-blueDark">
+                <!-- PAGE HEADER -->
+                <!-- PAGE HEADER --><i class="fa-fw fa fa-home"></i> User Management <span>
+                    >
+                    Employee
+                </span>
+            </h1>
+        </div>
+        <!-- end col -->
+        <!-- right side of the page with the sparkline graphs -->
+    </div>
+    <!-- end row -->
+    <!--
+    The ID "widget-grid" will start to initialize all widgets below
+    You do not need to use widgets if you dont want to. Simply remove
+    the <section></section> and you can use wells or panels instead
+    -->
+    <!-- widget grid -->
+    <section id="widget-grid" class="">
+
+        <!-- row -->
+        <div class="row">
+            <!-- NEW WIDGET START -->
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <table id="jqgrid"></table>
+                <div id="pjqgrid"></div>
+            </article>
+            <!-- WIDGET END -->
+        </div>
+        <!-- end row -->
+    </section>
+    <!-- end widget grid -->
+
+</div>
+<!-- END MAIN CONTENT -->
+
+
+@section pagespecific {
+    <script type="text/javascript">
+    $(document).ready(function () {
+
+        pageSetUp();
+        jQuery("#jqgrid").jqGrid({
+            url: '/employee/List',
+            datatype: "json",
+            mtype: 'Get',
+            height: 'auto',
+            colNames: ['Actions','','NIK', 'Employee Name', 'Email Address', 'IP Address', 'Is Active','Modified Date', 'Modified By', 'Setup'],          
+            colModel: [
+                { name: 'act', index: 'act', sortable: false, width:80 },
+                { name: 'employee_id', key: true, index: 'employee_id', editable: false, hidden: true, editrules: { edithidden: false } },
+                { name: 'employee_nik', index: 'employee_nik', align: "center", sortable: true, editable: true, width: 80 },
+                { name: 'employee_name', index: 'employee_name', sortable: true, editable: true, width: 200 },
+                { name: 'employee_email', index: 'employee_email', sortable: true, editable: true, width: 200 },
+                { name: 'ip_address', index: 'ip_address', align: "center", sortable: true, editable: true, width: 80 },
+                { name: 'rec_isactive', index: 'rec_isactive', align: "center", sortable: true, editable: true, edittype: 'select', editoptions: { value: 'Yes:Yes;No:No' }, width: 70 },
+                { name: 'updated_date', index: 'updated_date', align: "center", sortable: true, editable: false, formatter: "date", formatoptions: { newformat: "m/d/Y H:i:s" }, width: 170 },
+                { name: 'updated_by', index: 'updated_by', align: "center", editable: false, sortable: true, width: 100 },
+                {
+                    name: 'setup', index: 'setup', sortable: false, width: 50,
+                    formatter: formatOperations
+                    //formatoptions:
+                    //    {
+                    //        baseLinkUrl: "employee/setup/",
+                    //        idName: "",
+                    //        //addParam: "user_type_id=&job_level_id="
+                    //        addParam: function (options) {
+                    //            return {
+                    //                empid: options.rowData.employee_id
+                    //            };
+                    //        }
+                    //    },
+                }
+            ],
+
+            rowNum: 10,
+            rowList: [10, 20, 30],
+            pager: '#pjqgrid',
+            sortname: 'empoyee_nik',
+            toolbarfilter: true,
+            viewrecords: true,
+            sortorder: "asc",
+            gridComplete: function () {
+                var ids = jQuery("#jqgrid").jqGrid('getDataIDs');
+                for (var i = 0; i < ids.length; i++) {
+                    var cl = ids[i];
+                    
+                    be = "<button class='btn btn-xs btn-default' data-original-title='Edit Row' onclick=\"jQuery('#jqgrid').editRow('" + cl +"');\"><i class='fa fa-pencil'></i></button>";
+                    se = "<button class='btn btn-xs btn-default' data-original-title='Save Row' onclick=\"jQuery('#jqgrid').saveRow('" + cl + "');\"><i class='fa fa-save'></i></button>";
+                    ca = "<button class='btn btn-xs btn-default' data-original-title='Cancel' onclick=\"jQuery('#jqgrid').restoreRow('" + cl + "');\"><i class='fa fa-times'></i></button>";
+                    de = "<button class='btn btn-xs btn-default' data-original-title='Delete' onclick=\"jQuery('#jqgrid').delGridRow('" + cl + "');\"><i class='fa fa-trash-o'></i></button>";
+                    //ce = "<button class='btn btn-xs btn-default' onclick=\"jQuery('#jqgrid').restoreRow('"+cl+"');\"><i class='fa fa-times'></i></button>";
+                    //jQuery("#jqgrid").jqGrid('setRowData',ids[i],{act:be+se+ce});
+                    jQuery("#jqgrid").jqGrid('setRowData', ids[i], {
+                        act: be + se + ca + de
+                    });
+                }
+            },
+            jsonReader: {
+                root: "rows",
+                page: "page",
+                total: "total",
+                records: "records",
+                repeatitems: false,
+                Id: "0"
+            },
+            editurl: '/employee/CrudEmployee',
+            caption: "Employee",
+            emptyrecords: 'No Employee Records are Available to Display',
+            multiselect: false,
+            autowidth: true
+
+        });
+
+
+        function addLinks(cellvalue, options, rowObject) {
+            //to get row Id
+            //alert('options.rowId:' + options.rowId);
+            // to get employee_id
+            //alert('rowObject.employee_id:' + rowObject.employee_id);
+            //ce = "<button class='btn btn-xs btn-default' onclick=\"jQuery('#jqgrid').restoreRow('"+cl+"');\"><i class='fa fa-times'></i></button>";
+            var ce = "<button class='btn btn-xs btn-default' onclick=\"redirect_url(" + rowObject.employee_id + ");\"><i class='fa fa-times'></i></button>";
+            return ce;
+            //return "<a href='' title='Setup' onclick=\"ff_url(" + rowObject.employee_id + ")\" >Setup</a>";
+        }
+
+
+        function formatOperations(cellvalue, options, rowObject) {
+            return "<a href='/employee/setup/" + rowObject.employee_id + "'>Setup</a>";
+        }
+
+
+        jQuery("#jqgrid").jqGrid('navGrid', "#pjqgrid", {
+            edit: false,
+            add: false,
+            del: false,
+            refresh: true,
+            closeAfterSearch: true
+        }, {
+            zIndex: 100,
+            url: "/Employee/Delete",
+            closeOnEscape: true,
+            closeAfterDelete: true,
+            recreateForm: true,
+            msg: "Are you sure you want to delete Employee... ? ",
+            afterComplete: function (response) {
+                if (response.responseText) {
+                    alert(response.responseText);
+                }
+            }
+        }, {
+            zIndex: 100,
+            caption: "Search Employee",
+            sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+            closeAfterSearch: true
+        });
+        jQuery("#jqgrid").jqGrid('inlineNav', "#pjqgrid", {
+            edit: false,
+            add: true,
+            del: false,
+            save: false,
+            cancel: false
+        });
+        /* Add tooltips */
+        $('.navtable .ui-pg-button').tooltip({
+            container: 'body'
+        });
+
+        // remove classes
+        $(".ui-jqgrid").removeClass("ui-widget ui-widget-content");
+        $(".ui-jqgrid-view").children().removeClass("ui-widget-header ui-state-default");
+        $(".ui-jqgrid-labels, .ui-search-toolbar").children().removeClass("ui-state-default ui-th-column ui-th-ltr");
+        $(".ui-jqgrid-pager").removeClass("ui-state-default");
+        $(".ui-jqgrid").removeClass("ui-widget-content");
+
+        // add classes
+        $(".ui-jqgrid-htable").addClass("table table-bordered table-hover");
+        $(".ui-jqgrid-btable").addClass("table table-bordered table-striped");
+
+        $(".ui-pg-div").removeClass().addClass("btn btn-sm btn-primary");
+        $(".ui-icon.ui-icon-plus").removeClass().addClass("fa fa-plus");
+        $(".ui-icon.ui-icon-pencil").removeClass().addClass("fa fa-pencil");
+        $(".ui-icon.ui-icon-trash").removeClass().addClass("fa fa-trash-o");
+        $(".ui-icon.ui-icon-search").removeClass().addClass("fa fa-search");
+        $(".ui-icon.ui-icon-refresh").removeClass().addClass("fa fa-refresh");
+        $(".ui-icon.ui-icon-disk").removeClass().addClass("fa fa-save").parent(".btn-primary").removeClass("btn-primary").addClass("btn-success");
+        $(".ui-icon.ui-icon-cancel").removeClass().addClass("fa fa-times").parent(".btn-primary").removeClass("btn-primary").addClass("btn-danger");
+
+        $(".ui-icon.ui-icon-seek-prev").wrap("<div class='btn btn-sm btn-default'></div>");
+        $(".ui-icon.ui-icon-seek-prev").removeClass().addClass("fa fa-backward");
+
+        $(".ui-icon.ui-icon-seek-first").wrap("<div class='btn btn-sm btn-default'></div>");
+        $(".ui-icon.ui-icon-seek-first").removeClass().addClass("fa fa-fast-backward");
+
+        $(".ui-icon.ui-icon-seek-next").wrap("<div class='btn btn-sm btn-default'></div>");
+        $(".ui-icon.ui-icon-seek-next").removeClass().addClass("fa fa-forward");
+
+        $(".ui-icon.ui-icon-seek-end").wrap("<div class='btn btn-sm btn-default'></div>");
+        $(".ui-icon.ui-icon-seek-end").removeClass().addClass("fa fa-fast-forward");
+
+    })
+
+    $(window).on('resize.jqGrid', function () {
+        $("#jqgrid").jqGrid('setGridWidth', $("#content").width());
+    })
+
+    </script>
+}

@@ -1,0 +1,138 @@
+﻿@model ASM_UI.Models.ms_employee_detail
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ms_employee_detail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ms_approval_range.range_type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ms_approval_range.range_type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ms_asmin_company.company_code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ms_asmin_company.company_code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ms_department.department_code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ms_department.department_code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ms_employee.employee_nik)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ms_employee.employee_nik)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ms_job_level.job_level_code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ms_job_level.job_level_code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ms_user_type.user_type_code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ms_user_type.user_type_code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fl_approver)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fl_approver)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fl_active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fl_active)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.created_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.created_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.created_by)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.created_by)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.updated_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.updated_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.updated_by)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.updated_by)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deleted_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deleted_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deleted_by)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deleted_by)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.org_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.org_id)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.emp_det_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

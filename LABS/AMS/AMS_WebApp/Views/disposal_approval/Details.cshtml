@@ -1,0 +1,154 @@
+﻿@model ASM_UI.Models.tr_disposal_approval
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tr_disposal_approval</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.request_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.request_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.approval_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.approval_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.approval_location_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.approval_location_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.approval_dept_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.approval_dept_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.approval_employee_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.approval_employee_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.approval_level_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.approval_level_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.approval_status_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.approval_status_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.approval_noted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.approval_noted)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.approval_suggestion_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.approval_suggestion_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fl_active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fl_active)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.created_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.created_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.created_by)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.created_by)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.updated_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.updated_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.updated_by)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.updated_by)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deleted_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deleted_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deteled_by)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deteled_by)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.org_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.org_id)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.approval_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

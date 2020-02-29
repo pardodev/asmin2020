@@ -1,0 +1,184 @@
+﻿@model ASM_UI.Models.tr_depreciation
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>tr_depreciation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.asset_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.asset_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.depreciation_type_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.depreciation_type_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.asset_original_value)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.asset_original_value)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.asset_original_currency_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.asset_original_currency_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Currency_kurs)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Currency_kurs)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.asset_book_value)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.asset_book_value)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fis_asset_residu_value)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fis_asset_residu_value)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fis_asset_usefull_life)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fis_asset_usefull_life)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fis_ddb_precentage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fis_ddb_precentage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mkt_asset_residu_value)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mkt_asset_residu_value)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mkt_asset_usefull_life)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mkt_asset_usefull_life)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mkt_ddb_percentage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mkt_ddb_percentage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fl_active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fl_active)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.created_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.created_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.created_by)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.created_by)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.updated_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.updated_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.updated_by)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.updated_by)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deleted_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deleted_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deleted_by)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deleted_by)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.org_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.org_id)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

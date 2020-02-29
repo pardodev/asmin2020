@@ -1,0 +1,283 @@
+﻿@model ASM_UI.Models.AccountLoginViewModel
+@{
+    ViewBag.PageId = "extr-page";
+    ViewBag.PageClass = "animated fadeInDown";
+}
+@section topright{
+    <div class="row text-responsive">
+        <div class="col-lg-9">
+            <div id="MyDateDisplay" class="date" onload="showDate()"></div>
+        </div>
+        <div class="col-lg-9">
+            <div id="MyClockDisplay" class="clock" onload="showTime()"></div>
+        </div>
+    </div>
+   <!-- <span id="extr-page-header-space">
+
+         <span class="hidden-mobile">Need an account?</span>
+        <h1 style="font-weight:bold;font-size:16px; color:red;">Asset Management System</h1>
+        <a href="@Url.Action("Registration", "account")" class="btn btn-danger">Create account</a>
+    </span>-->
+}
+
+
+<div id="content" class="container">
+    <div class="row">
+        @*{ Html.RenderPartial("_LoginText"); } *@
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-7" style="background-color:aliceblue; vertical-align:middle; text-align:center; margin: auto; top: 60px; left: 0; right: 0; bottom: 0;">
+            <h1><b>Web Based Application</b></h1>
+            <div id="ChangeImage">
+                <img src="~/content/img/logo.png" alt="Asmin Bara Bronang" class="img-responsive">
+            </div>
+            <h2>Asset Management Control System</h2>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+            <div class="well no-padding">
+
+                <form action="@Url.Action("login", "account", new { ReturnUrl = Request.QueryString["ReturnUrl"] })" method="POST" id="login-form" class="smart-form client-form">
+                    <header>
+                        Sign In
+                    </header>
+
+                    <fieldset>
+                        @Html.HiddenFor(m => m.return_url)
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationBootstrap()
+
+                        <section>
+                            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "label" })
+                            <label class="input">
+                                <i class="icon-append fa fa-user"></i>
+                                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "tooltip tooltip-top-right fa fa-user txt-color-teal" })
+                            </label>
+                        </section>
+
+                        <section>
+                            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "label" })
+                            <label class="input">
+                                <i class="icon-append fa fa-lock"></i>
+                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "tooltip tooltip-top-right fa fa-lock txt-color-teal" })
+                            </label>
+                            <!-- <div class="note">
+                        <a href="@Url.Action("forgotpassword", "account")"><i class="fa fa-frown-o"></i> Forgot password?</a>
+                    </div> -->
+                        </section>
+
+                        <section>
+                            @Html.LabelFor(model => model.company_id, htmlAttributes: new { @class = "label" })
+                            <label class="input">
+                                @Html.DropDownListFor(model => model.company_id, new SelectList(Model.company_list, "company_id", "company_name"), "- Select Company -", htmlAttributes: new { @class = "form-control select2", id = "Company" })
+                                @Html.ValidationMessageFor(model => model.company_id, "", new { @class = "text-danger tooltip tooltip-top-right txt-color-teal" })
+                            </label>
+                        </section>
+
+
+                        <section>
+                            @Html.LabelFor(model => model.asset_reg_location_id, htmlAttributes: new { @class = "label" })
+                            <label class="input">
+                                @Html.DropDownListFor(model => model.asset_reg_location_id, new SelectList(Model.asset_register_location_list, "asset_reg_location_id", "asset_reg_location_name"), "-Select Asset Reg Location-", htmlAttributes: new { @class = "form-control select2" })
+                                @Html.ValidationMessageFor(model => model.asset_reg_location_id, "", new { @class = "text-danger" })
+                            </label>
+                        </section>
+
+
+                        @*<section>
+                        <label class="label">Password</label>
+                        <label class="input">
+                            <i class="icon-append fa fa-lock"></i>
+                            <input type="password" name="password" value="demo">
+                            <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Enter your password</b>
+                        </label>
+                        <div class="note">
+                            <a href="@Url.Action("forgotpassword", "account")"><i class="fa fa-frown-o"></i> Forgot password?</a>
+                        </div>
+                    </section>*@
+
+                        @*<section>
+                        @Html.LabelFor(model => model.RememberMe, htmlAttributes: new { @class = "checkbox" })
+                            @Html.CheckBoxFor(model => model.RememberMe)
+                            @Html.ValidationMessageFor(model => model.RememberMe, "", new { @class = "text-danger" })
+                            <input type="hidden" name="rememberMe" value="false" />
+                    </section>*@
+
+                        <section>
+                            <label class="checkbox">
+                                @{var str_checked = "";
+                                    if (Model.remember_me)
+                                    {
+                                        str_checked = "checked=\"checked\"";
+                                    }
+                                }
+                                <input type="checkbox" name="RememberMe" value="true" @str_checked>
+                                <input type="hidden" name="rememberMe" value="false" />
+                                <i></i>Stay signed in
+                            </label>
+                        </section>
+
+                    </fieldset>
+
+
+                    <footer>
+                        <button type="submit" class="btn btn-primary">
+                            Sign in
+                        </button>
+                    </footer>
+                </form>
+
+            </div>
+
+                @*@{ Html.RenderPartial("_SocialMedia"); }*@
+            </div>
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-1"></div>
+        </div>
+</div>
+
+<div class="panel-footer" style="min-height:50px;">
+    <p style="padding-top:10px;" ><center><h5>PT. Asmin Bara Bronang &copy; @DateTime.Now.Year. All Rights Reserved</h5></center></p>
+
+    <footer style="margin-top:30px;">
+        <center><small>Powered by Kadema Data Indonesia</small></center>
+    </footer>
+</div>
+
+
+
+@section pagespecific {
+    <style type="text/css">
+        .text-responsive {
+          font-size: calc(100% + 1pt);
+        }
+        #main{
+           background-color:aliceblue !important; 
+        }
+    .panel-footer{
+        margin-top:20px;
+        margin-bottom:-80px;
+        padding-bottom:20px !important;
+    }    
+    .clock {
+        border-color:black;
+        position: absolute; 
+        margin-top: 35px;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        color: slategrey;/*#63db14;*/
+        font-size: 11pt;
+        font-weight:bold;
+        font-family: Arial;
+        /*letter-spacing: 7px; */
+    }
+    .date {
+        position: absolute; 
+        margin-top: 20px;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        color: slategrey;/*#63db14; */
+        font-size: 11pt;
+        font-weight:bold;
+        font-family: Arial;
+        /*letter-spacing: 7px; */
+    }
+    </style>
+    <script type="text/javascript">
+        function showDate() {
+            var date = new Date();
+            var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            var dys = days[date.getDay()];
+            var dt = date.getDate();
+            var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            var mnt = months[date.getMonth()];
+            var y = date.getFullYear();
+
+            var dates = dys + ", " + dt + " " + mnt + " " + y;
+            document.getElementById("MyDateDisplay").innerText = dates;
+            document.getElementById("MyDateDisplay").textContent = dates;
+
+            setTimeout(showDate, 1000);
+        }
+        function showTime() {
+            var clock = new Date();
+            var h = clock.getHours(); // 0 - 23
+            var m = clock.getMinutes(); // 0 - 59
+            var s = clock.getSeconds(); // 0 - 59
+            
+            var session = "AM";
+
+            if (h == 0) {
+                h = 12;
+            }
+
+            if (h > 12) {
+                h = h - 12;
+                session = "PM";
+            }
+
+            h = (h < 10) ? "0" + h : h;
+            m = (m < 10) ? "0" + m : m;
+            s = (s < 10) ? "0" + s : s;
+
+            var times = h + ":" + m + ":" + s + " " + session;
+            document.getElementById("MyClockDisplay").innerText = times;
+            document.getElementById("MyClockDisplay").textContent = times;
+
+            setTimeout(showTime, 1000);
+
+        }
+        showDate();
+        showTime();
+
+        $("#Company").on("change", function (e) {
+            var id = this.value;
+            if(id == 1)
+            {
+                $("#ChangeImage").html('<img src="../content/img/logo.png" alt="Asmin Bara Bronang" class="img-responsive">');
+            }
+            else if(id == 2)
+            {
+                $("#ChangeImage").html('<img src="../content/img/logo2.jpg" alt="Asmin Bara Jaan" class="img-responsive">');
+            }
+        });
+
+        $(function () {
+            // Validation
+            $("#login-form").validate({
+                // Rules for form validation
+                rules: {
+                    UserName: {
+                        required: true,
+                    },
+                    Password: {
+                        required: true,
+                        minlength: 3,
+                        maxlength: 20
+                    },
+                    company_id: {
+                        required: true
+                    },
+                    asset_reg_location_id: {
+                        required: true
+                    }
+
+                },
+
+                // Messages for form validation
+                messages: {
+                    UserName: {
+                        required: 'Please enter your user name or NIK number'
+                    },
+                    Password: {
+                        required: 'Please enter your password'
+                    }
+                },
+
+                // Do not change code below
+                errorPlacement: function (error, element) {
+                    error.insertAfter(element.parent());
+                }
+            });
+        });
+
+    </script>
+}

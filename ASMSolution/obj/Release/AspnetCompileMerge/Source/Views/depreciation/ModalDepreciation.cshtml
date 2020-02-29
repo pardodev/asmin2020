@@ -1,0 +1,96 @@
+﻿<style type="text/css">
+    .modal-lg{
+        min-width: 750px !important;
+        margin: auto;
+    }
+</style>
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                &times;
+            </button>
+            <h4 class="modal-title">
+                Depreciation
+            </h4>
+        </div>
+        <div class="modal-body no-padding">
+            @*<input type="text" id="modal_asset_id" />
+            <input type="text" id="modal_depreciation_type_id" />*@
+
+                <table id="DepreciationTblList" class="table table-bordered table-hover table-striped table-responsive" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Periode</th>
+                            <th>Commercial Before</th>
+                            <th>Commercial After</th>
+                            <th>Variant</th>
+                            <th>Fiscal Before</th>
+                            <th>Fiscal After</th>
+                            <th>Variant</th>
+                        </tr>
+                    </thead>
+                </table>
+                <form id="modal-form" class="smart-form">
+                    <fieldset>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-xs-1"></div>
+                                    <div class="col-md-5">
+                                        <label class="label col-md-5">Commercial Change on Month</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <label class="input">
+                                            <input type="text" name="mkt_depre_correction_month" id="mkt_depre_correction_monthID" readonly placeholder="" class="input numeric" style="text-align:right;">
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-1"></div>
+                                    <div class="col-md-5">
+                                        <label class="label col-md-5">Addition(Deduction) Commercial Cost</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <label class="input">
+                                            <input type="text" name="variant_mkt_cost" id="variant_mkt_costID" readonly placeholder="" class="input numeric" style="text-align:right;">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-xs-1"></div>
+                                    <div class="col-md-5">
+                                        <label class="label col-md-5">Fiscal Change on Month</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <label class="input">
+                                            <input type="text" name="fis_depre_correction_month" id="fis_depre_correction_monthID" readonly placeholder="" class="input numeric" style="text-align:right;">
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-1"></div>
+                                    <div class="col-md-5">
+                                        <label class="label col-md-5">Addition(Deduction) Fiscal Cost</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <label class="input">
+                                            <input type="text" name="variant_fis_cost" id="variant_fis_costID" readonly placeholder="" class="input numeric" style="text-align:right;">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            
+        </div>
+    <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="Submit()">Submit</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="CancelDepreciation()">Cancel</button>
+    </div>
+    </div><!-- /.modal-content -->
+
+</div><!-- /.modal-dialog -->

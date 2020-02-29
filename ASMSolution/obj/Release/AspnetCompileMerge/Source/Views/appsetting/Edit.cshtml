@@ -1,0 +1,134 @@
+﻿@model ASM_UI.Models.sy_app_setting
+
+<div id="content">
+    <div class="row">
+        <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+            <h1 class="page-title txt-color-blueDark">
+
+                <!-- PAGE HEADER -->
+                <i class="fa-fw fa fa-pencil-square-o"></i>
+                System
+                <span>
+                    >
+                    Setting
+                </span>
+            </h1>
+        </div>
+    </div>
+
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false" data-widget-togglebutton="false" data-widget-collapsed="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                        <h2>Edit Setting</h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+
+                            @using (Html.BeginForm("Edit", "appSetting", FormMethod.Post, htmlAttributes: new { @class = "smart-form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.HiddenFor(model => model.app_id)
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <header>Application Setting</header>
+                                <fieldset>
+
+                                    <fieldset>
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1"></div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.app_key, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                </div>
+                                                <div class="col-md-8">
+                                                    @Html.EditorFor(model => model.app_key, new { htmlAttributes = new { @class = "form-control", placeholder = "KEY" } })
+                                                    @Html.ValidationMessageFor(model => model.app_key, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1"></div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.app_value, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <textarea name="app_value" rows="5" class="form-control" placeholder="Value">@Model.app_value</textarea>
+                                                    @Html.ValidationMessageFor(model => model.app_value, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-1"></div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(model => model.app_desc, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <textarea name="app_desc" rows="5" class="form-control" placeholder="Description">@Model.app_desc</textarea>
+                                                    @Html.ValidationMessageFor(model => model.app_desc, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                    </fieldset>
+
+                                </fieldset>
+
+                                <footer>
+                                    <div class="form-group">
+                                        <div class="col-md-7">
+                                            <input type="submit" value="Save" class="btn btn-primary" />
+                                            <input type="reset" value="Reset" class="btn btn-default" />
+                                            <a href="@Url.Action("Index", "appsetting", null, Request.Url.Scheme)"><input type="button" value="Close" class="btn btn-default" /></a>
+                                        </div>
+                                    </div>
+
+                                </footer>
+
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </section>
+</div>
+
+@section pagespecific {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#asset_receipt_date').datepicker({
+                dateFormat: 'dd-mm-yy',
+                prevText: '<i class="fa fa-chevron-left"></i>',
+                nextText: '<i class="fa fa-chevron-right"></i>',
+            });
+
+            //makeSafe();
+
+        });
+
+        function makeSafe() {
+            document.getElementById('app_value').value = window.escape(document.getElementById('app_value').value);
+        };
+
+        function makeDangerous() {
+            document.getElementById('app_value').value = window.unescape(document.getElementById('app_value').value);
+        }
+
+    </script>
+}

@@ -1,0 +1,271 @@
+﻿<!-- MAIN CONTENT -->
+<div id="content">
+
+    <!-- row -->
+    <div class="row">
+
+        <!-- col -->
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+            <h1 class="page-title txt-color-blueDark">
+                <!-- PAGE HEADER --><i class="fa-fw fa fa-home"></i> Depreciation <span>
+                    >
+                    Depreciation Process
+                </span>
+            </h1>
+        </div>
+        <!-- end col -->
+        <!-- right side of the page with the sparkline graphs -->
+    </div>
+    <!-- end row -->
+    <!--
+    The ID "widget-grid" will start to initialize all widgets below
+    You do not need to use widgets if you dont want to. Simply remove
+    the <section></section> and you can use wells or panels instead
+    -->
+    <!-- widget grid -->
+    <section id="widget-grid" class="">
+
+        <!-- row -->
+        <div class="row">
+
+            <!-- NEW WIDGET START -->
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <form id="depre-form" class="smart-form">
+                    <table id="jqgrid"></table>
+                    <div id="pjqgrid">
+                        
+                    </div>
+                </form>
+                <br>
+                <!-- <a href="javascript:void(0)" id="m1">Get Selected id's</a>
+                 <br>
+                 <a href="javascript:void(0)" id="m1s">Select(Unselect) row 13</a> -->
+                <button type="button" class="btn btn-success" id="ProcessBtn" onclick="ProcessButton()"><span class="fa fa-refresh"></span> Process</button>
+                <button type="button" class="btn btn-danger" id="ResetBtn" onclick="ResetButton()"><span class="fa fa-close"></span> Cancel</button>
+            </article>
+            <!-- WIDGET END -->
+
+        </div>
+
+        <!-- end row -->
+
+    </section>
+    <!-- end widget grid -->
+
+</div>
+<!-- END MAIN CONTENT -->
+
+
+@section pagespecific {
+    <script type="text/javascript">
+        function ProcessButton() {
+            var selRow = jQuery("#jqgrid").jqGrid('getGridParam', 'selarrrow');  //get selected rows
+            //alert(selRow);
+
+            var urlProcess = '/depreciationProcess/ProcessAllCheckedData/' + selRow;
+
+            $.ajax({
+                type: 'POST',
+                url: urlProcess,
+                success: function (result) {
+                    if (result === "No Data Selected")
+                    {
+                        swal({
+                            title: "Warning",
+                            text: result,
+                            type: "warning"
+                        });
+                        $('#jqgrid').trigger('reloadGrid');
+                    }
+                    else
+                    {
+                        swal({
+                            title: "Success",
+                            text: result,
+                            type: "success"
+                        });
+                        $('#jqgrid').trigger('reloadGrid');
+                    }
+                },
+                error: function (data) {
+                    swal("Error", "Error Process All Depreciation Data", "error");
+                }
+            })
+
+            //for (var i = 0; i < selRow.length; i++)  //iterate through array of selected rows
+            //{
+            //    var ret = jQuery("#jqgrid").jqGrid('getRowData', selRow[i]);   //get the selected row
+            //    var id = ret.asset_id + ',' + ret.depreciation_type_id;
+                
+            //    var urlProcess = '/depreciationProcess/ProcessAllCheckedData/';
+
+            //    $.ajax({
+            //        type: 'POST',
+            //        url: urlProcess,
+            //        data: $("#depre-form").serialize(),
+            //        success: function (result) {
+            //            alert("masuk");
+            //        },
+            //        error: function (data) {
+            //            alert("error!");
+            //        }
+            //    })
+            //}
+        }
+
+        function ResetButton() {
+            var selRow = jQuery("#jqgrid").jqGrid('getGridParam', 'selarrrow');  //get selected rows
+            //alert(selRow);
+
+            var urlProcess = '/depreciationProcess/ProcessAllCheckedData/' + selRow;
+
+            $.ajax({
+                type: 'POST',
+                url: urlProcess,
+                success: function (result) {
+                    if (result === "No Data Selected") {
+                        swal({
+                            title: "Warning",
+                            text: result,
+                            type: "warning"
+                        });
+                        $('#jqgrid').trigger('reloadGrid');
+                    }
+                    else {
+                        swal({
+                            title: "Success",
+                            text: result,
+                            type: "success"
+                        });
+                        $('#jqgrid').trigger('reloadGrid');
+                    }
+                },
+                error: function (data) {
+                    swal("Error", "Error Process All Depreciation Data", "error");
+                }
+            })
+        }
+
+    $(document).ready(function () {
+
+        pageSetUp();
+        jQuery("#jqgrid").jqGrid({
+            url: '/depreciationProcess/List',
+            datatype: "json",
+            mtype: 'Get',
+            height: 'auto',
+            //colNames: ['Actions', 'Inv No', 'Date', 'Client', 'Amount', 'Tax', 'Total', 'Notes'],
+            //colNames: ['Actions', '', 'Asset Number', 'Asset Name', 'Department', 'Employee', 'Asset Receipt Date'],
+            colNames: ['','','', 'Asset Number', 'Asset Name', 'Department', 'Employee', 'Asset Receipt Date'],
+            colModel: [
+                //{ name: 'act', index: 'act', sortable: false, width: 20 },
+                { name: 'depreciation_id', key: true, index: 'depreciation_id', width: 10, editable: false, hidden: true, editrules: { edithidden: false } },
+                { name: 'asset_id', index: 'asset_id', sortable: false, editable: false, hidden: true },
+                { name: 'depreciation_type_id', index: 'depreciation_type_id', sortable: false, editable: false, hidden: true },
+                { name: 'asset_number', index: 'asset_number', sortable: true, editable: true, width: 20 },
+                { name: 'asset_name', index: 'asset_name', sortable: true, editable: true, width: 25 },
+
+                { name: 'department_code', index: 'department_code', sortable: true, editable: true, width: 20 },
+                { name: 'employee_name', index: 'employee_name', sortable: true, editable: true, width: 25 },
+
+                { name: 'asset_receipt_date', index: 'asset_receipt_date', sortable: true, editable: false, width: 20, formatter: "date", formatoptions: { newformat: "m/d/Y" } }
+            ],
+
+            rowNum: 10,
+            rowList: [10, 20, 30],
+            pager: '#pjqgrid',
+            sortname: 'asset_number',
+            toolbarfilter: true,
+            viewrecords: true,
+            sortorder: "asc",
+            gridComplete: function () {
+                var ids = jQuery("#jqgrid").jqGrid('getDataIDs');
+                //for (var i = 0; i < ids.length; i++) {
+                //    var cl = ids[i];
+                //    be = "<button class='btn btn-xs btn-default' data-original-title='Edit Row' onclick=\"jQuery('#jqgrid').editRow('" + cl +"');\"><i class='fa fa-pencil'></i></button>";
+                //    se = "<button class='btn btn-xs btn-default' data-original-title='Save Row' onclick=\"jQuery('#jqgrid').saveRow('" + cl + "');\"><i class='fa fa-save'></i></button>";
+                //    ca = "<button class='btn btn-xs btn-default' data-original-title='Cancel' onclick=\"jQuery('#jqgrid').restoreRow('" + cl + "');\"><i class='fa fa-times'></i></button>";
+                //    //ce = "<button class='btn btn-xs btn-default' onclick=\"jQuery('#jqgrid').restoreRow('"+cl+"');\"><i class='fa fa-times'></i></button>";
+                //    //jQuery("#jqgrid").jqGrid('setRowData',ids[i],{act:be+se+ce});
+                //    jQuery("#jqgrid").jqGrid('setRowData', ids[i], {
+                //        act: be + se + ca
+                //    });
+                //}
+            },
+            jsonReader: {
+                root: "rows",
+                page: "page",
+                total: "total",
+                records: "records",
+                repeatitems: false,
+                Id: "0"
+            },
+            //editurl: '/depreciationProcess/CrudCategory',
+            caption: "Asset Depreciation List",
+            emptyrecords: 'No Asset Depreciation Records are Available to Display',
+            multiselect: true,
+            autowidth: true,
+
+        });
+        jQuery("#jqgrid").jqGrid('navGrid', "#pjqgrid", {
+            edit: false,
+            add: false,
+            del: false,
+            refresh: false,
+            search : false,
+            closeAfterSearch: true
+        }, {
+            zIndex: 100,
+            caption: "Search Asset",
+            sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+            closeAfterSearch: true
+        });
+        /*remark utk add, edit*/
+        //jQuery("#jqgrid").jqGrid('inlineNav', "#pjqgrid");
+
+        /* Add tooltips */
+        $('.navtable .ui-pg-button').tooltip({
+            container: 'body'
+        });
+
+
+        // remove classes
+        $(".ui-jqgrid").removeClass("ui-widget ui-widget-content");
+        $(".ui-jqgrid-view").children().removeClass("ui-widget-header ui-state-default");
+        $(".ui-jqgrid-labels, .ui-search-toolbar").children().removeClass("ui-state-default ui-th-column ui-th-ltr");
+        $(".ui-jqgrid-pager").removeClass("ui-state-default");
+        $(".ui-jqgrid").removeClass("ui-widget-content");
+
+        // add classes
+        $(".ui-jqgrid-htable").addClass("table table-bordered table-hover");
+        $(".ui-jqgrid-btable").addClass("table table-bordered table-striped");
+
+        $(".ui-pg-div").removeClass().addClass("btn btn-sm btn-primary");
+        $(".ui-icon.ui-icon-plus").removeClass().addClass("fa fa-plus");
+        $(".ui-icon.ui-icon-pencil").removeClass().addClass("fa fa-pencil");
+        $(".ui-icon.ui-icon-trash").removeClass().addClass("fa fa-trash-o");
+        $(".ui-icon.ui-icon-search").removeClass().addClass("fa fa-search");
+        $(".ui-icon.ui-icon-refresh").removeClass().addClass("fa fa-refresh");
+        $(".ui-icon.ui-icon-disk").removeClass().addClass("fa fa-save").parent(".btn-primary").removeClass("btn-primary").addClass("btn-success");
+        $(".ui-icon.ui-icon-cancel").removeClass().addClass("fa fa-times").parent(".btn-primary").removeClass("btn-primary").addClass("btn-danger");
+
+        $(".ui-icon.ui-icon-seek-prev").wrap("<div class='btn btn-sm btn-default'></div>");
+        $(".ui-icon.ui-icon-seek-prev").removeClass().addClass("fa fa-backward");
+
+        $(".ui-icon.ui-icon-seek-first").wrap("<div class='btn btn-sm btn-default'></div>");
+        $(".ui-icon.ui-icon-seek-first").removeClass().addClass("fa fa-fast-backward");
+
+        $(".ui-icon.ui-icon-seek-next").wrap("<div class='btn btn-sm btn-default'></div>");
+        $(".ui-icon.ui-icon-seek-next").removeClass().addClass("fa fa-forward");
+
+        $(".ui-icon.ui-icon-seek-end").wrap("<div class='btn btn-sm btn-default'></div>");
+        $(".ui-icon.ui-icon-seek-end").removeClass().addClass("fa fa-fast-forward");
+
+    })
+
+    $(window).on('resize.jqGrid', function () {
+        $("#jqgrid").jqGrid('setGridWidth', $("#content").width());
+    })
+
+    </script>
+}

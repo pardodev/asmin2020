@@ -1,0 +1,16 @@
+﻿
+---------------------------------------------------------------------------------------
+
+Daftar Reports
+
+---------------------------------------------------------------------------------------
+
+RPT01 = Asset Listing
+RPT02 = Asset Taking
+RPT03 = Asset Value
+RPT04 =	Asset Mutation
+RPT05 = Asset Disposal
+RPT06 = Asset Depre
+
+
+

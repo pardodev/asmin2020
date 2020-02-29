@@ -1,0 +1,229 @@
+﻿@using ReportViewerForMvc
+@using Microsoft.Reporting.WebForms;
+@using System.IO;
+@model ASM_UI.Models.Report_AssetListingViewModel
+
+<!-- MAIN CONTENT -->
+<div id="content">
+    <div class="row">
+
+        <!-- col -->
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+            <h1 class="page-title txt-color-blueDark">
+                <!-- PAGE HEADER --><i class="fa-fw fa fa-home"></i> Reports <span>
+                    >
+                    @Model.report_title
+                </span>
+            </h1>
+        </div>
+        <!-- end col -->
+
+    </div>
+
+    <section id="widget-grid" class="">
+        @{
+            if (ViewBag.ReportViewer == null)
+            {
+                <div class="row">
+                    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false" data-widget-togglebutton="false" data-widget-collapsed="false">
+                            <header>
+                                <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                                <h2>@Model.report_title</h2>
+                            </header>
+                            <div>
+                                <!-- widget edit box -->
+                                <div class="jarviswidget-editbox">
+                                    <!-- This area used as dropdown edit box -->
+                                </div>
+
+                                <div class="widget-body no-padding">
+                                    @using (Html.BeginForm("AssetListing", "report", FormMethod.Get, htmlAttributes: new { @class = "smart-form", @target = "_blank" }))
+                                    {
+                                        <header>
+                                            Report Parameters
+                                        </header>
+
+                                        <fieldset>
+                                            <fieldset title="Reports Parameter">
+                                                @Html.HiddenFor(model => model.id)
+                                                <section>
+                                                    <div class="row">
+                                                        <div class="col-md-1">
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            @Html.LabelFor(model => model.pyear, htmlAttributes: new { @class = "control-label" })
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <label class="input">
+                                                                @Html.DropDownListFor(x => x.pyear, new SelectList(Model.period_year_list, "Value", "Text", Model.pyear), new { @class = "form-control select2" })
+                                                                @Html.ValidationMessageFor(model => model.pyear, "", new { @class = "text-danger" })
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </section>
+
+                                                <section>
+                                                    <div class="row">
+                                                        <div class="col-md-1">
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <label>Month</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <label class="input">
+                                                                @Html.DropDownListFor(x => x.pmonth, new SelectList(Model.period_month_list, "Value", "Text", Model.pmonth), new { @class = "form-control select2" })
+                                                                @*<select>
+                                                                        <option value="0">- Select -</option>
+                                                                        <option value="1">Jan</option>
+                                                                        <option value="2">Feb</option>
+                                                                        <option value="3">Mar</option>
+                                                                        <option value="4">Apr</option>
+                                                                        <option value="5">May</option>
+                                                                        <option value="6">Jun</option>
+                                                                        <option value="7">Jul</option>
+                                                                        <option value="8">Aug</option>
+                                                                        <option value="9">Sep</option>
+                                                                        <option value="10">Oct</option>
+                                                                        <option value="11">Nov</option>
+                                                                        <option value="12">Dec</option>
+                                                                    </select>*@
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </section>
+
+                                                <section>
+                                                    <div class="row">
+                                                        <div class="col-md-1">
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            @Html.LabelFor(model => model.company, htmlAttributes: new { @class = "control-label" })
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <label class="input">
+                                                                @Html.DropDownListFor(model => model.company, new SelectList(Model.ms_company_list, "company_id", "company_name"), "- Select Company -", htmlAttributes: new { @class = "form-control select2" })
+                                                                @Html.ValidationMessageFor(model => model.company, "", new { @class = "text-danger" })
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </section>
+
+                                                @*<section>
+                                                        <div class="row">
+                                                            <div class="col-md-1">
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                @Html.LabelFor(model => model.location, htmlAttributes: new { @class = "control-label" })
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <label class="input">
+                                                                    @Html.DropDownListFor(model => model.location_id, new SelectList(Model.asset_location_list, "location_id", "location_name"), "- Select Location -", htmlAttributes: new { @class = "form-control select2" })
+                                                                    @Html.ValidationMessageFor(model => model.location_id, "", new { @class = "text-danger" })
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </section>*@
+
+                                                <section>
+                                                    <div class="row">
+                                                        <div class="col-md-1">
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            @Html.LabelFor(model => model.asset_register, htmlAttributes: new { @class = "control-label" })
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <label class="input">
+                                                                @Html.DropDownListFor(model => model.asset_register, new SelectList(Model.ms_asset_register_location_list, "asset_reg_location_id", "asset_reg_location_name"), "- Select Registration -", htmlAttributes: new { @class = "form-control select2" })
+                                                                @Html.ValidationMessageFor(model => model.asset_register, "", new { @class = "text-danger" })
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </section>
+
+                                                <section>
+                                                    <div class="row">
+                                                        <div class="col-md-1">
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            @Html.LabelFor(model => model.category, htmlAttributes: new { @class = "control-label" })
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <label class="input">
+                                                                @Html.DropDownListFor(model => model.category, new SelectList(Model.ms_category_list, "category_id", "category_name"), "- Select Category -", htmlAttributes: new { @class = "form-control select2" })
+                                                                @Html.ValidationMessageFor(model => model.category, "", new { @class = "text-danger" })
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </section>
+
+                                            </fieldset>
+
+                                        </fieldset>
+
+                                        <footer>
+                                            <div class="form-group">
+                                                <div class="col-md-7">
+                                                    <input type="submit" value="Search" class="btn btn-primary" />
+                                                </div>
+                                            </div>
+                                        </footer>
+
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </article>
+                </div>
+            }
+        }
+
+        @if (ViewBag.ReportViewer != null)
+            {
+            <div class="row">
+                <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false" data-widget-togglebutton="false" data-widget-collapsed="false">
+                        <div>
+                            <div class="widget-body no-padding">
+                                <form method="get" action="assetlisting" class="smart-form" id="frm1" name="frm1">
+                                    <header></header>
+                                    <fieldset>
+                                        @Html.ReportViewer((ReportViewer)ViewBag.ReportViewer, new { scrolling = "yes", width = "100%", height = "100%" })
+                                    </fieldset>
+                                    <footer>
+                                        <div class="form-group">
+                                            <div class="col-md-7">
+                                                <input type="submit" value="Close" class="btn btn-primary" />
+                                            </div>
+                                        </div>
+                                    </footer>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        }
+
+
+    </section>
+
+</div>
+
+@section pagespecific {
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            //var responsiveHelper_dt_basic = undefined;
+            //var responsiveHelper_datatable_fixed_column = undefined;
+            //var responsiveHelper_datatable_col_reorder = undefined;
+            //var responsiveHelper_datatable_tabletools = undefined;
+
+        });
+
+    </script>
+}

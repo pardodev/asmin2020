@@ -1,0 +1,138 @@
+﻿@model ASM_UI.Models.user_rightViewModel
+@{
+    ViewBag.Title = "User Rights";
+}
+<div id="content">
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false" data-widget-togglebutton="false" data-widget-collapsed="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                        <h2>User Rights </h2>
+
+                    </header>
+                    <!-- widget div-->
+                    <div>
+
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                        @using (Html.BeginForm("FormSave", "user_right", FormMethod.Post, htmlAttributes: new { @class = "smart-form" }))
+                        {
+                            <header>
+                                User Rights Form
+                            </header>
+                            <fieldset>
+                                @Html.AntiForgeryToken()
+                                <br />
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                <section>
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                        </div>
+                                        <div class="col-md-2">
+                                            @Html.LabelFor(model => model.user_type_id, "User Type", htmlAttributes: new { @class = "control-label" })
+                                        </div>
+                                        <div class="col-md-8">
+                                            @if (Model.FormMode == ASM_UI.Models.EnumFormModeKey.Form_Edit)
+                                            {
+                                                @Html.DropDownListFor(model => model.user_type_id, new SelectList(Model.user_type_list, "user_type_id", "user_type_name", Model.user_type_id), "- Select User Type -", htmlAttributes: new { @class = "form-control" })
+                                                @*@Html.HiddenFor(model => model.user_type_id)*@
+                                            }
+                                            else
+                                            {
+                                                @Html.DropDownListFor(model => model.user_type_id, new SelectList(Model.user_type_list, "user_type_id", "user_type_name"), "- Select User Type -", htmlAttributes: new { @class = "form-control" })
+                                            }
+                                            @Html.ValidationMessageFor(model => model.user_type_id, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <section>
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                        </div>
+                                        <div class="col-md-2">
+                                            @Html.LabelFor(model => model.job_level_id, "Job Level ", htmlAttributes: new { @class = "control-label" })
+                                        </div>
+                                        <div class="col-md-8">
+
+                                            @if (Model.FormMode == ASM_UI.Models.EnumFormModeKey.Form_Edit)
+                                            {
+                                                @Html.DropDownListFor(model => model.job_level_id, new SelectList(Model.job_level_list, "job_level_id", "job_level_name", Model.job_level_id), "- Select Job Type -", htmlAttributes: new { @class = "form-control" })
+                                                @*@Html.HiddenFor(model => model.job_level_id)*@
+                                            }
+                                            else
+                                            {
+                                                @Html.DropDownListFor(model => model.job_level_id, new SelectList(Model.job_level_list, "job_level_id", "job_level_name"), "- Select Job Type -", htmlAttributes: new { @class = "form-control" });
+                                            }
+                                            @Html.ValidationMessageFor(model => model.job_level_id, "", new { @class = "text-danger" })
+                                        </div>
+
+                                    </div>
+                                </section>
+
+                                <section>
+                                    <div class="row">
+                                        @*@Html.LabelFor(model => model.menu_id, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                        <div class="col-md-1">
+                                        </div>
+                                        <div class="control label col-md-2">Menu</div>
+                                        <div class="col-md-8">
+                                            @if (Model.ms_menus != null)
+                                            {
+                                                <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                    <table class="table table-bordered table-hover table-responsive table-striped" id="ms_menu">
+                                                        <tr>
+                                                            <th>Module</th>
+                                                            <th>Menu Code</th>
+                                                            <th>Menu Name</th>
+                                                            <th>Access</th>
+                                                        </tr>
+                                                        @foreach (var mnu in Model.checkbox_menu_id)
+                                                        {
+                                                            var str_checked = (mnu.Checked) ? "checked=checked" : "";
+                                                            <tr>
+                                                                <td>@mnu.ms_menu.ms_module.module_name</td>
+                                                                <td><label for="menu_id">@mnu.ms_menu.menu_code</label></td>
+                                                                <td><label for="menu_id">@mnu.ms_menu.menu_name</label></td>
+                                                                <td><input type="checkbox" id="menu_id_@mnu.Value" name="menu_id" @str_checked value="@mnu.Value" /></td>
+                                                            </tr>
+                                                        }
+                                                    </table>
+                                                </article>
+                                            }
+                                            else
+                                            {
+                                                <div>None Menu Exist</div>
+                                            }
+
+                                            @*@Html.EditorFor(model => model.menu_id, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.menu_id, "", new { @class = "text-danger" })*@
+                                        </div>
+                                    </div>
+                                </section>
+                            </fieldset>
+                            <footer>
+                                <div class="form-group">
+                                    <div class="col-md-7">
+                                        @Html.ActionLink("Cancel", "Index", "user_right", htmlAttributes: new { @class = "btn btn-default" })
+                                        <input type="submit" value="Save" class="btn btn-primary" />
+                                    </div>
+                                </div>
+                            </footer>
+                        }
+                        </div>
+                    </div>
+            
+            </article>
+        </div>
+    </section>
+</div>

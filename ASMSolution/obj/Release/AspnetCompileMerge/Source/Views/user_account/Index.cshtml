@@ -1,0 +1,271 @@
+﻿<!-- MAIN CONTENT -->
+<div id="content">
+
+    <!-- row -->
+    <div class="row">
+
+        <!-- col -->
+        <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+            <h1 class="page-title txt-color-blueDark">
+                <!-- PAGE HEADER --><i class="fa-fw fa fa-home"></i> User Management <span>
+                    >
+                    User Account
+                </span>
+            </h1>
+
+        </div>
+        <!-- end col -->
+        <!-- right side of the page with the sparkline graphs -->
+        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+            <!-- Button trigger modal -->
+            <a data-toggle="modal" href="#UserAccount" class="btn btn-success btn-lg pull-right header-btn hidden-mobile" onclick="OpenModalFrm('0');"><i class="fa fa-plus fa-lg"></i> User Account</a>
+        </div>
+    </div>
+    <!-- end row -->
+
+    <!--
+    The ID "widget-grid" will start to initialize all widgets below
+    You do not need to use widgets if you dont want to. Simply remove
+    the <section></section> and you can use wells or panels instead
+    -->
+    <!-- widget grid -->
+    <section id="widget-grid" class="">
+
+        <!-- row -->
+        <div class="row">
+
+            <!-- NEW WIDGET START -->
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                <table id="jqgrid"></table>
+                <div id="pjqgrid"></div>
+
+                <br>
+
+            </article>
+            <!-- WIDGET END -->
+
+        </div>
+
+        <!-- end row -->
+
+    </section>
+    <!-- end widget grid -->
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="UserAccount" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"></div>
+    <div class="modal fade" id="Employee" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"></div>
+
+</div>
+<!-- END MAIN CONTENT -->
+
+
+
+
+@section pagespecific {
+    <script type="text/javascript">
+        $.fn.modal.Constructor.prototype.enforceFocus = function () { };
+
+        $(document).ready(function () {
+
+            pageSetUp();
+            jQuery("#jqgrid").jqGrid({
+                url: '/user_account/List',
+                datatype: "json",
+                mtype: 'Get',
+                height: 'auto',
+                colNames: ['Actions', '', '', 'NIK', 'Employee Name', 'Email', 'User Name', 'IsActive', 'Modified Date', 'Modified By', ''],
+                colModel: [
+                    { name: 'act', index: 'act', sortable: false, width: 12, search: false },
+                    { name: 'user_id', index: 'user_id', editable: false, hidden: true, editrules: { edithidden: false }, key: true },
+                    { name: 'employee_id', index: 'employee_id', editable: false, hidden: true, editrules: { edithidden: false } },
+                    { name: 'employee_nik', index: 'employee_nik', sortable: true, sortorder: 'asc', editable: false, width: 15 },
+                    { name: 'employee_name', index: 'employee_name', sortable: true, editable: false, width: 35 },
+                    { name: 'employee_email', index: 'employee_email', sortable: true, editable: false, width: 35 },
+                    { name: 'user_name', index: 'user_name', sortable: true, editable: false, width: 20 },
+                    { name: 'rec_isactive', index: 'rec_isactive', sortable: true, editable: false, width: 10, edittype: 'select', editoptions: { value: 'Yes:Yes;No:No' }, search: false },
+                    { name: 'rec_modified_date', index: 'rec_modified_date', sortable: true, editable: false, width: 25, formatter: "date", formatoptions: { newformat: "m/d/Y H:i:s" }, search: false },
+                    { name: 'rec_modified_by', index: 'rec_modified_by', sortable: true, sortorder: 'asc', editable: false, width: 15 },
+                    { name: 'setup', index: 'setup', sortable: false, editable: false, search: false, width: 5 }
+                ],
+
+                rowNum: 10,
+                rowList: [10, 20, 30],
+                pager: '#pjqgrid',
+                sortname: 'employee_name',
+                toolbarfilter: true,
+                viewrecords: true,
+                sortorder: "asc",
+                gridComplete: function () {
+                    var ids = jQuery("#jqgrid").jqGrid('getDataIDs');
+                    for (var i = 0; i < ids.length; i++) {
+                        var cl = ids[i];
+                        //be = "<button class='btn btn-xs btn-default' data-original-title='Edit Row' onclick=\"jQuery('#jqgrid').editRow('" + cl + "');\"><i class='fa fa-pencil'></i></button>";
+                        //se = "<button class='btn btn-xs btn-default' data-original-title='Save Row' onclick=\"jQuery('#jqgrid').saveRow('" + cl + "');\"><i class='fa fa-save'></i></button>";
+                        //ca = "<button class='btn btn-xs btn-default' data-original-title='Cancel' onclick=\"jQuery('#jqgrid').restoreRow('" + cl + "');\"><i class='fa fa-times'></i></button>";
+                        //ce = "<button class='btn btn-xs btn-default' onclick=\"jQuery('#jqgrid').restoreRow('"+cl+"');\"><i class='fa fa-times'></i></button>";
+                        //jQuery("#jqgrid").jqGrid('setRowData', ids[i], {
+                        //    act: be + se + ca
+                        //});
+
+                        be = "<a data-toggle='modal' href='#UserAccount' class='btn btn-xs btn-default' onclick=\"OpenModalFrm('" + cl + "');\"><i class='fa fa-pencil'></i> Edit</a>";
+                        jQuery("#jqgrid").jqGrid('setRowData', ids[i], { act: be });
+
+                    }
+                },
+                jsonReader: {
+                    root: "rows",
+                    page: "page",
+                    total: "total",
+                    records: "records",
+                    repeatitems: false,
+                    Id: "0"
+                },
+                editurl: '/user_account/Cruduser_account/',
+                caption: "User Account",
+                emptyrecords: 'No Currency Records are Available to Display',
+                multiselect: true,
+                autowidth: true,
+
+            });
+            jQuery("#jqgrid").jqGrid('navGrid', "#pjqgrid", {
+                edit: false,
+                add: false,
+                del: true,
+                refresh: true,
+                closeAfterSearch: true
+            }, {
+                zIndex: 100,
+                caption: "Search Currency",
+                sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+                closeAfterSearch: true
+            });
+            jQuery("#jqgrid").jqGrid('inlineNav', "#pjqgrid", {
+                edit: false,
+                add: false,
+                cancel: false,
+                save:false,
+            });
+            /* Add tooltips */
+            $('.navtable .ui-pg-button').tooltip({
+                container: 'body'
+            });
+            // remove classes
+            $(".ui-jqgrid").removeClass("ui-widget ui-widget-content");
+            $(".ui-jqgrid-view").children().removeClass("ui-widget-header ui-state-default");
+            $(".ui-jqgrid-labels, .ui-search-toolbar").children().removeClass("ui-state-default ui-th-column ui-th-ltr");
+            $(".ui-jqgrid-pager").removeClass("ui-state-default");
+            $(".ui-jqgrid").removeClass("ui-widget-content");
+
+            // add classes
+            $(".ui-jqgrid-htable").addClass("table table-bordered table-hover");
+            $(".ui-jqgrid-btable").addClass("table table-bordered table-striped");
+
+            $(".ui-pg-div").removeClass().addClass("btn btn-sm btn-primary");
+            $(".ui-icon.ui-icon-plus").removeClass().addClass("fa fa-plus");
+            $(".ui-icon.ui-icon-pencil").removeClass().addClass("fa fa-pencil");
+            $(".ui-icon.ui-icon-trash").removeClass().addClass("fa fa-trash-o");
+            $(".ui-icon.ui-icon-search").removeClass().addClass("fa fa-search");
+            $(".ui-icon.ui-icon-refresh").removeClass().addClass("fa fa-refresh");
+            $(".ui-icon.ui-icon-disk").removeClass().addClass("fa fa-save").parent(".btn-primary").removeClass("btn-primary").addClass("btn-success");
+            $(".ui-icon.ui-icon-cancel").removeClass().addClass("fa fa-times").parent(".btn-primary").removeClass("btn-primary").addClass("btn-danger");
+
+            $(".ui-icon.ui-icon-seek-prev").wrap("<div class='btn btn-sm btn-default'></div>");
+            $(".ui-icon.ui-icon-seek-prev").removeClass().addClass("fa fa-backward");
+
+            $(".ui-icon.ui-icon-seek-first").wrap("<div class='btn btn-sm btn-default'></div>");
+            $(".ui-icon.ui-icon-seek-first").removeClass().addClass("fa fa-fast-backward");
+
+            $(".ui-icon.ui-icon-seek-next").wrap("<div class='btn btn-sm btn-default'></div>");
+            $(".ui-icon.ui-icon-seek-next").removeClass().addClass("fa fa-forward");
+
+            $(".ui-icon.ui-icon-seek-end").wrap("<div class='btn btn-sm btn-default'></div>");
+            $(".ui-icon.ui-icon-seek-end").removeClass().addClass("fa fa-fast-forward");
+
+        })
+
+        $(window).on('resize.jqGrid', function () {
+            $("#jqgrid").jqGrid('setGridWidth', $("#content").width());
+        })
+
+
+        function OpenModalFrm(id) {
+            $("#UserAccount").html("");
+            $.ajax({
+                url: "/user_account/ModalFrm/" + id,
+                success: function (data) {
+                    //alert("data");
+                    $("#UserAccount").html(data);
+                },
+                error: function (data) {
+                    //console.log(data);
+                    alert("Error!\n" + JSON.stringify(data));
+                }
+            });
+        }
+
+
+        function GetEmployee(id) {
+            $('#CancelBtn').prop('disabled', true);
+
+            $.ajax({
+                type: 'POST',
+                url: "/user_account/GetEmployeeList/" + id,
+                dataType: 'json',
+                success: function (data) {
+                    for (var i in data) {
+                        $("#employee_id").val(data[i].employee_id);
+                        $("#employee_nik").val(data[i].employee_nik);
+                        $("#employee_name").val(data[i].employee_name);
+                        $("#employee_email").val(data[i].employee_email);
+                        $("#employee_email").css({ 'background-color': color_input_text });
+                        $("#employee_name").css({ 'background-color': color_input_text });
+                        $("#employee_nik").css({ 'background-color': color_input_text });
+                    }
+                },
+                error: function (data) {
+                    alert("error!");
+                }
+            })
+        }
+
+
+        function OpenModalEmployeeList() {
+            $("#Employee").html("");
+            var empployee_id = $("#employee_id").val();
+            //alert("modal \n" + empployee_id);
+
+            $.ajax({
+                url: "/user_account/EmployeeModal/",
+                success: function (data) {
+                    $("#Employee").html(data);
+                    //alert("open modal");
+                    var oTable = $('#EmployeeTblList').DataTable({
+                        "ajax": {
+                            "url": "/user_account/GetEmployeeList/0",
+                            "type": "GET",
+                            "datatype": "json",
+                        },
+                        "columns": [
+                            { "data": "employee_id", "autoWidth": true },
+                            { "data": "employee_nik", "autoWidth": true },
+                            { "data": "employee_name", "autoWidth": true },
+                            { "data": "employee_email", "autoWidth": true },
+                            {
+                                "data": "action",
+                                "autowidth": true,
+                                "mRender": function (data, type, full) {
+                                    return '<a class="btn btn-xs btn-primary" data-dismiss="modal" onclick="GetEmployee(' + full['employee_id'] + ');">' + 'Select' + '</a>';
+                                }
+                            }
+                        ]
+                    });
+                }
+            });
+        }
+
+
+
+    </script>
+}

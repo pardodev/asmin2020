@@ -1,0 +1,171 @@
+﻿@model IEnumerable<ASM_UI.Models.tr_asset_registration>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.asset_type_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.asset_number)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.company_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.asset_reg_location_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.asset_reg_pic_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.category_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.asset_po_number)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.asset_do_number)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.asset_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.asset_merk)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.asset_serial_number)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.vendor_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.asset_receipt_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.location_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.department_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.asset_description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fl_active)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.created_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.created_by)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.updated_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.updated_by)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.deleted_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.deleted_by)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.org_id)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.asset_type_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.asset_number)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.company_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.asset_reg_location_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.asset_reg_pic_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.category_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.asset_po_number)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.asset_do_number)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.asset_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.asset_merk)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.asset_serial_number)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.vendor_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.asset_receipt_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.location_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.department_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.asset_description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fl_active)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.created_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.created_by)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.updated_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.updated_by)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.deleted_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.deleted_by)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.org_id)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.asset_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.asset_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.asset_id })
+        </td>
+    </tr>
+}
+
+</table>

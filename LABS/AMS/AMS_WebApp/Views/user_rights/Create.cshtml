@@ -1,0 +1,69 @@
+﻿@model ASM_UI.Models.user_rightViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create user access</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.user_type_id, "user_type_id", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("user_type_id", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.user_type_id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.job_level_id, "job_level_id", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("job_level_id", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.job_level_id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.menu_access, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <table id="tablemnu">
+                    @foreach (var mnu in Model.ms_menus)
+                    {
+                       <tr>
+                           <td><label class="form-check-label" for="@mnu.menu_id">@mnu.menu_code</label></td>
+                           <td><label class="form-check-label" for="@mnu.menu_id">@mnu.menu_name</label></td>
+                           <td>
+                               <div class="form-check">
+                                   <input type="checkbox" class="form-check-input" id="menu_id" value="@mnu.menu_id">
+                               </div>
+                           </td>
+                       </tr>
+                    }
+                </table>
+
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

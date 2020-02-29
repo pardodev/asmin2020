@@ -1,0 +1,244 @@
+﻿<script type="text/javascript">
+
+    $('#Country').select2({
+        placeholder: 'Select Country',
+        allowClear: true
+    });
+
+    $(document).ready(function () {
+        var $loginForm = $("#insurance-form").validate({
+            // Rules for form validation
+            rules: {
+                insuranceCode: {
+                    required: true,
+                },
+                insuranceName: {
+                    required: true
+                },
+                insuranceAddress: {
+                    required: true
+                },
+                Country: {
+                    required: true
+                },
+                //insurancePhone: {
+                //    required: true,
+                //    number: true
+                //},
+                //insuranceMail: {
+                //    required: true,
+                //    email: true
+                //},
+                //insuranceCPName: {
+                //    required: true
+                //},
+                //insuranceCPPhone: {
+                //    required: true
+                //},
+                //insuranceCPName: {
+                //    required: true
+                //},
+                //insuranceDescription: {
+                //    required: true
+                //}
+            },
+
+            // Messages for form validation
+            messages: {
+                insuranceCode: {
+                    required: 'Please enter Code'
+                },
+                insuranceName: {
+                    required: 'Please enter Name'
+                },
+                insuranceAddress: {
+                    required: 'Please enter Address'
+                },
+                Country: {
+                    required: 'Please enter Country'
+                },
+                //insurancePhone: {
+                //    required: 'Please enter Phone'
+                //},
+                //insuranceMail: {
+                //    required: 'Please enter Mail'
+                //},
+                //insuranceCPName: {
+                //    required: 'Please enter CP Name'
+                //},
+                //insuranceCPPhone: {
+                //    required: 'Please enter CP Phone'
+                //},
+                //insuranceCPMail: {
+                //    required: 'Please enter CP Mail'
+                //},
+                //insuranceDescription: {
+                //    required: 'Please enter Description'
+                //}
+            },
+
+            // Do not change code below
+            errorPlacement: function (error, element) {
+                error.insertAfter(element.parent());
+            }
+        });
+
+    })
+</script>
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                &times;
+            </button>
+            <h4 class="modal-title">
+                Insurance Management
+            </h4>
+        </div>
+        <div class="modal-body no-padding">
+
+            <form id="insurance-form" class="smart-form" method="post" action="@Url.Action("SaveData", "insurance")">
+                <fieldset>
+                    <section>
+                        <div class="row">
+                            <label class="label col col-3">Insurance Code</label>
+                            <div class="col col-9">
+                                <label class="input">
+                                    <input type="text" name="insuranceCode" id="insurance_Code" placeholder="Insurance Code">
+                                </label>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="row">
+                            <label class="label col col-3">Insurance Name</label>
+                            <div class="col col-9">
+                                <label class="input">
+                                    <input type="text" name="insuranceName" id="insurance_Name" placeholder="Insurance Name">
+                                </label>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="row">
+                            <label class="label col col-3">Insurance Address</label>
+                            <div class="col col-9">
+                                <label class="input">
+                                    <input type="text" name="insuranceAddress" id="insurance_Address" placeholder="Insurance Address">
+                                </label>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="row">
+                            <label class="label col col-3">Country</label>
+                            <div class="col col-9">
+                                <select id="CountryID" name="Country" placeholder="Select Country" style="width:100%" class="select2"></select>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="row">
+                            <label class="label col col-3">Phone</label>
+                            <div class="col col-9">
+                                <label class="input">
+                                    <input type="text" name="insurancePhone" id="insurance_Phone" placeholder="Insurance Phone">
+                                </label>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="row">
+                            <label class="label col col-3">Email Address</label>
+                            <div class="col col-9">
+                                <label class="input">
+                                    <input type="text" name="insuranceMail" id="insurance_Mail" placeholder="Insurance Mail">
+                                </label>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="row">
+                            <hr />
+                        </div>
+                    </section>
+                    <section>
+                        <div class="row">
+                            <label class="label col col-3">CP Name</label>
+                            <div class="col col-9">
+                                <label class="input">
+                                    <input type="text" name="insuranceCPName" id="insurance_CPName" placeholder="Insurance CP Name">
+                                </label>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="row">
+                            <label class="label col col-3">CP Phone</label>
+                            <div class="col col-9">
+                                <label class="input">
+                                    <input type="text" name="insuranceCPPhone" id="insurance_CPPhone" placeholder="Insurance CP Phone">
+                                </label>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="row">
+                            <label class="label col col-3">CP Email Address</label>
+                            <div class="col col-9">
+                                <label class="input">
+                                    <input type="text" name="insuranceCPMail" id="insurance_CPMail" placeholder="Insurance CP Mail">
+                                </label>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="row">
+                            <label class="label col col-3">Description</label>
+                            <div class="col col-9">
+                                <label class="input">
+                                    <input type="text" name="insuranceDescription" id="insurance_Description" placeholder="Insurance Description">
+                                </label>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="row">
+                            <label class="label col col-3">Is Active</label>
+                            <div class="col col-9">
+                                <label class="input">
+                                    <select id="rec_isactive" name="rec_isactive" placeholder="Select" style="width:100%" class="select2">
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="row">
+                            <label class="label col col-3" style="display:none">Insurance ID</label>
+                            <div class="col col-9">
+                                <label class="input">
+                                    <input type="text" name="insuranceID" id="insuranceID" placeholder="Insurance ID" style="display:none">
+                                </label>
+                            </div>
+                        </div>
+                    </section>
+                </fieldset>
+
+                <footer>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Cancel
+                    </button>
+
+                </footer>
+            </form>
+
+
+        </div>
+
+    </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->

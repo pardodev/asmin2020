@@ -1,0 +1,159 @@
+﻿@model IEnumerable<ASM_UI.Models.tr_disposal_process>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.request_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fl_pic_asset_comfirm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pic_asset_confirm_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pic_asset_employee_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pic_asset_level_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pic_asset_received_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pic_asset_received_employee_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pic_asset_received_level_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.disposal_suggestion_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.disposal_sent_dept_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.disposal_sent_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.user_asset_received_employee_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.user_asset_received_level_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.user_asset_received_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fl_active)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.created_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.created_by)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.updated_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.updated_by)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.deleted_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.deleted_by)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.org_id)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.request_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fl_pic_asset_comfirm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pic_asset_confirm_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pic_asset_employee_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pic_asset_level_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pic_asset_received_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pic_asset_received_employee_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pic_asset_received_level_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.disposal_suggestion_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.disposal_sent_dept_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.disposal_sent_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.user_asset_received_employee_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.user_asset_received_level_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.user_asset_received_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fl_active)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.created_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.created_by)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.updated_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.updated_by)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.deleted_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.deleted_by)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.org_id)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.disposal_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.disposal_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.disposal_id })
+        </td>
+    </tr>
+}
+
+</table>
