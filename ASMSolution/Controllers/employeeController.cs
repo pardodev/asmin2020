@@ -500,32 +500,42 @@ namespace ASM_UI.Controllers
             return View(emp_setup);
         }
 
-        [HttpGet]
-        public JsonResult FetchRegisterLocation()
-        {
-            var data = db.ms_asset_register_location
-                .Where(c => c.fl_active == true)
-                .Select(l => new
-                {
-                    Value = l.asset_reg_location_id,
-                    Text = l.asset_reg_location_name
-                });
-            return Json(data, JsonRequestBehavior.AllowGet);
-        }
+        //[HttpGet]
+        //public JsonResult FetchRegisterLocation()
+        //{
+        //    var data = db.ms_asset_register_location
+        //        .Where(c => c.fl_active == true)
+        //        .Select(l => new
+        //        {
+        //            Value = l.asset_reg_location_id,
+        //            Text = l.asset_reg_location_name
+        //        });
+        //    return Json(data, JsonRequestBehavior.AllowGet);
+        //}
 
-        [HttpGet]
-        public JsonResult FetchAssetLocation(int reg_location_id)
-        {
-            var data = db.ms_asset_location
-                .Where(l => l.asset_reg_location_id == reg_location_id && l.fl_active == true)
-                .Select(l => new
-                {
-                    Value = l.location_id,
-                    Text = l.location_name
-                });
-            return Json(data, JsonRequestBehavior.AllowGet);
-        }
+        //[HttpGet]
+        //public JsonResult FetchAssetLocation(int reg_location_id)
+        //{
+        //    var data = db.ms_asset_location
+        //        .Where(l => l.asset_reg_location_id == reg_location_id && l.fl_active == true)
+        //        .Select(l => new
+        //        {
+        //            Value = l.location_id,
+        //            Text = l.location_name
+        //        });
+        //    return Json(data, JsonRequestBehavior.AllowGet);
+        //}
 
+        public ActionResult GetAssetLocation(int reg_loc_id)
+        {
+
+            List<ms_asset_location> select_list_location = db.ms_asset_location
+                .Where(l => l.asset_reg_location_id == reg_loc_id && l.fl_active == true)
+                .ToList<ms_asset_location>();
+                
+            ViewBag.DDL_AssetLocation = new SelectList(select_list_location, "location_id", "location_name");
+            return PartialView("_DDL_AssetLocation");
+        }
 
 
     }

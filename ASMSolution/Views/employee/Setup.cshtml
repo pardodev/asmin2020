@@ -129,12 +129,20 @@
                                                                                     <label class="input">@item.ms_asmin_company.company_name</label>
                                                                                 </td>
 
-                                                                                <td>@Html.DropDownListFor(x => x.selected_register_id, new SelectList(item.sli_register_list, "Value", "Text", item.sli_register_list), new { @class = "form-control select" })</td>
-                                                                                <td>@Html.DropDownListFor(x => x.selected_location_id, new SelectList(item.sli_location_list, "Value", "Text", item.sli_location_list), new { @class = "form-control select" })</td>
+                                                                                <td>
+                                                                                    @*@Html.DropDownListFor(x => x.selected_register_id, new SelectList(item.sli_register_list, "Value", "Text", item.sli_register_list), new { @class = "form-control select" })*@
+                                                                                    @Html.DropDownListFor(x => x.selected_register_id, new SelectList(item.sli_register_list, "Value", "Text", item.sli_register_list), new { @class = "form-control select" })
+                                                                                </td>
+                                                                                
+                                                                                <td>
+                                                                                    @Html.DropDownListFor(x => x.selected_location_id, new SelectList(item.sli_location_list, "Value", "Text", item.sli_location_list), new { @class = "form-control select" })
+                                                                                    @*@Html.DropDownListFor(x => x.selected_location_id, new SelectList(""), "-- Select --", new { @class = "form-control select" })*@
+                                                                                </td>
 
                                                                                 <td>@Html.DropDownListFor(x => x.selected_department_id, new SelectList(item.sli_department_list, "Value", "Text", item.selected_department_id), new { @class = "form-control select" })</td>
                                                                                 <td>@Html.DropDownListFor(x => x.selected_job_level_id, new SelectList(item.sli_job_level_list, "Value", "Text", item.selected_job_level_id), new { @class = "form-control select" })</td>
                                                                                 @*<td>@Html.DropDownListFor(x => x.selected_user_type_id, new SelectList(item.sli_user_type_list, "Value", "Text", item.selected_user_type_id), new { @class = "form-control select" })</td>*@
+                                                                            
                                                                             </tr>
                                                                             i_loop += 1;
                                                                         }
@@ -178,11 +186,72 @@
 @section pagespecific {
     <script type="text/javascript">
         $(document).ready(function () {
+
             $('#asset_receipt_date').datepicker({
                 dateFormat: 'dd-mm-yy',
                 prevText: '<i class="fa fa-chevron-left"></i>',
                 nextText: '<i class="fa fa-chevron-right"></i>',
             });
+
+            //$.map($('select[name="selected_register_id"]'), function (e) {
+            //    alert(this.name);
+            //    alert(this.id);
+            //    //return $('option:selected', e).val();
+            //});
+
+            //$('#selected_register_id').change(function () {
+            //    alert(this.name);
+            //    alert(this.id);
+            //});
+
+
+             //$('.form-control select').change( function() {
+             //    alert($(this).name);
+             //    alert($(this).id);
+             //});
+
+            $(".selected_location_id").live('change',function(){
+                alert(this+"option:selected");
+                ////alert($(this+"option:selected").val());
+            });
+
+            $('select[name="_selected_register_id_"]').change(function () {
+               //var index = $(this).attr('name').split('_');
+               //console.log(index);
+
+                //var _name = $(this).attr('name');
+                //console.log(_name);
+                //var _id = $(this).attr('id');
+                //console.log(_id);
+                //console.log($(this).length);
+
+                var _val = $(this).val();
+                //console.log(_val);
+
+                //var _val0 = $("select[name='selected_register_id'] option:selected").val();
+                //alert(_val0);
+
+                var reg_loc_id = _val;
+                var script_url = '/employee/GetAssetLocation?reg_loc_id=' + reg_loc_id;
+                debugger
+                $.ajax({
+                    type        : "post",
+                    url         : script_url,
+                    contentType : "html",
+                    success: function (data) {
+                        debugger
+                        //var o_ctl = $('select[name="selected_location_id"]');
+                        var o_ctl  = $.map($('select[name="selected_location_id"]'), function (e) {
+                                        return $(e);
+                                     });
+                        //o_ctl.empty();
+                        o_ctl.append(data);
+                    }
+
+                   });
+
+            });
+
         });
     </script>
 }

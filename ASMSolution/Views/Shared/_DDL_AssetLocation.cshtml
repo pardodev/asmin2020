@@ -1,0 +1,11 @@
+﻿@model ASM_UI.Models.ms_asset_location
+
+<option value="">-- Select --</option>
+
+@if (ViewBag.DDL_AssetLocation != null)
+{
+    foreach(var item in ViewBag.DDL_AssetLocation)
+    { 
+        <option value="@item.Value">@item.Text</option>
+    }
+}
