@@ -124,6 +124,115 @@ namespace ASM_UI.Controllers
             return View(_qry);
         }
 
+        [HttpGet]
+        public JsonResult List()
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            var _qry = new object();
+            if (UserProfile.asset_reg_location_id == 2) //branchs
+            {
+                _qry = (from dr in db.tr_mutation_request
+                        where (dr.fl_active == true && dr.deleted_date == null)
+                        //&& dr.org_id == UserProfile.OrgId
+                        //&& dr.request_dept_id == UserProfile.department_id
+                        //&& dr.request_location_id == UserProfile.location_id
+
+                        join a in db.tr_asset_registration on dr.asset_id equals a.asset_id
+                        where (a.fl_active == true && a.deleted_date == null
+                        && a.company_id == UserProfile.company_id
+                        && a.current_location_id == UserProfile.location_id
+                        )
+
+                        //join b in db.ms_asmin_company on a.company_id equals b.company_id
+                        //where (b.fl_active == true && b.deleted_date == null)
+
+                        join c in db.ms_department on dr.transfer_to_dept_id equals c.department_id
+                        where (c.fl_active == true && c.deleted_date == null)
+
+                        join d in db.ms_employee on dr.transfer_to_emp_id equals d.employee_id
+                        where (d.fl_active == true && d.deleted_date == null)
+
+                        //join e in db.ms_asset_register_location on dr.request_location_id equals e.asset_reg_location_id
+                        //where (e.fl_active == true && e.deleted_date == null)
+
+                        join e in db.ms_asset_location on dr.transfer_to_location_id equals e.location_id
+                        where (e.fl_active == true && e.deleted_date == null)
+
+                        join f in db.ms_request_status on dr.request_status equals f.request_status_id
+
+                        select new 
+                        {
+                            asset_id = dr.asset_id,
+                            asset_number = a.asset_number,
+                            asset_name = a.asset_name,
+
+                            request_id = dr.request_id,
+                            request_code = dr.request_code,
+                            request_date = dr.request_date,
+                            request_status_name = f.request_status_name,
+                            fl_approval = dr.fl_approval,
+                            approval_date = dr.approval_date,
+
+                            department_name = c.department_code,
+                            employee_name = d.employee_name,
+                            location_name = e.location_name
+                        }).ToList();
+            }
+            else if (UserProfile.asset_reg_location_id == 1)
+            {
+                _qry = (from dr in db.tr_mutation_request
+                        where (dr.fl_active == true && dr.deleted_date == null)
+                        //&& dr.org_id == UserProfile.OrgId
+                        //&& dr.request_dept_id == UserProfile.department_id
+                        //&& dr.request_location_id == UserProfile.location_id
+
+                        join a in db.tr_asset_registration on dr.asset_id equals a.asset_id
+                        where (a.fl_active == true && a.deleted_date == null
+                        && a.company_id == UserProfile.company_id
+                        //&& a.current_location_id == UserProfile.location_id
+                        )
+
+                        //join b in db.ms_asmin_company on a.company_id equals b.company_id
+                        //where (b.fl_active == true && b.deleted_date == null)
+
+                        join c in db.ms_department on dr.transfer_to_dept_id equals c.department_id
+                        where (c.fl_active == true && c.deleted_date == null)
+
+                        join d in db.ms_employee on dr.transfer_to_emp_id equals d.employee_id
+                        where (d.fl_active == true && d.deleted_date == null)
+
+                        //join e in db.ms_asset_register_location on dr.request_location_id equals e.asset_reg_location_id
+                        //where (e.fl_active == true && e.deleted_date == null)
+
+                        join e in db.ms_asset_location on dr.transfer_to_location_id equals e.location_id
+                        where (e.fl_active == true && e.deleted_date == null)
+
+                        join f in db.ms_request_status on dr.request_status equals f.request_status_id
+
+                        select new 
+                        {
+                            asset_id = dr.asset_id,
+                            asset_number = a.asset_number,
+                            asset_name = a.asset_name,
+
+                            request_id = dr.request_id,
+                            request_code = dr.request_code,
+                            request_date = dr.request_date,
+                            request_status_name = f.request_status_name,
+                            fl_approval = dr.fl_approval,
+                            approval_date = dr.approval_date,
+
+                            department_name = c.department_code,
+                            employee_name = d.employee_name,
+                            location_name = e.location_name
+                        }).ToList();
+            }
+
+
+            return Json(new { data = _qry }, JsonRequestBehavior.AllowGet);
+
+        }
+
         public ActionResult RequestMutation()
         {
             AssetMutationViewModel mutation_req = new AssetMutationViewModel()
@@ -461,32 +570,32 @@ namespace ASM_UI.Controllers
                             //Save Approval List Mutation Untuk KTT
                             //Hendy 22 Feb 2020
                             var _qry_ktt = (from sa in db.sy_ref_approval_level
-                                        where sa.asset_reg_location_id == mutation_req.current_location_id 
-                                        && sa.job_level_id == 3
+                                            where sa.asset_reg_location_id == mutation_req.current_location_id
+                                            && sa.job_level_id == 3
 
-                                        join a in db.ms_job_level on sa.job_level_id equals a.job_level_id
-                                        where (a.fl_active == true && a.deleted_date == null)
+                                            join a in db.ms_job_level on sa.job_level_id equals a.job_level_id
+                                            where (a.fl_active == true && a.deleted_date == null)
 
-                                        join b in db.ms_employee_detail on a.job_level_id equals b.job_level_id
-                                        where (b.fl_active == true && b.deleted_date == null) 
-                                        && b.company_id == UserProfile.company_id 
-                                        && b.asset_reg_location_id == UserProfile.asset_reg_location_id
+                                            join b in db.ms_employee_detail on a.job_level_id equals b.job_level_id
+                                            where (b.fl_active == true && b.deleted_date == null)
+                                            && b.company_id == UserProfile.company_id
+                                            && b.asset_reg_location_id == UserProfile.asset_reg_location_id
 
-                                        join c in db.ms_employee on b.employee_id equals c.employee_id
-                                                                             
+                                            join c in db.ms_employee on b.employee_id equals c.employee_id
 
-                                        orderby sa.order_no ascending
-                                        select new AssetMutationViewModel()
-                                        {
-                                            //request_location_id = b.loca
-                                            request_dept_id = b.department_id,
-                                            request_emp_id = b.employee_id,
-                                            request_level_id = a.job_level_id,
-                                            current_employee_id = c.employee_id,
-                                            employee_email = c.employee_email,
-                                            employee_name = c.employee_name,
-                                            ip_address = c.ip_address
-                                        }).ToList<AssetMutationViewModel>();
+
+                                            orderby sa.order_no ascending
+                                            select new AssetMutationViewModel()
+                                            {
+                                                //request_location_id = b.loca
+                                                request_dept_id = b.department_id,
+                                                request_emp_id = b.employee_id,
+                                                request_level_id = a.job_level_id,
+                                                current_employee_id = c.employee_id,
+                                                employee_email = c.employee_email,
+                                                employee_name = c.employee_name,
+                                                ip_address = c.ip_address
+                                            }).ToList<AssetMutationViewModel>();
 
                             if (_qry_ktt != null)
                             {
@@ -531,33 +640,33 @@ namespace ASM_UI.Controllers
                             if (dept != null)
                             {
                                 var _qry_bod = (from sa in db.sy_ref_approval_level
-                                        where sa.asset_reg_location_id == mutation_req.current_location_id && sa.job_level_id == 9
+                                                where sa.asset_reg_location_id == mutation_req.current_location_id && sa.job_level_id == 9
 
-                                        join a in db.ms_job_level on sa.job_level_id equals a.job_level_id
-                                        where (a.fl_active == true && a.deleted_date == null)
+                                                join a in db.ms_job_level on sa.job_level_id equals a.job_level_id
+                                                where (a.fl_active == true && a.deleted_date == null)
 
-                                        join b in db.ms_employee_detail on a.job_level_id equals b.job_level_id
-                                        where (b.fl_active == true && b.deleted_date == null
-                                                && b.company_id == UserProfile.company_id)
+                                                join b in db.ms_employee_detail on a.job_level_id equals b.job_level_id
+                                                where (b.fl_active == true && b.deleted_date == null
+                                                        && b.company_id == UserProfile.company_id)
 
-                                        join c in db.ms_employee on b.employee_id equals c.employee_id
-                                        where c.fl_active == true && c.deleted_date == null
+                                                join c in db.ms_employee on b.employee_id equals c.employee_id
+                                                where c.fl_active == true && c.deleted_date == null
 
-                                        join d in db.ms_department on c.employee_id equals d.employee_bod_id
-                                        where d.department_id == UserProfile.department_id
+                                                join d in db.ms_department on c.employee_id equals d.employee_bod_id
+                                                where d.department_id == UserProfile.department_id
 
-                                    orderby sa.order_no ascending
-                                    select new AssetMutationViewModel()
-                                    {
-                                        //request_location_id = b.loca
-                                        request_dept_id = b.department_id,
-                                        request_emp_id = d.employee_bod_id,
-                                        request_level_id = a.job_level_id,
-                                        current_employee_id = c.employee_id,
-                                        employee_email = c.employee_email,
-                                        employee_name = c.employee_name,
-                                        ip_address = c.ip_address
-                                    }).ToList<AssetMutationViewModel>();
+                                                orderby sa.order_no ascending
+                                                select new AssetMutationViewModel()
+                                                {
+                                                    //request_location_id = b.loca
+                                                    request_dept_id = b.department_id,
+                                                    request_emp_id = d.employee_bod_id,
+                                                    request_level_id = a.job_level_id,
+                                                    current_employee_id = c.employee_id,
+                                                    employee_email = c.employee_email,
+                                                    employee_name = c.employee_name,
+                                                    ip_address = c.ip_address
+                                                }).ToList<AssetMutationViewModel>();
 
                                 if (_qry_bod != null)
                                 {

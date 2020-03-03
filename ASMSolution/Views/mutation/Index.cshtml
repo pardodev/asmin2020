@@ -57,66 +57,26 @@
                                         <th>
                                             @Html.DisplayNameFor(model => model.asset_name)
                                         </th>
-                                        @*<th>
-                                            @Html.DisplayNameFor(model => model.company_id)
-                                        </th>*@
+
                                         <th>
-                                            Transfer To "Location"
-                                            @*@Html.DisplayNameFor(model => model.location_name)*@
+                                            @*Transfer To Location*@
+                                            @Html.DisplayNameFor(model => model.location_name)
                                         </th>
                                         <th>
-                                            Transfer To "Department"
-                                            @*@Html.DisplayNameFor(model => model.department_name)*@
+                                            @*Transfer To Department*@
+                                            @Html.DisplayNameFor(model => model.department_name)
                                         </th>
                                         <th>
-                                            Transfer To "Employee"
-                                            @*@Html.DisplayNameFor(model => model.employee_name)*@
+                                            @*Transfer To Employee*@
+                                            @Html.DisplayNameFor(model => model.employee_name)
                                         </th>
-                                        <th>Approval Status</th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.request_status_name)
+                                        </th>
+                                        @*<th colspan="2" width="5%"></th>*@
+                                        <th hidden="hidden" width="5%"></th>
                                     </tr>
                                 </thead>
-                                @foreach (var item in Model)
-                                {
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.request_code)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.request_date)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.asset_parent.asset_number)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.asset_parent.asset_name)
-                                            </td>
-                                            @*<td>
-                                                @Html.DisplayFor(modelItem => item.company.company_code)
-                                            </td>*@
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.location_name)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.department_name)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.employee_name)
-                                            </td>
-
-                                            <td>
-                                                @if (item.fl_approval == false || item.fl_approval == null)
-                                                {
-                                                    @Html.ActionLink(string.Format("{0}", @Html.DisplayFor(modelItem => item.request_status_name)), "Details", new { id = item.request_id })
-                                                }
-                                                else if (item.fl_approval == true)
-                                                {
-                                                    @Html.ActionLink(string.Format("{0} - {1:dd MMM yyyy}", @Html.DisplayFor(modelItem => item.request_status_name), @Html.DisplayFor(modelItem => item.approval_date)), "Details", new { id = item.request_id })
-                                                }
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                }
 
                             </table>
                         </div>
@@ -145,26 +105,79 @@
             };
 
             $('#table_basic').dataTable({
-                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
-                    "t" +
-                    "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-                "autoWidth": true,
-                "oLanguage": {
-                    "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+
+                "ajax": {
+                    "url": "/mutation/List/",
+                    "type": "GET",
+                    "datatype": "json",
                 },
-                "preDrawCallback": function () {
-                    // Initialize the responsive datatables helper once.
-                    if (!responsiveHelper_dt_basic) {
-                        responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#table_basic'), breakpointDefinition);
+
+                "columns": [
+                    { "data": "request_code", "autoWidth": true },
+                    //{ "data": "request_date", "autoWidth": true },
+                            {
+                                "data": "request_date", "autoWidth": true, type: 'date',
+                                render: function (data, type, row) { return data ? moment(data).format('DD-M-YYYY') : ''; }
+                            },
+
+                    { "data": "asset_number", "autoWidth": true },
+                    { "data": "asset_name", "autoWidth": true },
+                    { "data": "location_name", "autoWidth": true },
+                    { "data": "department_name", "autoWidth": true },
+                    { "data": "employee_name", "autoWidth": true },
+                    //{ "data": "request_status_name", "autoWidth": true },
+                    {
+                        "data": "action",
+                        "autowidth": true,
+                        "mRender": function (data, type, rec_row) {
+                            debugger
+                            var _status_name = rec_row['request_status_name'];
+                            var _app_date = (rec_row['approval_date']) ? moment(rec_row['approval_date']).format('DD-MMM-YYYY') : '';
+                            if (rec_row['fl_approval'] == true)
+                                return '<a href="/mutation/Details/' + rec_row['request_id'] + '">' + _status_name + '<br/>' + _app_date + '</a>';
+                            else
+                                return '<a href="/mutation/Details/' + rec_row['request_id'] + '">' + _status_name + '</a>';
+                        }
+                    },
+                    //{
+                    //    "data": "action",
+                    //    "autowidth": true,
+                    //    "mRender": function (data, type, full) {
+                    //        return '<a href="/mutation/Details/' + full['request_id'] + '">' + 'Detail' + '</a>';
+                    //    }
+                    //}
+
+                    //{
+                    //    "data": "action",
+                    //    "autowidth": true,
+                    //    "mRender": function (data, type, full) {
+                    //        return '<a href="#" onclick="DeleteData('+full['asset_id']+')">' + 'Delete' + '</a>';
+                    //    }
+                    //}
+
+                ]
+            },
+                {
+                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
+                        "t" +
+                        "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+                    "autoWidth": true,
+                    "oLanguage": {
+                        "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+                    },
+                    "preDrawCallback": function () {
+                        // Initialize the responsive datatables helper once.
+                        if (!responsiveHelper_dt_basic) {
+                            responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#table_basic'), breakpointDefinition);
+                        }
+                    },
+                    "rowCallback": function (nRow) {
+                        responsiveHelper_dt_basic.createExpandIcon(nRow);
+                    },
+                    "drawCallback": function (oSettings) {
+                        responsiveHelper_dt_basic.respond();
                     }
-                },
-                "rowCallback": function (nRow) {
-                    responsiveHelper_dt_basic.createExpandIcon(nRow);
-                },
-                "drawCallback": function (oSettings) {
-                    responsiveHelper_dt_basic.respond();
-                }
-            });
+                });
         });
 
     </script>

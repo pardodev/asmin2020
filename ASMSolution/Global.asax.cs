@@ -9,6 +9,9 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
 using System.Web.Optimization;
+using System.Threading;
+using System.Globalization;
+using Newtonsoft.Json;
 
 namespace ASM_UI
 {
@@ -24,6 +27,7 @@ namespace ASM_UI
             var binder = new App_Start.UTCDateTimeModelBinder();
             ModelBinders.Binders.Add(typeof(DateTime), binder);
             ModelBinders.Binders.Add(typeof(DateTime?), binder);
+
         }
 
         protected void Session_Start()
@@ -82,6 +86,16 @@ namespace ASM_UI
             var ex = Server.GetLastError();
             //log the error!
             app_logwriter.ToLog(ex.Message);
+        }
+
+        protected void Application_BeginRequest()
+        {
+            var currentCulture = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+            currentCulture.NumberFormat.NumberDecimalSeparator = ",";
+            currentCulture.NumberFormat.NumberGroupSeparator = ".";
+            currentCulture.NumberFormat.CurrencyDecimalSeparator = ",";
+
+            Thread.CurrentThread.CurrentCulture = currentCulture;
         }
 
     }
